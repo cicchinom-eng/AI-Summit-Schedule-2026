@@ -1,0 +1,325 @@
+/* ==================================================================================================
+   Secret themes. Activated by typing a code into the Explore search box. Each one re-skins the
+   chrome through the design tokens plus a handful of targeted overrides, and adds its own decor.
+   ================================================================================================== */
+
+.theme-decor { position: fixed; inset: 0; pointer-events: none; z-index: 35; overflow: hidden; }
+.theme-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.theme-exit { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 80; padding: 10px 16px; border-radius: 999px; font-weight: 700; font-size: 13px; cursor: pointer; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5); }
+@media (max-width: 860px) { .theme-exit { bottom: calc(84px + env(safe-area-inset-bottom)); } }
+.theme-toast { position: fixed; left: 50%; top: 72px; transform: translateX(-50%); z-index: 90; padding: 12px 18px; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 600; font-size: 14px; box-shadow: var(--shadow-float); animation: toast-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both; white-space: nowrap; max-width: calc(100vw - 32px); overflow: hidden; text-overflow: ellipsis; }
+@keyframes toast-in { from { opacity: 0; transform: translate(-50%, -10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+/* ------------------------------------------------------------------ NINTENDO ------------------ */
+html[data-theme='nintendo'] {
+  --bg: #0f0f23; --surface: #1c1c3a; --surface-2: #26264d; --ink: #ffffff; --ink-2: #e7e7ff; --muted: #9a9ad6;
+  --line: rgba(255, 255, 255, 0.25); --line-2: rgba(255, 255, 255, 0.15);
+  --accent: #e52521; --accent-ink: #ffffff; --star: #fbd000; --star-soft: #4a3b00; --ok: #43b047; --ok-ink: #8ef08f; --ok-soft: #0f3f15;
+  --display: 'Press Start 2P', monospace; --body: 'Pixelify Sans', monospace;
+  --r-sm: 0; --r: 0; --r-lg: 0; --r-xl: 0;
+  --shadow-card: 6px 6px 0 #000; --shadow-hover: 10px 10px 0 #000; --shadow-float: 12px 12px 0 #000;
+  --g-arrival: linear-gradient(#2b2b55, #2b2b55); --g-welcome: linear-gradient(#e52521, #e52521); --g-keynote: linear-gradient(#049cd8, #049cd8);
+  --g-keynote-tbd: linear-gradient(#111, #111); --g-sessions: linear-gradient(#fbd000, #fbd000); --g-lunch: linear-gradient(#43b047, #43b047);
+}
+html[data-theme='nintendo'] body { background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect width='32' height='32' fill='%230f0f23'/%3E%3Cpath d='M0 31h32M31 0v32' stroke='%231e1e45' stroke-width='2'/%3E%3C/svg%3E"); color: #fff; font-size: 19px; cursor: crosshair; padding-top: 30px; image-rendering: pixelated; }
+html[data-theme='nintendo'] h1, html[data-theme='nintendo'] h2, html[data-theme='nintendo'] h3, html[data-theme='nintendo'] h4 { color: #fff; letter-spacing: 0; line-height: 1.35; text-shadow: 4px 4px 0 #000; }
+html[data-theme='nintendo'] h1 { font-size: clamp(22px, 4vw, 44px); }
+html[data-theme='nintendo'] h2 { font-size: clamp(18px, 2.8vw, 30px); }
+html[data-theme='nintendo'] h3 { font-size: 13px; }
+html[data-theme='nintendo'] h4 { font-size: 11px; }
+html[data-theme='nintendo'] .page-head h2 { font-size: clamp(20px, 3.4vw, 36px); }
+html[data-theme='nintendo'] .page-head h2::after, html[data-theme='nintendo'] .section-head h2::after { content: ' ▶'; color: #fbd000; animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+html[data-theme='nintendo'] .topbar { background: #000; border-bottom: 4px solid #fff; top: 30px; }
+html[data-theme='nintendo'] .wordmark b, html[data-theme='nintendo'] .nav a { font-family: var(--display); font-size: 10px; color: #fff; }
+html[data-theme='nintendo'] .wordmark span { font-family: var(--display); font-size: 9px; color: #fbd000; }
+html[data-theme='nintendo'] .nav a[aria-current='page'] { color: #fbd000; }
+html[data-theme='nintendo'] .nav a[aria-current='page']::after { background: #fbd000; height: 4px; }
+html[data-theme='nintendo'] .live { font-family: var(--body); color: #43b047; }
+html[data-theme='nintendo'] .live i { background: #43b047; border-radius: 0; }
+html[data-theme='nintendo'] .hero, html[data-theme='nintendo'] .prog-cover { background: #049cd8; border: 6px solid #fff; box-shadow: 10px 10px 0 #000; color: #fff; }
+html[data-theme='nintendo'] .hero .orb { display: none; }
+html[data-theme='nintendo'] .hero h1, html[data-theme='nintendo'] .prog-cover h1 { color: #fff; }
+html[data-theme='nintendo'] .prog-cover .date { color: #fff; font-family: var(--body); font-size: 20px; }
+html[data-theme='nintendo'] .prog-cover h1::before { content: 'PRESS START'; display: block; font-size: 12px; color: #fbd000; margin-bottom: 14px; animation: blink 1.2s steps(2) infinite; }
+html[data-theme='nintendo'] .ribbon-block { border-radius: 0; background: #1c1c3a; box-shadow: inset 0 0 0 3px #fff; backdrop-filter: none; }
+html[data-theme='nintendo'] .ribbon-block b { font-family: var(--body); font-size: 15px; }
+html[data-theme='nintendo'] .glance > div, html[data-theme='nintendo'] .card, html[data-theme='nintendo'] .pcard, html[data-theme='nintendo'] .tile, html[data-theme='nintendo'] .panel,
+html[data-theme='nintendo'] .prog-item, html[data-theme='nintendo'] .prog-desc, html[data-theme='nintendo'] .info-block, html[data-theme='nintendo'] .stop-top, html[data-theme='nintendo'] .stop-alt,
+html[data-theme='nintendo'] .day-pick, html[data-theme='nintendo'] .meet-row, html[data-theme='nintendo'] .lunch-card, html[data-theme='nintendo'] .speaker, html[data-theme='nintendo'] .madlib,
+html[data-theme='nintendo'] .filters, html[data-theme='nintendo'] .pf-step, html[data-theme='nintendo'] .stat, html[data-theme='nintendo'] .room-tile, html[data-theme='nintendo'] .pw-tile {
+  background: var(--surface); border: 4px solid #fff; border-radius: 0; box-shadow: 6px 6px 0 #000; color: #fff;
+}
+html[data-theme='nintendo'] .card::before, html[data-theme='nintendo'] .card::after, html[data-theme='nintendo'] .pcard::before, html[data-theme='nintendo'] .pcard::after,
+html[data-theme='nintendo'] .prog-item::before, html[data-theme='nintendo'] .prog-desc::before, html[data-theme='nintendo'] .stop-top::before, html[data-theme='nintendo'] .stop-top::after,
+html[data-theme='nintendo'] .day-pick::before, html[data-theme='nintendo'] .glance > div::before, html[data-theme='nintendo'] .lunch-card::before, html[data-theme='nintendo'] .speaker::before,
+html[data-theme='nintendo'] .madlib::before, html[data-theme='nintendo'] .madlib::after, html[data-theme='nintendo'] .room-tile::before, html[data-theme='nintendo'] .tile.g-sessions::before,
+html[data-theme='nintendo'] .tile.g-sessions::after, html[data-theme='nintendo'] .tile.g-lunch::before, html[data-theme='nintendo'] .pw-tile::after { display: none; }
+html[data-theme='nintendo'] .card { border-left: 12px solid var(--c); }
+html[data-theme='nintendo'] .card .pw-label, html[data-theme='nintendo'] .stop-top .pw-label { color: var(--c); font-family: var(--display); font-size: 8px; filter: brightness(1.6); }
+html[data-theme='nintendo'] .card .title, html[data-theme='nintendo'] .prog-item .t, html[data-theme='nintendo'] .stop-top .t, html[data-theme='nintendo'] .day-pick .t { font-family: var(--body); font-size: 20px; font-weight: 700; color: #fff; letter-spacing: 0; }
+html[data-theme='nintendo'] .card .who, html[data-theme='nintendo'] .prog-item .w, html[data-theme='nintendo'] .copy, html[data-theme='nintendo'] .sub, html[data-theme='nintendo'] .lead { color: #c9c9ff; }
+html[data-theme='nintendo'] .tile.vivid, html[data-theme='nintendo'] .tile.g-welcome, html[data-theme='nintendo'] .tile.g-keynote { color: #fff; }
+html[data-theme='nintendo'] .tile.g-welcome { background: #e52521; } html[data-theme='nintendo'] .tile.g-keynote { background: #049cd8; } html[data-theme='nintendo'] .tile.g-sessions { background: #fbd000; color: #000; }
+html[data-theme='nintendo'] .tile.g-sessions h3, html[data-theme='nintendo'] .tile.g-sessions .time, html[data-theme='nintendo'] .tile.g-sessions .big, html[data-theme='nintendo'] .tile.g-sessions .big small { color: #000; text-shadow: none; }
+html[data-theme='nintendo'] .tile.g-lunch { background: #43b047; } html[data-theme='nintendo'] .tile.g-lunch h3, html[data-theme='nintendo'] .tile.g-lunch .time { color: #fff; }
+html[data-theme='nintendo'] .tile .mini > div, html[data-theme='nintendo'] .opt, html[data-theme='nintendo'] .exhibit, html[data-theme='nintendo'] .room-chip, html[data-theme='nintendo'] .fact { background: #000; color: #fff; border-radius: 0; border: 2px solid #fff; backdrop-filter: none; }
+html[data-theme='nintendo'] .opt span, html[data-theme='nintendo'] .exhibit span, html[data-theme='nintendo'] .fact-row span, html[data-theme='nintendo'] .tile .mini span { color: #c9c9ff; }
+html[data-theme='nintendo'] .pw-tile { color: #fff; }
+html[data-theme='nintendo'] .pw-tile h3 { color: #fff; }
+html[data-theme='nintendo'] .btn { border-radius: 0; font-family: var(--display); font-size: 9px; padding: 14px 18px; border: 3px solid #fff; box-shadow: 4px 4px 0 #000; background: #e52521; color: #fff; }
+html[data-theme='nintendo'] .btn.light, html[data-theme='nintendo'] .btn.white, html[data-theme='nintendo'] .btn.glass { background: #049cd8; color: #fff; }
+html[data-theme='nintendo'] .btn.dark { background: #000; }
+html[data-theme='nintendo'] .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #000; }
+html[data-theme='nintendo'] .chip, html[data-theme='nintendo'] .pill-select, html[data-theme='nintendo'] .search, html[data-theme='nintendo'] .slot-switch { border-radius: 0; background: #000; color: #fff; box-shadow: inset 0 0 0 2px #fff; font-family: var(--body); }
+html[data-theme='nintendo'] .chip[aria-pressed='true'] { background: #fbd000; color: #000; }
+html[data-theme='nintendo'] .chip.pw[aria-pressed='true'] { background: var(--c); color: #fff; }
+html[data-theme='nintendo'] .search input { color: #fff; font-family: var(--body); font-size: 19px; }
+html[data-theme='nintendo'] .slot-switch button { color: #c9c9ff; font-family: var(--body); font-size: 16px; }
+html[data-theme='nintendo'] .slot-switch button[aria-pressed='true'] { color: #000; }
+html[data-theme='nintendo'] .slot-switch .pill-bg { background: #fbd000; border-radius: 0; box-shadow: none; }
+html[data-theme='nintendo'] .tag { border-radius: 0; background: #000; color: #fff; border: 2px solid #fff; font-family: var(--body); font-size: 14px; }
+html[data-theme='nintendo'] .tag.room { background: #fbd000; color: #000; border-color: #000; font-family: var(--display); font-size: 9px; }
+html[data-theme='nintendo'] .tag.open { background: #43b047; color: #fff; }
+html[data-theme='nintendo'] .prog-item .rm { background: #fbd000; color: #000; border-radius: 0; font-family: var(--display); font-size: 9px; }
+html[data-theme='nintendo'] .star { color: #666; } html[data-theme='nintendo'] .star[aria-pressed='true'] { color: #fbd000; filter: drop-shadow(2px 2px 0 #000); }
+html[data-theme='nintendo'] .star[aria-pressed='true']::after { content: '1UP'; position: absolute; top: -14px; right: -4px; font-family: var(--display); font-size: 8px; color: #43b047; animation: oneup 1s ease-out both; }
+@keyframes oneup { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-20px); opacity: 0; } }
+html[data-theme='nintendo'] .drawer, html[data-theme='nintendo'] .modal-card { background: #1c1c3a; border: 5px solid #fff; border-radius: 0; box-shadow: 12px 12px 0 #000; color: #fff; }
+html[data-theme='nintendo'] .drawer .desc, html[data-theme='nintendo'] .drawer .who, html[data-theme='nintendo'] .modal-card p { color: #e7e7ff; }
+html[data-theme='nintendo'] .drawer .cta { background: linear-gradient(to top, #1c1c3a 70%, transparent); }
+html[data-theme='nintendo'] .drawer .close { background: #e52521; color: #fff; border-radius: 0; }
+html[data-theme='nintendo'] .scrim { background: rgba(0, 0, 0, 0.7); backdrop-filter: none; }
+html[data-theme='nintendo'] .notice { background: #000; color: #fbd000; border: 3px dashed #fbd000; border-radius: 0; font-family: var(--body); font-size: 17px; }
+html[data-theme='nintendo'] .footer { color: #9a9ad6; border-top: 4px solid #fff; font-family: var(--body); font-size: 15px; }
+html[data-theme='nintendo'] .glance b, html[data-theme='nintendo'] .glance span, html[data-theme='nintendo'] .glance small { color: #fff; font-family: var(--body); }
+html[data-theme='nintendo'] .glance b { font-family: var(--display); font-size: 9px; }
+html[data-theme='nintendo'] .glance > div.is-now { border-color: #fbd000; }
+html[data-theme='nintendo'] .glance > div.is-now::after { background: #fbd000; color: #000; border-radius: 0; font-family: var(--display); font-size: 7px; }
+html[data-theme='nintendo'] .glance > div .go { background: #fbd000; color: #000; border-radius: 0; }
+html[data-theme='nintendo'] .now-strip { background: #000; border: 3px solid #fbd000; border-radius: 0; font-family: var(--body); }
+html[data-theme='nintendo'] .person img, html[data-theme='nintendo'] .speaker img, html[data-theme='nintendo'] .tile .face, html[data-theme='nintendo'] .person .avatar { border-radius: 0; border: 3px solid #fff; image-rendering: pixelated; filter: contrast(1.15) saturate(1.3); }
+html[data-theme='nintendo'] .talk-title, html[data-theme='nintendo'] .person .name, html[data-theme='nintendo'] .tile .face-row .name { font-family: var(--body); font-size: 22px; font-weight: 700; }
+html[data-theme='nintendo'] .sentence { font-family: var(--body); font-size: clamp(22px, 3vw, 32px); font-weight: 700; }
+html[data-theme='nintendo'] .curious-label { font-family: var(--body); }
+html[data-theme='nintendo'] .stop-n, html[data-theme='nintendo'] .pf-node { border-radius: 0; background: #e52521; border: 3px solid #fff; }
+html[data-theme='nintendo'] .stop-top .why span { background: #000; color: #fbd000; border-radius: 0; border: 1px solid #fbd000; }
+html[data-theme='nintendo'] .tabbar { background: #000; border-top: 4px solid #fff; }
+html[data-theme='nintendo'] .tabbar a { font-family: var(--display); font-size: 7px; color: #c9c9ff; }
+html[data-theme='nintendo'] .tabbar a[aria-current='page'] { color: #fbd000; }
+html[data-theme='nintendo'] .room-tile.open { background: #0f3f15; } html[data-theme='nintendo'] .room-tile.open .rs { color: #8ef08f; }
+html[data-theme='nintendo'] .theme-exit { font-family: var(--display); font-size: 9px; background: #e52521; color: #fff; border: 3px solid #fff; border-radius: 0; bottom: 46px; }
+@media (max-width: 860px) { html[data-theme='nintendo'] .theme-exit { bottom: calc(84px + env(safe-area-inset-bottom)); } }
+html[data-theme='nintendo'] .theme-toast { font-family: var(--display); font-size: 10px; background: #000; border: 3px solid #fbd000; border-radius: 0; color: #fbd000; }
+/* HUD, ? block and the Pac-Man corridor */
+.theme-nintendo .hud { position: fixed; top: 0; left: 0; right: 0; height: 30px; background: #000; color: #fff; font-family: 'Press Start 2P', monospace; font-size: 10px; line-height: 30px; overflow: hidden; border-bottom: 2px solid #fff; z-index: 45; }
+.theme-nintendo .hud-track { display: inline-flex; gap: 48px; white-space: nowrap; animation: ticker 28s linear infinite; padding-left: 100vw; }
+.theme-nintendo .hud span:nth-child(odd) { color: #fbd000; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+.theme-nintendo .qblock { position: fixed; right: 22px; top: 96px; width: 44px; height: 44px; z-index: 46; background: #f7a600; color: #fff; border: 4px solid #000; box-shadow: inset -5px -5px 0 #b86f00, inset 5px 5px 0 #ffd36b; font-family: 'Press Start 2P', monospace; font-size: 18px; line-height: 1; display: grid; place-items: center; cursor: pointer; text-shadow: 2px 2px 0 #000; image-rendering: pixelated; }
+.theme-nintendo .qblock::before, .theme-nintendo .qblock::after { content: ''; position: absolute; width: 5px; height: 5px; background: #000; }
+.theme-nintendo .qblock::before { left: 3px; top: 3px; box-shadow: 30px 0 0 #000; } .theme-nintendo .qblock::after { left: 3px; bottom: 3px; box-shadow: 30px 0 0 #000; }
+.theme-nintendo .qblock.bump { animation: bump 0.22s ease-out; }
+@keyframes bump { 40% { transform: translateY(-12px); } }
+.theme-nintendo .coin-pop { position: absolute; left: 50%; top: -8px; transform: translateX(-50%); font-family: 'Press Start 2P', monospace; font-size: 10px; color: #fbd000; text-shadow: 2px 2px 0 #000; animation: coin-pop 0.9s ease-out forwards; white-space: nowrap; }
+.theme-nintendo .coin-pop::before { content: ''; display: block; width: 14px; height: 18px; margin: 0 auto 4px; background: #fbd000; border: 2px solid #000; border-radius: 50%; box-shadow: inset 3px 0 0 #fff6a3; }
+@keyframes coin-pop { from { opacity: 1; transform: translate(-50%, 0); } to { opacity: 0; transform: translate(-50%, -70px); } }
+.theme-nintendo .pac-track { position: fixed; left: 0; right: 0; bottom: 0; height: 30px; z-index: 36; background: #000 radial-gradient(circle, #ffd27a 0 2.5px, transparent 3px) 10px 50% / 28px 28px repeat-x; border-top: 3px solid #2121de; box-shadow: 0 -3px 0 #000, 0 -6px 0 #2121de; overflow: hidden; }
+.theme-nintendo .eaten { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: #000; animation: pac-run 18s linear infinite; }
+@keyframes pac-run { from { width: 0; } to { width: 100%; } }
+@property --mouth { syntax: '<angle>'; inherits: false; initial-value: 40deg; }
+.theme-nintendo .pac { position: absolute; top: 4px; width: 22px; height: 22px; border-radius: 50%; --mouth: 40deg;
+  background: conic-gradient(from calc(90deg - var(--mouth) / 2), transparent 0 var(--mouth), #fbd000 var(--mouth) 360deg);
+  animation: pac-move 18s linear infinite, chomp 0.28s ease-in-out infinite alternate; }
+@keyframes pac-move { from { left: -26px; } to { left: 100%; } }
+@keyframes chomp { from { --mouth: 6deg; } to { --mouth: 80deg; } }
+.theme-nintendo .ghost { position: absolute; top: 5px; width: 20px; height: 20px; border-radius: 10px 10px 2px 2px; clip-path: polygon(0 0, 100% 0, 100% 100%, 83% 78%, 66% 100%, 50% 78%, 34% 100%, 17% 78%, 0 100%); animation: pac-move 18s linear infinite, ghost-bob 0.5s ease-in-out infinite alternate;
+  background-image: radial-gradient(circle at 32% 40%, #fff 0 3px, transparent 3.5px), radial-gradient(circle at 68% 40%, #fff 0 3px, transparent 3.5px), radial-gradient(circle at 35% 42%, #2121de 0 1.4px, transparent 2px), radial-gradient(circle at 71% 42%, #2121de 0 1.4px, transparent 2px); }
+@keyframes ghost-bob { to { transform: translateY(-2px); } }
+.theme-nintendo .blinky { background-color: #ff0000; animation-delay: 0.9s, 0s; } .theme-nintendo .pinky { background-color: #ffb8ff; animation-delay: 1.5s, 0.1s; }
+.theme-nintendo .inky { background-color: #00ffff; animation-delay: 2.1s, 0.2s; } .theme-nintendo .clyde { background-color: #ffb852; animation-delay: 2.7s, 0.3s; }
+@media (max-width: 860px) { .theme-nintendo .pac-track { display: none; } .theme-nintendo .qblock { top: 84px; } }
+
+/* ------------------------------------------------------------------ 90s ------------------------ */
+html[data-theme='90s'] {
+  --bg: #fff8e7; --surface: #ffffff; --surface-2: #fff1b8; --ink: #1b0a3a; --ink-2: #3b1d6e; --muted: #7b2cff;
+  --line: #1b0a3a; --line-2: rgba(27, 10, 58, 0.3);
+  --accent: #ff2d95; --accent-ink: #d0006f; --star: #ffee00; --star-soft: #fff9b0; --ok: #00ff85; --ok-ink: #007a3d; --ok-soft: #d4ffe9;
+  --display: 'Bungee', 'Impact', sans-serif; --body: 'Comic Neue', 'Comic Sans MS', cursive;
+  --r-sm: 8px; --r: 14px; --r-lg: 18px; --r-xl: 24px;
+  --shadow-card: 6px 6px 0 #1b0a3a; --shadow-hover: 9px 9px 0 #7b2cff; --shadow-float: 14px 14px 0 #1b0a3a;
+  --g-arrival: linear-gradient(135deg, #fff 0%, #fff1b8 100%); --g-welcome: linear-gradient(135deg, #ff2d95, #7b2cff); --g-keynote: linear-gradient(135deg, #00e5ff, #7b2cff);
+  --g-keynote-tbd: linear-gradient(135deg, #1b0a3a, #7b2cff); --g-sessions: linear-gradient(135deg, #ffee00, #ff2d95); --g-lunch: linear-gradient(135deg, #00ff85, #00e5ff);
+}
+html[data-theme='90s'] body { font-size: 18px; padding-top: 34px; color: var(--ink);
+  background-color: #fff8e7;
+  background-image:
+    radial-gradient(circle, #ff2d95 0 4px, transparent 5px), radial-gradient(circle, #00e5ff 0 3px, transparent 4px),
+    linear-gradient(45deg, transparent 46%, #7b2cff 46% 54%, transparent 54%), linear-gradient(-45deg, transparent 47%, #ffee00 47% 53%, transparent 53%),
+    radial-gradient(circle, #00ff85 0 3px, transparent 4px);
+  background-size: 180px 180px, 140px 140px, 90px 90px, 120px 120px, 220px 220px;
+  background-position: 20px 30px, 90px 110px, 0 0, 50px 70px, 160px 20px; }
+html[data-theme='90s'] h1, html[data-theme='90s'] h2, html[data-theme='90s'] h3, html[data-theme='90s'] h4 { font-family: var(--display); font-weight: 400; letter-spacing: 0.01em; color: var(--ink); }
+html[data-theme='90s'] h1 { font-family: 'Bungee', sans-serif; color: #ff2d95; }
+html[data-theme='90s'] .page-head h2, html[data-theme='90s'] .section-head h2 { display: inline-block; background: #fff; color: #7b2cff; padding: 4px 18px; border: 4px solid #1b0a3a; box-shadow: 8px 8px 0 #ff2d95; transform: rotate(-1.5deg); }
+html[data-theme='90s'] .page-head .sub, html[data-theme='90s'] .section-head .sub, html[data-theme='90s'] .results-line, html[data-theme='90s'] .curious-hint, html[data-theme='90s'] .wing h3, html[data-theme='90s'] .legend { background: #fff; display: inline-block; padding: 6px 12px; border: 2px solid #1b0a3a; box-shadow: 4px 4px 0 #1b0a3a; color: #1b0a3a; font-weight: 700; }
+html[data-theme='90s'] .section-head .sub, html[data-theme='90s'] .page-head .sub { margin-top: 14px; }
+html[data-theme='90s'] .results-line { display: flex; }
+@keyframes rainbow-shift { to { background-position: 300% 0; } }
+html[data-theme='90s'] .topbar { top: 34px; background: #ffee00; border-bottom: 4px solid #1b0a3a; }
+html[data-theme='90s'] .wordmark b { font-family: var(--display); color: #7b2cff; font-size: 16px; } html[data-theme='90s'] .wordmark span { font-family: var(--display); color: #ff2d95; }
+html[data-theme='90s'] .nav a { font-family: var(--display); font-size: 12px; color: #1b0a3a; }
+html[data-theme='90s'] .nav a[aria-current='page'] { color: #ff2d95; } html[data-theme='90s'] .nav a[aria-current='page']::after { background: #ff2d95; height: 4px; }
+html[data-theme='90s'] .live { color: #1b0a3a; font-weight: 700; } html[data-theme='90s'] .live i { background: #00ff85; border: 2px solid #1b0a3a; }
+html[data-theme='90s'] .hero, html[data-theme='90s'] .prog-cover { background: #1b0a3a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M10 20 q10 -14 20 0 t20 0' stroke='%23ff2d95' stroke-width='4' fill='none'/%3E%3Ccircle cx='90' cy='30' r='6' fill='%2300e5ff'/%3E%3Cpath d='M70 90 l14 -24 l14 24z' fill='%23ffee00'/%3E%3Crect x='20' y='80' width='12' height='12' fill='%2300ff85' transform='rotate(20 26 86)'/%3E%3C/svg%3E"); border: 5px solid #1b0a3a; box-shadow: 12px 12px 0 #ff2d95; }
+html[data-theme='90s'] .hero .orb { display: none; }
+html[data-theme='90s'] .hero h1, html[data-theme='90s'] .prog-cover h1 { color: #ffee00; text-shadow: 5px 5px 0 #ff2d95, 10px 10px 0 #00e5ff; }
+html[data-theme='90s'] .prog-cover .date { color: #fff; font-family: var(--body); font-weight: 700; }
+html[data-theme='90s'] .prog-cover h1::before { content: '✨ TOTALLY RAD ✨'; display: block; font-family: 'VT323', monospace; font-size: 26px; color: #00ff85; letter-spacing: 0.1em; margin-bottom: 10px; text-shadow: none; animation: blink 1s steps(2) infinite; }
+html[data-theme='90s'] .ribbon-block { border-radius: 10px; background: #fff; color: #1b0a3a; box-shadow: 3px 3px 0 #ff2d95; }
+html[data-theme='90s'] .ribbon-block b, html[data-theme='90s'] .ribbon-block span { color: #1b0a3a; }
+html[data-theme='90s'] .ribbon-ticks { color: #ffee00; }
+html[data-theme='90s'] .glance > div, html[data-theme='90s'] .card, html[data-theme='90s'] .pcard, html[data-theme='90s'] .tile, html[data-theme='90s'] .panel, html[data-theme='90s'] .prog-item,
+html[data-theme='90s'] .prog-desc, html[data-theme='90s'] .info-block, html[data-theme='90s'] .stop-top, html[data-theme='90s'] .stop-alt, html[data-theme='90s'] .day-pick, html[data-theme='90s'] .meet-row,
+html[data-theme='90s'] .lunch-card, html[data-theme='90s'] .speaker, html[data-theme='90s'] .madlib, html[data-theme='90s'] .filters, html[data-theme='90s'] .pf-step, html[data-theme='90s'] .stat, html[data-theme='90s'] .room-tile {
+  border: 3px solid #1b0a3a; box-shadow: 6px 6px 0 #1b0a3a; }
+html[data-theme='90s'] .card:nth-child(3n+1) { transform: rotate(-0.6deg); } html[data-theme='90s'] .card:nth-child(3n+2) { transform: rotate(0.5deg); }
+html[data-theme='90s'] .card:hover { transform: rotate(0) translateY(-3px); }
+html[data-theme='90s'] .card .title, html[data-theme='90s'] .stop-top .t, html[data-theme='90s'] .day-pick .t, html[data-theme='90s'] .prog-item .t { font-family: var(--body); font-weight: 700; font-size: 19px; }
+html[data-theme='90s'] .card .pw-label { font-family: var(--display); font-size: 11px; }
+html[data-theme='90s'] .tile.g-sessions::before { opacity: 0.9; } html[data-theme='90s'] .tile.g-lunch::before { opacity: 1; }
+html[data-theme='90s'] .tile .big { font-family: var(--display); -webkit-text-stroke: 2px #1b0a3a; color: #ffee00; }
+html[data-theme='90s'] .btn { font-family: var(--display); font-size: 13px; border: 3px solid #1b0a3a; box-shadow: 4px 4px 0 #1b0a3a; background: #ff2d95; color: #fff; }
+html[data-theme='90s'] .btn.light, html[data-theme='90s'] .btn.white { background: #ffee00; color: #1b0a3a; } html[data-theme='90s'] .btn.dark { background: #7b2cff; } html[data-theme='90s'] .btn.glass { background: #00e5ff; color: #1b0a3a; }
+html[data-theme='90s'] .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #1b0a3a; }
+html[data-theme='90s'] .chip, html[data-theme='90s'] .pill-select, html[data-theme='90s'] .search { border: 2px solid #1b0a3a; box-shadow: 3px 3px 0 #1b0a3a; font-family: var(--body); font-weight: 700; }
+html[data-theme='90s'] .chip[aria-pressed='true'] { background: #7b2cff; color: #fff; }
+html[data-theme='90s'] .slot-switch { background: #fff; border: 3px solid #1b0a3a; box-shadow: 4px 4px 0 #1b0a3a; }
+html[data-theme='90s'] .slot-switch button { font-family: var(--display); font-size: 12px; }
+html[data-theme='90s'] .slot-switch .pill-bg { background: #ffee00; box-shadow: inset 0 0 0 2px #1b0a3a; }
+html[data-theme='90s'] .tag { border: 2px solid #1b0a3a; background: #fff; font-weight: 700; } html[data-theme='90s'] .tag.room { background: #7b2cff; color: #fff; font-family: var(--display); font-size: 11px; }
+html[data-theme='90s'] .prog-item .rm { background: #7b2cff; font-family: var(--display); font-size: 11px; border: 2px solid #1b0a3a; }
+html[data-theme='90s'] .star[aria-pressed='true'] { color: #ff2d95; filter: drop-shadow(2px 2px 0 #1b0a3a); }
+html[data-theme='90s'] .drawer, html[data-theme='90s'] .modal-card { border: 4px solid #1b0a3a; box-shadow: 14px 14px 0 #ff2d95; }
+html[data-theme='90s'] .drawer h2 { font-family: var(--display); font-size: 24px; }
+html[data-theme='90s'] .notice { background: #ffee00; border: 3px dashed #1b0a3a; font-weight: 700; }
+html[data-theme='90s'] .sentence { font-family: var(--body); font-weight: 700; }
+html[data-theme='90s'] .glance b { font-family: var(--display); font-size: 13px; }
+html[data-theme='90s'] .footer { border-top: 4px double #1b0a3a; color: #1b0a3a; font-weight: 700; }
+html[data-theme='90s'] .footer::after { content: '© 1996 · Made with Microsoft FrontPage · 🖱️ Best viewed at 800×600 · This site is Y2K compliant'; display: block; width: 100%; font-family: 'VT323', monospace; font-size: 18px; color: #7b2cff; }
+html[data-theme='90s'] .tabbar { background: #ffee00; border-top: 4px solid #1b0a3a; } html[data-theme='90s'] .tabbar a { font-family: var(--display); font-size: 9px; color: #1b0a3a; } html[data-theme='90s'] .tabbar a[aria-current='page'] { color: #ff2d95; }
+html[data-theme='90s'] .theme-exit { font-family: var(--display); font-size: 12px; background: #00e5ff; color: #1b0a3a; border: 3px solid #1b0a3a; box-shadow: 4px 4px 0 #1b0a3a; }
+html[data-theme='90s'] .theme-toast { font-family: var(--display); background: #ff2d95; border: 3px solid #1b0a3a; box-shadow: 6px 6px 0 #1b0a3a; }
+.theme-90s .ticker { position: fixed; top: 0; left: 0; right: 0; height: 34px; background: #1b0a3a; color: #00ff85; font-family: 'VT323', monospace; font-size: 22px; line-height: 34px; overflow: hidden; z-index: 45; border-bottom: 3px solid #ff2d95; }
+.theme-90s .ticker-track { display: inline-flex; gap: 56px; white-space: nowrap; animation: ticker 60s linear infinite; padding-left: 100vw; }
+.theme-90s .ticker span:nth-child(3n) { color: #ffee00; } .theme-90s .ticker span:nth-child(3n+1) { color: #00e5ff; }
+.theme-90s .memphis { position: fixed; z-index: 36; opacity: 0.9; animation: wobble 9s ease-in-out infinite; }
+.theme-90s .m1 { left: 4%; top: 30%; width: 70px; height: 70px; background: #ff2d95; border-radius: 50%; border: 4px solid #1b0a3a; }
+.theme-90s .m2 { right: 5%; top: 24%; width: 0; height: 0; border-left: 40px solid transparent; border-right: 40px solid transparent; border-bottom: 70px solid #00e5ff; animation-delay: 1s; }
+.theme-90s .m3 { left: 8%; bottom: 20%; width: 90px; height: 24px; background: repeating-linear-gradient(90deg, #7b2cff 0 12px, transparent 12px 24px); transform: rotate(-20deg); animation-delay: 2s; }
+.theme-90s .m4 { right: 10%; bottom: 30%; width: 60px; height: 60px; background: #ffee00; border: 4px solid #1b0a3a; transform: rotate(15deg); animation-delay: 3s; }
+@keyframes wobble { 50% { transform: translateY(-18px) rotate(12deg); } }
+.theme-90s .uc-badge { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%) rotate(-2deg); background: repeating-linear-gradient(45deg, #ffee00 0 14px, #1b0a3a 14px 28px); color: #1b0a3a; font-family: 'Bungee', sans-serif; font-size: 13px; padding: 8px 16px; border: 3px solid #1b0a3a; z-index: 37; text-shadow: 0 0 6px #ffee00, 0 0 2px #ffee00; animation: blink 1.4s steps(2) infinite; }
+.theme-90s .counter-wrap { position: fixed; left: 16px; bottom: 16px; z-index: 37; font-family: 'VT323', monospace; font-size: 20px; color: #1b0a3a; background: #fff; border: 3px solid #1b0a3a; padding: 4px 10px; box-shadow: 4px 4px 0 #1b0a3a; display: flex; gap: 8px; align-items: center; }
+.theme-90s .hit-counter { display: inline-flex; gap: 2px; } .theme-90s .hit-counter b { background: #000; color: #00ff85; padding: 0 5px; font-family: 'VT323', monospace; font-size: 20px; }
+.theme-90s .floppy, .theme-90s .tape, .theme-90s .pager, .theme-90s .cd { position: fixed; z-index: 36; font-size: 40px; animation: wobble 7s ease-in-out infinite; filter: drop-shadow(3px 3px 0 #1b0a3a); }
+.theme-90s .floppy { left: 3%; top: 60%; } .theme-90s .tape { right: 4%; top: 55%; animation-delay: 1.5s; } .theme-90s .pager { left: 5%; top: 14%; animation-delay: 2.5s; } .theme-90s .cd { right: 6%; bottom: 12%; animation-delay: 0.7s; animation-name: spin-cd; }
+@keyframes spin-cd { to { transform: rotate(360deg); } }
+.sparkle-host { position: fixed; inset: 0; pointer-events: none; z-index: 95; }
+.sparkle-host .sparkle { position: absolute; transform: translate(-50%, -50%); font-size: 14px; color: hsl(var(--h) 100% 55%); animation: sparkle-fall 0.9s ease-out forwards; text-shadow: 0 0 6px hsl(var(--h) 100% 70%); }
+@keyframes sparkle-fall { from { opacity: 1; transform: translate(-50%, -50%) scale(1.3); } to { opacity: 0; transform: translate(-50%, 30px) scale(0.4) rotate(90deg); } }
+@media (max-width: 860px) { .theme-90s .memphis, .theme-90s .floppy, .theme-90s .tape, .theme-90s .pager, .theme-90s .cd, .theme-90s .uc-badge { display: none; } .theme-90s .counter-wrap { bottom: 84px; } }
+
+/* ------------------------------------------------------------------ DISNEY --------------------- */
+html[data-theme='disney'] {
+  --bg: #0b1140; --surface: #ffffff; --surface-2: #f3efff; --ink: #1c1650; --ink-2: #3d3577; --muted: #7a73b3;
+  --line: rgba(255, 209, 102, 0.6); --line-2: rgba(255, 209, 102, 0.35);
+  --accent: #6f2dbd; --accent-ink: #4c1d8c; --star: #ffd166; --star-soft: #fff4d6; --ok: #4ade80; --ok-ink: #1f7a4a; --ok-soft: #e4f9ec;
+  --display: 'Mouse Memoirs', 'Trebuchet MS', sans-serif; --body: 'Nunito', system-ui, sans-serif;
+  --r-sm: 14px; --r: 22px; --r-lg: 28px; --r-xl: 40px;
+  --shadow-card: 0 0 0 2px rgba(255, 209, 102, 0.55), 0 14px 40px -16px rgba(111, 45, 189, 0.5); --shadow-hover: 0 0 0 2px #ffd166, 0 20px 50px -16px rgba(111, 45, 189, 0.7), 0 0 30px rgba(255, 209, 102, 0.35);
+  --shadow-float: 0 0 0 3px #ffd166, 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+  --g-arrival: linear-gradient(135deg, #fff, #f3efff); --g-welcome: linear-gradient(135deg, #6f2dbd 0%, #c04fd6 50%, #ff6fb5 100%); --g-keynote: linear-gradient(135deg, #1a1f71 0%, #3b5bdb 55%, #6f2dbd 100%);
+  --g-keynote-tbd: linear-gradient(135deg, #1a1f71, #0b1140); --g-sessions: linear-gradient(135deg, #ffe9a8 0%, #ffd6e8 50%, #e2d6ff 100%); --g-lunch: linear-gradient(135deg, #d6f5e5 0%, #e6f7ff 50%, #fff2cc 100%);
+}
+html[data-theme='disney'] body { background: radial-gradient(120% 90% at 50% 100%, #3b2a8f 0%, #1a1f71 40%, #0b1140 100%) fixed; color: var(--ink); font-size: 17.5px; }
+html[data-theme='disney'] h1, html[data-theme='disney'] h2, html[data-theme='disney'] h3, html[data-theme='disney'] h4 { font-family: var(--display); font-weight: 400; letter-spacing: 0.01em; }
+html[data-theme='disney'] h1 { font-size: clamp(56px, 9vw, 104px); line-height: 0.95; }
+html[data-theme='disney'] h2 { font-size: clamp(40px, 5.5vw, 64px); }
+html[data-theme='disney'] .page-head h2 { font-size: clamp(52px, 7vw, 84px); }
+html[data-theme='disney'] h3 { font-size: 26px; } html[data-theme='disney'] h4 { font-size: 22px; }
+html[data-theme='disney'] .page-head h2, html[data-theme='disney'] .section-head h2 { color: #ffd166; text-shadow: 0 2px 0 #b8860b, 0 0 24px rgba(255, 209, 102, 0.45); }
+html[data-theme='disney'] .page-head .sub, html[data-theme='disney'] .section-head .sub { color: #e6e1ff; }
+html[data-theme='disney'] .topbar { background: rgba(11, 17, 64, 0.82); border-bottom: 1px solid rgba(255, 209, 102, 0.35); }
+html[data-theme='disney'] .wordmark b { font-family: var(--display); font-size: 24px; color: #ffd166; } html[data-theme='disney'] .wordmark span { font-family: var(--display); color: #fff; font-size: 18px; }
+html[data-theme='disney'] .nav a { color: #e6e1ff; font-family: var(--display); font-size: 19px; } html[data-theme='disney'] .nav a[aria-current='page'] { color: #ffd166; } html[data-theme='disney'] .nav a[aria-current='page']::after { background: #ffd166; }
+html[data-theme='disney'] .live { color: #e6e1ff; }
+html[data-theme='disney'] .hero, html[data-theme='disney'] .prog-cover { background: radial-gradient(100% 120% at 50% 110%, #6f2dbd 0%, #1a1f71 50%, #0b1140 100%); border: 2px solid rgba(255, 209, 102, 0.7); box-shadow: 0 0 60px rgba(111, 45, 189, 0.5), inset 0 0 80px rgba(255, 209, 102, 0.08); }
+html[data-theme='disney'] .hero .orb.a { background: radial-gradient(circle, #ff6fb5, transparent 70%); } html[data-theme='disney'] .hero .orb.b { background: radial-gradient(circle, #ffd166, transparent 70%); opacity: 0.5; } html[data-theme='disney'] .hero .orb.c { background: radial-gradient(circle, #3b5bdb, transparent 70%); }
+html[data-theme='disney'] .hero h1, html[data-theme='disney'] .prog-cover h1 { color: #ffd166; text-shadow: 0 3px 0 #b8860b, 0 0 30px rgba(255, 209, 102, 0.5); }
+html[data-theme='disney'] .prog-cover h1::before { content: '✦ The Most Magical Summit on Earth ✦'; display: block; font-size: 0.34em; color: #fff; letter-spacing: 0.08em; margin-bottom: 8px; text-shadow: 0 0 12px #fff; }
+html[data-theme='disney'] .prog-cover .date { color: #e6e1ff; font-family: var(--body); font-weight: 600; }
+html[data-theme='disney'] .ribbon-block { background: rgba(255, 255, 255, 0.1); box-shadow: inset 0 0 0 1px rgba(255, 209, 102, 0.5); }
+html[data-theme='disney'] .ribbon-block.concurrent { background: linear-gradient(135deg, rgba(255, 209, 102, 0.35), rgba(255, 111, 181, 0.2)); }
+html[data-theme='disney'] .ribbon-block b { font-family: var(--display); font-size: 18px; letter-spacing: 0.02em; }
+html[data-theme='disney'] .ribbon-ticks, html[data-theme='disney'] .hero-now { color: #e6e1ff; }
+html[data-theme='disney'] .glance > div, html[data-theme='disney'] .card, html[data-theme='disney'] .pcard, html[data-theme='disney'] .tile, html[data-theme='disney'] .panel, html[data-theme='disney'] .prog-item,
+html[data-theme='disney'] .prog-desc, html[data-theme='disney'] .info-block, html[data-theme='disney'] .stop-top, html[data-theme='disney'] .stop-alt, html[data-theme='disney'] .day-pick, html[data-theme='disney'] .meet-row,
+html[data-theme='disney'] .lunch-card, html[data-theme='disney'] .speaker, html[data-theme='disney'] .madlib, html[data-theme='disney'] .filters, html[data-theme='disney'] .pf-step, html[data-theme='disney'] .stat, html[data-theme='disney'] .room-tile { box-shadow: var(--shadow-card); }
+html[data-theme='disney'] .card .title, html[data-theme='disney'] .stop-top .t, html[data-theme='disney'] .day-pick .t, html[data-theme='disney'] .prog-item .t { font-family: var(--display); font-size: 23px; font-weight: 400; letter-spacing: 0.01em; line-height: 1.1; }
+html[data-theme='disney'] .prog-item .t { font-size: 20px; }
+html[data-theme='disney'] .card .pw-label { font-family: var(--display); font-size: 15px; letter-spacing: 0.03em; }
+html[data-theme='disney'] .tile h3, html[data-theme='disney'] .pcard h3 { font-size: clamp(30px, 3.4vw, 40px); }
+html[data-theme='disney'] .tile .big { font-family: var(--display); font-weight: 400; }
+html[data-theme='disney'] .btn { font-family: var(--display); font-size: 20px; letter-spacing: 0.03em; background: linear-gradient(180deg, #ffe08a, #ffd166 60%, #e0b24a); color: #1c1650; box-shadow: 0 0 0 2px #fff, 0 6px 18px -6px rgba(255, 209, 102, 0.7); }
+html[data-theme='disney'] .btn:hover { background: linear-gradient(180deg, #fff0bd, #ffd166); box-shadow: 0 0 0 2px #fff, 0 0 24px rgba(255, 209, 102, 0.8); }
+html[data-theme='disney'] .btn.dark { background: linear-gradient(180deg, #8a46dd, #6f2dbd); color: #fff; } html[data-theme='disney'] .btn.light, html[data-theme='disney'] .btn.white { background: #fff; color: #6f2dbd; } html[data-theme='disney'] .btn.glass { background: rgba(255, 255, 255, 0.14); color: #fff; }
+html[data-theme='disney'] .chip, html[data-theme='disney'] .pill-select { font-family: var(--body); font-weight: 700; box-shadow: inset 0 0 0 1.5px rgba(111, 45, 189, 0.35); }
+html[data-theme='disney'] .chip[aria-pressed='true'] { background: #6f2dbd; color: #fff; } html[data-theme='disney'] .pill-select.set { background: #6f2dbd; }
+html[data-theme='disney'] .slot-switch { background: rgba(255, 255, 255, 0.12); } html[data-theme='disney'] .slot-switch button { color: #e6e1ff; font-family: var(--display); font-size: 19px; letter-spacing: 0.02em; } html[data-theme='disney'] .slot-switch button small { color: #c9c2ff; }
+html[data-theme='disney'] .slot-switch button[aria-pressed='true'] { color: #1c1650; } html[data-theme='disney'] .slot-switch button[aria-pressed='true'] small { color: var(--muted); }
+html[data-theme='disney'] .slot-switch .pill-bg { background: #ffd166; }
+html[data-theme='disney'] .search { box-shadow: 0 0 0 2px rgba(255, 209, 102, 0.6); }
+html[data-theme='disney'] .tag.room { background: #6f2dbd; } html[data-theme='disney'] .prog-item .rm { background: #6f2dbd; font-family: var(--display); font-size: 16px; }
+html[data-theme='disney'] .star[aria-pressed='true'] { color: #ffd166; filter: drop-shadow(0 0 6px #ffd166); }
+html[data-theme='disney'] .star[aria-pressed='true']::after { content: '✨'; position: absolute; top: -12px; right: -8px; font-size: 14px; animation: oneup 1.2s ease-out both; }
+html[data-theme='disney'] .results-line, html[data-theme='disney'] .toolbar .btn.ghost, html[data-theme='disney'] .wing h3, html[data-theme='disney'] .legend, html[data-theme='disney'] .footer, html[data-theme='disney'] .muted { color: #c9c2ff; }
+html[data-theme='disney'] .results-line b { color: #ffd166; }
+html[data-theme='disney'] .drawer, html[data-theme='disney'] .modal-card { box-shadow: var(--shadow-float); }
+html[data-theme='disney'] .drawer h2, html[data-theme='disney'] .modal-card h2 { font-size: 40px; color: var(--ink); text-shadow: none; }
+html[data-theme='disney'] .notice { background: #fff4d6; box-shadow: 0 0 0 2px #ffd166; }
+html[data-theme='disney'] .now-strip { background: #6f2dbd; box-shadow: 0 0 0 2px #ffd166; }
+html[data-theme='disney'] .glance > div.is-now { box-shadow: 0 0 0 3px #ffd166, 0 0 24px rgba(255, 209, 102, 0.6); } html[data-theme='disney'] .glance > div.is-now::after { background: #ffd166; color: #1c1650; }
+html[data-theme='disney'] .glance b { font-family: var(--display); font-size: 20px; }
+html[data-theme='disney'] .person img, html[data-theme='disney'] .speaker img, html[data-theme='disney'] .tile .face { border-radius: 50%; box-shadow: 0 0 0 3px #ffd166, 0 0 20px rgba(255, 209, 102, 0.5); }
+html[data-theme='disney'] .person .name, html[data-theme='disney'] .tile .face-row .name, html[data-theme='disney'] .talk-title { font-family: var(--display); font-size: 28px; font-weight: 400; }
+html[data-theme='disney'] .sentence { font-family: var(--display); font-weight: 400; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0.01em; }
+html[data-theme='disney'] .curious-label { font-family: var(--display); font-size: 28px; }
+html[data-theme='disney'] .stop-n, html[data-theme='disney'] .pf-node { background: #6f2dbd; box-shadow: 0 0 0 2px #ffd166; }
+html[data-theme='disney'] .stop-head b, html[data-theme='disney'] .day-slot .when b { color: #ffd166; font-family: var(--display); font-size: 22px; } html[data-theme='disney'] .stop-head span:not(.stop-n), html[data-theme='disney'] .day-slot .when span { color: #c9c2ff; }
+html[data-theme='disney'] .tabbar { background: rgba(11, 17, 64, 0.9); border-top: 1px solid rgba(255, 209, 102, 0.4); } html[data-theme='disney'] .tabbar a { color: #c9c2ff; font-family: var(--display); font-size: 14px; } html[data-theme='disney'] .tabbar a[aria-current='page'] { color: #ffd166; }
+html[data-theme='disney'] .footer::after { content: 'Where dreams come true · ✦ · Bibbidi-Bobbidi-Boo'; width: 100%; display: block; font-family: var(--display); font-size: 20px; color: #ffd166; text-align: center; }
+html[data-theme='disney'] .theme-exit { font-family: var(--display); font-size: 19px; background: #6f2dbd; color: #ffd166; box-shadow: 0 0 0 2px #ffd166, 0 0 20px rgba(255, 209, 102, 0.6); }
+html[data-theme='disney'] .theme-toast { font-family: var(--display); font-size: 22px; background: #6f2dbd; box-shadow: 0 0 0 2px #ffd166, 0 0 30px rgba(255, 209, 102, 0.6); color: #ffd166; }
+.theme-disney .sky { position: fixed; inset: 0; }
+.theme-disney .sky i { position: absolute; background: #fff; border-radius: 50%; box-shadow: 0 0 6px #fff; animation: twinkle 3s ease-in-out infinite; }
+@keyframes twinkle { 50% { opacity: 0.2; transform: scale(0.6); } }
+.theme-disney .castle { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: min(720px, 90vw); height: 180px; opacity: 0.7;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 180' preserveAspectRatio='none'%3E%3Cg fill='%230b1140'%3E%3Crect x='0' y='140' width='720' height='40'/%3E%3Crect x='80' y='110' width='40' height='70'/%3E%3Cpolygon points='80,110 100,70 120,110'/%3E%3Crect x='160' y='90' width='50' height='90'/%3E%3Cpolygon points='160,90 185,40 210,90'/%3E%3Crect x='250' y='120' width='60' height='60'/%3E%3Crect x='330' y='60' width='60' height='120'/%3E%3Cpolygon points='330,60 360,0 390,60'/%3E%3Crect x='410' y='120' width='60' height='60'/%3E%3Crect x='510' y='90' width='50' height='90'/%3E%3Cpolygon points='510,90 535,40 560,90'/%3E%3Crect x='600' y='110' width='40' height='70'/%3E%3Cpolygon points='600,110 620,70 640,110'/%3E%3Crect x='120' y='130' width='40' height='50'/%3E%3Crect x='560' y='130' width='40' height='50'/%3E%3C/g%3E%3Cg fill='%23ffd166'%3E%3Crect x='355' y='100' width='10' height='16'/%3E%3Crect x='180' y='120' width='8' height='12'/%3E%3Crect x='530' y='120' width='8' height='12'/%3E%3C/g%3E%3C/svg%3E") center bottom / 100% 100% no-repeat; }
+.theme-disney .wish { position: fixed; bottom: 14px; left: 16px; z-index: 36; font-family: 'Mouse Memoirs', sans-serif; font-size: 18px; color: #ffd166; background: rgba(11, 17, 64, 0.88); padding: 8px 14px; border-radius: 999px; box-shadow: 0 0 0 1.5px rgba(255, 209, 102, 0.7); text-shadow: 0 0 14px rgba(255, 209, 102, 0.8); white-space: nowrap; max-width: calc(100vw - 24px); overflow: hidden; text-overflow: ellipsis; letter-spacing: 0.04em; animation: wish-glow 3s ease-in-out infinite; }
+@keyframes wish-glow { 50% { text-shadow: 0 0 26px #ffd166, 0 0 40px rgba(255, 209, 102, 0.6); } }
+.theme-disney .hidden-mickey { position: fixed; right: 22px; top: 70px; width: 44px; height: 44px; z-index: 36; opacity: 0.8; }
+.theme-disney .hidden-mickey i { position: absolute; border-radius: 50%; background: #ffd166; box-shadow: 0 0 14px rgba(255, 209, 102, 0.8); }
+.theme-disney .hidden-mickey i:nth-child(1) { left: 0; top: 0; width: 16px; height: 16px; } .theme-disney .hidden-mickey i:nth-child(2) { right: 0; top: 0; width: 16px; height: 16px; } .theme-disney .hidden-mickey i:nth-child(3) { left: 8px; top: 12px; width: 28px; height: 28px; }
+.theme-disney .sparkle-rise { position: fixed; bottom: -20px; color: #ffd166; font-size: 22px; z-index: 36; text-shadow: 0 0 10px #ffd166; animation: rise 9s linear infinite; }
+.theme-disney .r1 { left: 12%; } .theme-disney .r2 { left: 38%; animation-delay: 2s; font-size: 16px; } .theme-disney .r3 { left: 64%; animation-delay: 4s; } .theme-disney .r4 { left: 86%; animation-delay: 6s; font-size: 18px; }
+@keyframes rise { 0% { transform: translateY(0) rotate(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+@media (max-width: 860px) { .theme-disney .wish { display: none; } .theme-disney .hidden-mickey { display: none; } }
+
+/* Keep every theme out of the printed program. */
+@media print {
+  html[data-theme] { --bg: #fff; --ink: #1d1d1f; --ink-2: #424245; --muted: #86868b; --display: 'Inter Tight', 'Inter', sans-serif; --body: 'Inter', sans-serif; }
+  html[data-theme] body { background: #fff !important; padding-top: 0 !important; }
+  .theme-decor, .theme-toast { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) { .theme-decor *, .theme-decor { animation: none !important; } }

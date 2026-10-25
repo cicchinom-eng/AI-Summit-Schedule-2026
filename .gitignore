@@ -1,0 +1,4 @@
+# Planning files with presenter contact details. Keep on disk, never in the repo.
+source-of-truth/
+
+.DS_Store
