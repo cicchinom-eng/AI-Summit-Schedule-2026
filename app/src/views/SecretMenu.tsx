@@ -45,7 +45,7 @@ export default function SecretMenu() {
         </div>
 
         <motion.div className="sm-footer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.5 }}>
-          <p>Tell a friend. Or don't. That's the point.</p>
+          <p>Tell a friend. Or don't.</p>
           <button className="btn dark" onClick={() => go('sessions')}>Back to Explore</button>
         </motion.div>
       </div>
