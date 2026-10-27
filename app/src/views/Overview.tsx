@@ -35,7 +35,7 @@ export default function Overview() {
   const welcome = data.keynotes.filter((k) => k.key.startsWith('welcome'));
   const kAM = keynoteFor('keynote_am');
   const kPM = keynoteFor('keynote_pm');
-  const pmTBD = !kPM || /tbd|announced/i.test(kPM.status + kPM.name);
+  const pmTBD = !kPM || /tbd|announced/i.test(kPM.name);
   const slotTile = (n: number, cls: string) => {
     const b = block(`slot${n}`); if (!b) return null;
     const list = data.sessions.filter((s) => s.slots.includes(n));
@@ -192,7 +192,7 @@ export default function Overview() {
         <div className="section-head"><div><h2>Keynotes.</h2></div></div>
         <div className="grid pair">
           {data.keynotes.filter((k) => k.key.startsWith('keynote')).map((k) => {
-            const tbd = /tbd|announced/i.test(k.status + k.name);
+            const tbd = /tbd|announced/i.test(k.name);
             return (
               <article key={k.key} className={`speaker ${tbd ? 'tbd' : ''}`}>
                 {PHOTO[k.photo] ? <img src={PHOTO[k.photo]} alt={k.name} /> : <div className="avatar" aria-hidden>{tbd ? '?' : k.name.slice(0, 1)}</div>}

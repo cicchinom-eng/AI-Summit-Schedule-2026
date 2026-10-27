@@ -63,7 +63,8 @@ export default function Sessions() {
             onKeyDown={(e) => {
               if (e.key !== 'Enter') return;
               const w = f.q.trim().toLowerCase();
-              if (HIDDEN_VIEWS.includes(w)) { e.preventDefault(); setF({ ...f, q: '' }); go(w); return; }
+              const slug = w.replace(/\s+/g, '-');
+              if (HIDDEN_VIEWS.includes(slug)) { e.preventDefault(); setF({ ...f, q: '' }); go(slug); return; }
               if (tryThemeCode(w)) { e.preventDefault(); setF({ ...f, q: '' }); }
             }} />
           {f.q && <button onClick={() => setF({ ...f, q: '' })} aria-label="Clear search"><X size={16} /></button>}

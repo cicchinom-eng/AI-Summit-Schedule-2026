@@ -16,7 +16,7 @@ const time = (b?: Block) => (b ? `${b.start} – ${b.end}`.replace(/ (AM|PM)/g, 
 
 function Person({ k, lg, line }: { k: Keynote; lg?: boolean; line?: string }) {
   const src = PHOTO[k.photo];
-  const tbd = /tbd|announced/i.test(k.status + k.name);
+  const tbd = /tbd|announced/i.test(k.name);
   return (
     <div className={`person ${lg ? 'lg' : ''}`}>
       {src ? <img src={src} alt={k.name} /> : <div className="avatar" aria-hidden>{tbd ? '?' : k.name.slice(0, 1)}</div>}
@@ -38,7 +38,7 @@ export default function Program() {
   const kAM = data.keynotes.find((k) => k.key === 'keynote_am');
   const kPM = data.keynotes.find((k) => k.key === 'keynote_pm');
   const welcome = data.keynotes.filter((k) => k.key.startsWith('welcome'));
-  const pmTBD = !kPM || /tbd|announced/i.test(kPM.status + kPM.name);
+  const pmTBD = !kPM || /tbd|announced/i.test(kPM.name);
   const nowBlocks = eventDay ? currentBlocks(data, nowMin) : [];
   const nowSlot = eventDay ? currentSlot(data, nowMin) : null;
   const nextS = eventDay ? nextSlot(data, nowMin) : null;

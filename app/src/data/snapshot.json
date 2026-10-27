@@ -1744,7 +1744,7 @@
    "Bring a Device": "Yes",
    "Runs": "1",
    "Slots": "2",
-   "Room": "B202",
+   "Room": "A224",
    "Presenters (display)": "Erica Sposa",
    "Lead Presenter": "Erica Sposa",
    "Lead Title": "Tech Coach & English Teacher",
@@ -2206,7 +2206,7 @@
    "Meetup ID": "mu_sup",
    "Name": "Supervisors",
    "Kind": "Meetup",
-   "Room": "F108 & F110",
+   "Room": "A224",
    "Description": "Department and curriculum supervisors.",
    "Host (optional)": "",
    "Order": "13",
@@ -2216,7 +2216,7 @@
    "Meetup ID": "mu_tech",
    "Name": "Tech Coaches & Directors",
    "Kind": "Meetup",
-   "Room": "F208 & F210",
+   "Room": "A222",
    "Description": "Instructional tech coaches and technology directors.",
    "Host (optional)": "",
    "Order": "14",
@@ -2231,6 +2231,36 @@
    "Host (optional)": "",
    "Order": "15",
    "Status": "Placeholder (2025 topics)"
+  },
+  {
+   "Meetup ID": "secret",
+   "Name": "Local AI For Schools: AI That Never Leaves Campus",
+   "Kind": "Secret Menu",
+   "Room": "B205",
+   "Description": "Every time a teacher pastes an IEP note or a student essay into a cloud chatbot, that data leaves the building. This session shows you how to keep it inside. We’ll set up large language models that run entirely on school hardware, with no internet connection, no third-party servers, and no student information drifting into someone else’s training data. You’ll see which open models are good enough for real classroom work, what kind of machine you actually need, and how to pitch it to the IT director who has said no to everything else. Bring your privacy questions. Leave with a working setup.",
+   "Host (optional)": "",
+   "Order": "",
+   "Status": ""
+  },
+  {
+   "Meetup ID": "secret",
+   "Name": "How To Build a Team of AI Agents: AI Harnesses for Educators",
+   "Kind": "Secret Menu",
+   "Room": "F108 & F110",
+   "Description": "One AI assistant is a tool. Ten of them working together is a staff. This session goes inside agentic teams, where you assign roles, set goals, and let a crew of AI agents divide up the work. We’ll use Paperclip, an open-source harness that gives agents org charts, budgets, goals, governance, and audit logs in a single self-hosted app, and lets you pause, reassign, or shut down any agent at any time. You’ll watch a team of agents tackle a real school task live, then talk honestly about what to delegate, what to supervise, and what should never be handed off at all.",
+   "Host (optional)": "",
+   "Order": "",
+   "Status": ""
+  },
+  {
+   "Meetup ID": "secret",
+   "Name": "Lights, Camera, AI: Video Generation and Digital Storytelling",
+   "Kind": "Secret Menu",
+   "Room": "F208 & F210",
+   "Description": "Seeing used to be believing. Your students already know that’s over. This session hands you the director’s chair: we’ll generate short films, clone a voice (our own, with permission), and build a scene that never happened, all in under an hour. Then we flip it. How do you teach students to spot a fake, question a viral clip, and tell powerful stories with these tools without deceiving anyone? You’ll leave with classroom-ready projects on digital storytelling and media literacy, plus a new appreciation for how easy this has become.",
+   "Host (optional)": "",
+   "Order": "",
+   "Status": ""
   }
  ],
  "Lunch": [
