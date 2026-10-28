@@ -1,0 +1,259 @@
+/* ══════════════════════════════════════════════════════════════════════════════
+   James Santana's Punch-Out!!  ──  NES boxing mini-game easter egg
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Container ── */
+.po { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; width: 100dvw; height: 100dvh;
+  z-index: 200; background: #0a0a1e; font-family: 'Press Start 2P', monospace; color: #fff;
+  overflow: hidden; display: flex; flex-direction: column; user-select: none; -webkit-user-select: none; }
+.po * { box-sizing: border-box; }
+
+/* ── CRT scanlines ── */
+.po-scan { position: absolute; inset: 0; z-index: 90; pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0,0,0,0.1) 2px 4px); }
+
+/* ── Screen shake (two variants to retrigger) ── */
+.po-shake-0 { animation: po-sk-a .13s ease-in-out; }
+.po-shake-1 { animation: po-sk-b .13s ease-in-out; }
+@keyframes po-sk-a { 0%,100%{transform:translate(0)} 25%{transform:translate(-5px,3px)} 50%{transform:translate(4px,-3px)} 75%{transform:translate(-3px,-4px)} }
+@keyframes po-sk-b { 0%,100%{transform:translate(0)} 25%{transform:translate(4px,-3px)} 50%{transform:translate(-4px,2px)} 75%{transform:translate(3px,4px)} }
+
+/* ── Flash ── */
+.po-flash { position: absolute; inset: 0; z-index: 80; background: #fff; animation: po-fl .4s ease-out forwards; }
+@keyframes po-fl { 0%{opacity:1} 100%{opacity:0} }
+
+/* ── Blink ── */
+.po-blink { animation: po-blk 1.2s steps(2) infinite; }
+@keyframes po-blk { 50%{opacity:0} }
+.po-blink-light { animation: po-blk 2s ease-in-out infinite; }
+
+/* ── Shared back button ── */
+.po-back { margin-top: 14px; background: none; border: 2px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.45);
+  font-family: inherit; font-size: 7px; padding: 8px 16px; cursor: pointer; letter-spacing: .04em; transition: all .2s; }
+.po-back:hover { border-color: #fbd000; color: #fbd000; }
+
+
+/* ══════════════════════════════ TITLE SCREEN ════════════════════════════════ */
+
+.po-title { flex: 1; position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+
+.po-title-bg { position: absolute; inset: 0; background-size: cover; background-position: center 20%;
+  animation: po-tz 25s ease-in-out infinite alternate; }
+@keyframes po-tz { from{transform:scale(1)} to{transform:scale(1.06)} }
+.po-title-bg::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(transparent 30%, rgba(0,0,0,0.75) 80%, rgba(0,0,0,0.95) 100%); }
+
+.po-title-bottom { position: relative; z-index: 2; text-align: center; padding: 0 24px 40px; }
+.po-start-text { font-size: clamp(12px, 3vw, 18px); color: #fbd000; text-shadow: 2px 2px 0 #000, 0 0 20px rgba(251,208,0,0.4); }
+
+
+/* ══════════════════════════════ FIGHT SCREEN ════════════════════════════════ */
+
+.po-fight { display: flex; flex-direction: column; flex: 1; }
+
+/* ── HUD ── */
+.po-hud { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #000; border-bottom: 3px solid #333; z-index: 10; flex-shrink: 0; }
+.po-hud-side { flex: 1; } .po-hud-side.po-right { text-align: right; }
+.po-hud-name { font-size: clamp(5px, 1.3vw, 8px); color: #bbb; display: block; margin-bottom: 3px; letter-spacing: .06em; }
+.po-bar { height: 14px; background: #1a1a1a; border: 2px solid #555; }
+.po-hp { height: 100%; transition: width .25s ease-out; }
+.po-hp-g { background: linear-gradient(#43b047, #2d8a30); }
+.po-hp-y { background: linear-gradient(#fbd000, #c9a200); }
+.po-hp-r { background: linear-gradient(#e52521, #b01d1a); animation: po-hpf .5s steps(2) infinite; }
+@keyframes po-hpf { 50%{opacity:.55} }
+.po-hud-mid { font-size: clamp(7px, 1.6vw, 11px); color: #fbd000; white-space: nowrap; text-shadow: 2px 2px 0 #000; padding: 0 6px; letter-spacing: .08em; }
+
+/* ── Ring ── */
+.po-ring { flex: 1; position: relative; overflow: hidden;
+  background:
+    radial-gradient(ellipse at 30% -5%, rgba(255,220,80,0.1) 0%, transparent 35%),
+    radial-gradient(ellipse at 70% -5%, rgba(255,220,80,0.1) 0%, transparent 35%),
+    linear-gradient(180deg, #0a0a2e 0%, #0e1840 28%, #143020 58%, #1c6038 75%, #258a4a 100%); }
+
+.po-crowd { position: absolute; top: 0; left: 0; right: 0; height: 32%; pointer-events: none;
+  background:
+    radial-gradient(circle, #665577 0 2.5px, transparent 3px) 0 0/30px 20px,
+    radial-gradient(circle, #776655 0 2px, transparent 2.5px) 15px 10px/30px 20px;
+  opacity: .3; }
+
+.po-rope { position: absolute; left: 0; right: 0; height: 3px; z-index: 2; box-shadow: 0 0 6px rgba(255,215,0,0.25); }
+.po-r1 { top: 16%; background: linear-gradient(90deg, #ffd700 0 14%, transparent 15% 85%, #ffd700 86%); }
+.po-r2 { top: 28%; background: linear-gradient(90deg, #ffd700 0 11%, transparent 12% 88%, #ffd700 89%); }
+.po-r3 { top: 40%; background: linear-gradient(90deg, #ffd700 0 9%, transparent 10% 90%, #ffd700 91%); }
+
+.po-post { position: absolute; top: 8%; width: 8px; z-index: 3;
+  background: repeating-linear-gradient(180deg, #999 0 4px, #666 4px 8px); }
+.po-pl { left: 5%; height: 38%; } .po-pr { right: 5%; height: 38%; }
+
+/* ── James ── */
+.po-james { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); z-index: 5; text-align: center; }
+
+.po-james-img { width: clamp(130px, 28vw, 220px); height: auto; display: block;
+  image-rendering: pixelated; image-rendering: -moz-crisp-edges;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6));
+  transition: transform .12s, filter .1s; }
+
+/* James anims */
+.po-ja-idle .po-james-img { animation: ja-bob 1.6s ease-in-out infinite; }
+@keyframes ja-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+.po-ja-hit-l .po-james-img { transform: translateX(14px) rotate(5deg) scaleX(.96); filter: brightness(3) saturate(0) drop-shadow(0 0 12px #fff); }
+.po-ja-hit-r .po-james-img { transform: translateX(-14px) rotate(-5deg) scaleX(.96); filter: brightness(3) saturate(0) drop-shadow(0 0 12px #fff); }
+
+.po-ja-taunt { animation: ja-taunt .5s ease-in-out; }
+@keyframes ja-taunt { 0%,100%{transform:translateX(-50%) scale(1)} 50%{transform:translateX(-50%) scale(1.04)} }
+
+.po-ja-windup .po-james-img { animation: ja-wind 2s ease-in-out forwards; }
+@keyframes ja-wind {
+  0% { transform: scale(1) translateY(0); }
+  40% { transform: scale(.92) translateY(8px) rotate(6deg); }
+  100% { transform: scale(1.3) translateY(-24px) rotate(-6deg); filter: brightness(1.2) contrast(1.2) drop-shadow(0 0 20px rgba(255,50,50,0.4)); }
+}
+
+.po-ja-punch .po-james-img { animation: ja-punch .45s ease-in forwards; }
+@keyframes ja-punch {
+  0% { transform: scale(1.3) translateY(-24px) rotate(-6deg); }
+  50% { transform: scale(2.5) translateY(18vh) rotate(2deg); filter: brightness(1.4); }
+  100% { transform: scale(4) translateY(30vh) rotate(0); filter: brightness(1); }
+}
+
+.po-ja-victory .po-james-img { animation: ja-bob 1s ease-in-out infinite; }
+
+/* ── Taunt ── */
+.po-taunt { position: absolute; top: 4%; left: 50%; transform: translateX(-50%); z-index: 20;
+  background: #fff; color: #111; font-size: clamp(6px, 1.3vw, 9px); padding: 8px 14px;
+  border: 3px solid #000; max-width: 300px; text-align: center; line-height: 1.7;
+  animation: po-tin .25s ease-out; }
+.po-taunt::after { content: ''; position: absolute; bottom: -10px; left: 50%; margin-left: -7px;
+  border: 7px solid transparent; border-top-color: #000; }
+@keyframes po-tin { from{opacity:0;transform:translateX(-50%) translateY(-6px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+/* ── Hit text ── */
+.po-hit { position: absolute; z-index: 25; pointer-events: none; white-space: nowrap;
+  font-size: clamp(22px, 6vw, 44px); color: #fbd000;
+  text-shadow: 3px 3px 0 #e52521, 6px 6px 0 #000;
+  animation: po-hitfx .55s ease-out forwards; }
+@keyframes po-hitfx { 0%{opacity:1;transform:scale(.4) rotate(-10deg)} 30%{opacity:1;transform:scale(1.4) rotate(5deg)} 100%{opacity:0;transform:scale(1) translateY(-30px)} }
+
+/* ── Robot ── */
+.po-robot { position: absolute; bottom: 3%; left: 50%; transform: translateX(-50%); z-index: 6; }
+.po-robot-body { width: clamp(60px, 12vw, 96px); margin: 0 auto; }
+.po-robot-svg { width: 100%; height: auto; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); }
+
+/* Gloves */
+.po-glove { position: absolute; width: clamp(48px, 10vw, 76px); aspect-ratio: 1/.82;
+  background: radial-gradient(ellipse at 42% 42%, #FF5555 0%, #E52521 30%, #B01D1A 65%, #8A1614 100%);
+  border: 3px solid #111; border-radius: 42% 42% 36% 36%;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.2), inset 3px 3px 0 rgba(255,255,255,0.1), 0 4px 14px rgba(0,0,0,0.45);
+  transition: transform .12s ease-out; bottom: 0; }
+.po-glove::before { content: ''; position: absolute; top: 48%; left: 18%; right: 18%; height: 3px; background: #8A1614; border-radius: 2px; }
+.po-gl-l { left: clamp(-70px, -14vw, -54px); }
+.po-gl-r { right: clamp(-70px, -14vw, -54px); }
+
+/* Punch anims */
+.po-ro-punch-l .po-gl-l { transform: translateY(clamp(-140px, -28vw, -220px)) translateX(30px) scale(1.5) rotate(-12deg); transition: transform .08s ease-out; }
+.po-ro-punch-r .po-gl-r { transform: translateY(clamp(-140px, -28vw, -220px)) translateX(-30px) scale(1.5) rotate(12deg); transition: transform .08s ease-out; }
+.po-ro-punch-l .po-robot-body { transform: rotate(-3deg); transition: transform .08s; }
+.po-ro-punch-r .po-robot-body { transform: rotate(3deg); transition: transform .08s; }
+
+.po-ro-hit { animation: ro-hit .3s ease-out; }
+@keyframes ro-hit { 0%{transform:translateX(-50%)} 50%{transform:translateX(-50%) translateY(8px) scale(.92)} 100%{transform:translateX(-50%)} }
+
+.po-ro-ko { animation: ro-ko 1.6s ease-in forwards; }
+.po-ro-ko .po-glove { opacity: 0; transition: opacity .1s; }
+@keyframes ro-ko {
+  0% { transform: translateX(-50%) scale(1) rotate(0); opacity: 1; }
+  15% { transform: translateX(-50%) translateY(-24px) scale(1.1) rotate(-12deg); }
+  100% { transform: translateX(-50%) translateY(120vh) scale(.2) rotate(720deg); opacity: 0; }
+}
+
+/* ── Controls bar ── */
+.po-ctrl { display: flex; justify-content: center; gap: 28px; padding: 8px 12px; background: #000;
+  border-top: 2px solid #333; font-size: clamp(6px, 1.1vw, 8px); color: #777; flex-shrink: 0; letter-spacing: .04em; }
+@media (pointer: coarse) { .po-ctrl { display: none; } }
+
+.po-touch { display: none; }
+@media (pointer: coarse) {
+  .po-touch { display: flex; gap: 10px; padding: 10px 14px; background: #000; border-top: 2px solid #333; flex-shrink: 0; }
+  .po-touch button { flex: 1; padding: 16px 6px; background: #e52521; color: #fff; border: 3px solid #fff;
+    font-family: 'Press Start 2P', monospace; font-size: 10px; cursor: pointer; }
+  .po-touch button:active { background: #ff4444; transform: scale(.95); }
+}
+
+/* ── Fight intro overlay ── */
+.po-intro { position: absolute; inset: 0; z-index: 40; background: #000;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  animation: po-introfade 1.8s ease-out forwards; }
+@keyframes po-introfade { 0%,55%{opacity:1} 100%{opacity:0;pointer-events:none} }
+.po-intro-r { font-size: clamp(16px, 4vw, 32px); color: #fff; text-shadow: 2px 2px 0 #000;
+  animation: po-introtext .4s ease-out both; }
+.po-intro-f { font-size: clamp(32px, 9vw, 72px); color: #fbd000; text-shadow: 4px 4px 0 #e52521, 8px 8px 0 #000;
+  animation: po-introtext .4s .5s ease-out both; }
+@keyframes po-introtext { from{transform:scale(2.5);opacity:0} to{transform:scale(1);opacity:1} }
+
+/* ── KO overlays ── */
+.po-ko-warn { position: absolute; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center;
+  font-size: clamp(9px, 2.2vw, 16px); color: #fbd000; text-shadow: 3px 3px 0 #000;
+  background: rgba(0,0,0,0.55); animation: po-blk .7s steps(2) infinite; padding: 16px; text-align: center; letter-spacing: .06em; }
+
+.po-ko-move { position: absolute; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center; flex-direction: column;
+  font-size: clamp(14px, 4vw, 32px); color: #e52521; text-shadow: 4px 4px 0 #000, 0 0 40px rgba(229,37,33,0.4);
+  background: rgba(0,0,0,0.75); animation: po-komin .4s ease-out; line-height: 1.8; padding: 16px; text-align: center; }
+.po-ko-move small { font-size: .42em; color: #fbd000; letter-spacing: .14em; display: block; margin-bottom: 6px; }
+@keyframes po-komin { from{opacity:0;transform:scale(1.6)} to{opacity:1;transform:scale(1)} }
+
+.po-ko-big { position: absolute; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center;
+  font-size: clamp(52px, 16vw, 130px); color: #fbd000; text-shadow: 6px 6px 0 #e52521, 12px 12px 0 #000;
+  background: rgba(0,0,0,0.85); animation: po-kobig .25s cubic-bezier(.2,.8,.2,1) both; letter-spacing: .04em; }
+.po-ko-big span { color: #e52521; }
+@keyframes po-kobig { from{opacity:0;transform:scale(3.5)} to{opacity:1;transform:scale(1)} }
+
+/* Darken ring during KO */
+.po-fight:has(.po-ko-warn) .po-ring,
+.po-fight:has(.po-ko-move) .po-ring { filter: brightness(.45); transition: filter .5s; }
+.po-fight:has(.po-ko-big) .po-ring { filter: brightness(.18); transition: filter .3s; }
+
+
+/* ══════════════════════════════ WINNER SCREEN ═══════════════════════════════ */
+
+.po-winner { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; padding: 24px; text-align: center;
+  background: radial-gradient(ellipse at 50% 55%, #2a1a50 0%, #0a0a1e 80%); position: relative; overflow: hidden;
+  animation: po-winin .8s ease-out; }
+@keyframes po-winin { from{opacity:0} to{opacity:1} }
+
+.po-win-badge { font-size: clamp(24px, 7vw, 56px); color: #fbd000;
+  text-shadow: 4px 4px 0 #e52521, 8px 8px 0 #000, 0 0 40px rgba(251,208,0,0.35);
+  margin-bottom: 16px; letter-spacing: .1em; animation: po-pulse 1.5s ease-in-out infinite; }
+@keyframes po-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+
+.po-win-frame { position: relative; margin: 0 auto 14px;
+  border: 5px solid #fbd000; box-shadow: 0 0 0 3px #000, 0 0 50px rgba(251,208,0,0.35), 0 0 100px rgba(251,208,0,0.12);
+  background: #0a0a2e; animation: po-wdrop .6s ease-out both; }
+.po-win-frame img { width: clamp(100px, 22vw, 180px); height: auto; display: block; image-rendering: pixelated; image-rendering: -moz-crisp-edges;
+  animation: ja-bob 1.2s ease-in-out infinite; }
+
+.po-win-name { font-size: clamp(12px, 3vw, 22px); color: #fff; text-shadow: 3px 3px 0 #000; margin-bottom: 6px; letter-spacing: .06em;
+  animation: po-wdrop .6s .15s ease-out both; }
+.po-win-sub { font-size: clamp(7px, 1.8vw, 12px); color: #fbd000; text-shadow: 2px 2px 0 #000; margin-bottom: 5px; letter-spacing: .1em;
+  animation: po-wdrop .6s .25s ease-out both; }
+.po-win-rec { font-size: clamp(7px, 1.5vw, 10px); color: #e52521; text-shadow: 2px 2px 0 #000; letter-spacing: .06em;
+  animation: po-wdrop .6s .35s ease-out both; }
+@keyframes po-wdrop { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+
+/* Confetti */
+.po-confetti-box { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.po-confetti { position: absolute; top: -14px; opacity: .85; animation: po-cfall 3.2s linear infinite; }
+@keyframes po-cfall { 0%{transform:translateY(-10px) rotate(0);opacity:1} 100%{transform:translateY(110vh) rotate(720deg);opacity:.4} }
+
+
+/* ══════════════════════════════ RESPONSIVE ══════════════════════════════════ */
+
+@media (max-height: 500px) {
+  .po-james { top: 2%; }
+  .po-james-img { width: clamp(80px, 18vw, 130px); }
+  .po-robot { bottom: 1%; }
+  .po-robot-body { width: clamp(40px, 8vw, 64px); }
+}
+
+@media print { .po { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { .po, .po * { animation-duration: .01s !important; transition-duration: .01s !important; } }
