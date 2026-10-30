@@ -197,7 +197,7 @@ html[data-theme='90s'] .chip[aria-pressed='true'] { background: #7b2cff; color: 
 html[data-theme='90s'] .slot-switch { background: #fff; border: 3px solid #1b0a3a; box-shadow: 4px 4px 0 #1b0a3a; }
 html[data-theme='90s'] .slot-switch button { font-family: var(--display); font-size: 12px; }
 html[data-theme='90s'] .slot-switch .pill-bg { background: #ffee00; box-shadow: inset 0 0 0 2px #1b0a3a; }
-html[data-theme='90s'] .tag { border: 2px solid #1b0a3a; background: #fff; font-weight: 700; } html[data-theme='90s'] .tag.room { background: #7b2cff; color: #fff; font-family: var(--display); font-size: 11px; }
+html[data-theme='90s'] .tag { border: 2px solid #1b0a3a; background: #fff; color: #1b0a3a; font-weight: 700; } html[data-theme='90s'] .tag.room { background: #7b2cff; color: #fff; font-family: var(--display); font-size: 11px; }
 html[data-theme='90s'] .prog-item .rm { background: #7b2cff; font-family: var(--display); font-size: 11px; border: 2px solid #1b0a3a; }
 html[data-theme='90s'] .star[aria-pressed='true'] { color: #ff2d95; filter: drop-shadow(2px 2px 0 #1b0a3a); }
 html[data-theme='90s'] .drawer, html[data-theme='90s'] .modal-card { border: 4px solid #1b0a3a; box-shadow: 14px 14px 0 #ff2d95; }
@@ -371,6 +371,9 @@ html[data-theme='80s'] .filters, html[data-theme='80s'] .pf-step, html[data-them
   background: #1a0a3e; border: 1px solid rgba(255,45,149,0.3); color: #fff;
   box-shadow: 0 0 12px rgba(255,0,255,0.08), 0 8px 24px -8px rgba(0,0,0,0.5);
 }
+html[data-theme='80s'] .card, html[data-theme='80s'] .prog-item { background: #1a0a3e !important; }
+html[data-theme='80s'] .card::before, html[data-theme='80s'] .card::after,
+html[data-theme='80s'] .prog-item::before, html[data-theme='80s'] .prog-item::after { display: none; }
 html[data-theme='80s'] .card:hover, html[data-theme='80s'] .prog-item:hover { border-color: #ff2d95; box-shadow: 0 0 25px rgba(255,45,149,0.25), 0 12px 30px -8px rgba(0,0,0,0.5); }
 html[data-theme='80s'] .card .title, html[data-theme='80s'] .prog-item .t, html[data-theme='80s'] .stop-top .t, html[data-theme='80s'] .day-pick .t { font-family: var(--body); font-weight: 600; font-size: 18px; color: #fff; }
 html[data-theme='80s'] .card .pw-label, html[data-theme='80s'] .stop-top .pw-label { font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c); filter: brightness(1.5); }
@@ -403,7 +406,10 @@ html[data-theme='80s'] .slot-switch { background: rgba(13,2,33,0.6); border: 1px
 html[data-theme='80s'] .slot-switch button { color: #a78bfa; font-family: 'Orbitron', sans-serif; font-size: 12px; letter-spacing: 0.04em; }
 html[data-theme='80s'] .slot-switch button[aria-pressed='true'] { color: #fff; }
 html[data-theme='80s'] .slot-switch .pill-bg { background: linear-gradient(135deg, #ff2d95, #6f2dbd); box-shadow: 0 0 12px rgba(255,45,149,0.4); }
-html[data-theme='80s'] .tag { background: rgba(255,45,149,0.12); color: #e4d7ff; border: 1px solid rgba(255,45,149,0.25); font-family: var(--body); }
+html[data-theme='80s'] .tag { background: rgba(255,45,149,0.15); color: #e4d7ff; border: 1px solid rgba(255,45,149,0.3); font-family: var(--body); }
+html[data-theme='80s'] .pcard, html[data-theme='80s'] .stop-top, html[data-theme='80s'] .stop-alt, html[data-theme='80s'] .day-pick { background: #1a0a3e !important; }
+html[data-theme='80s'] .pcard::before, html[data-theme='80s'] .pcard::after,
+html[data-theme='80s'] .stop-top::before, html[data-theme='80s'] .stop-top::after { display: none; }
 html[data-theme='80s'] .tag.room { background: #ff2d95; color: #fff; font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 0.06em; }
 html[data-theme='80s'] .prog-item .rm { background: #ff2d95; font-family: 'Orbitron', sans-serif; font-size: 10px; }
 html[data-theme='80s'] .star[aria-pressed='true'] { color: #ffee00; filter: drop-shadow(0 0 8px #ffee00); }
