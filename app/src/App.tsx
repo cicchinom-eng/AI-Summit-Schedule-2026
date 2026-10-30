@@ -82,7 +82,7 @@ export default function App() {
   const tryThemeCode = useCallback((raw: string) => {
     const r = tryCode(raw);
     const w = raw.trim().toLowerCase();
-    if (r === 'set') setToast(w.includes('disney') || w === 'mickey' || w === 'magic' ? '✨ Bibbidi-bobbidi-boo. The magic is on.' : w.startsWith('9') || w === 'nineties' ? '📼 Whoa. It\u2019s 1996 again.' : '🍄 Player 1 has entered the game.');
+    if (r === 'set') setToast(w.includes('disney') || w === 'mickey' || w === 'magic' ? '✨ Bibbidi-bobbidi-boo. The magic is on.' : w.startsWith('9') || w === 'nineties' ? '📼 Whoa. It\u2019s 1996 again.' : w.startsWith('8') || w === 'eighties' || w === 'radical' ? '🕶 Totally radical. It\u2019s 1985.' : '🍄 Player 1 has entered the game.');
     else if (r === 'off') setToast('Back to normal.');
     if (r) setTimeout(() => setToast(null), 2600);
     return r;

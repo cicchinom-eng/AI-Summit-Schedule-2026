@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 
-export type ThemeId = 'nintendo' | '90s' | 'disney';
+export type ThemeId = 'nintendo' | '90s' | 'disney' | '80s';
 export const THEME_CODES: Record<string, ThemeId> = {
   nintendo: 'nintendo', mario: 'nintendo', zelda: 'nintendo', nes: 'nintendo',
   '90s': '90s', "90's": '90s', nineties: '90s', '1990s': '90s',
   disney: 'disney', mickey: 'disney', magic: 'disney',
+  '80s': '80s', "80's": '80s', eighties: '80s', '1980s': '80s', radical: '80s',
 };
 export const THEME_OFF_CODES = ['normal', 'reset', 'off', 'classic', 'default', 'exit'];
 
@@ -13,6 +14,7 @@ const FONTS: Record<ThemeId, string> = {
   nintendo: 'https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@400..700&display=swap',
   '90s': 'https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=VT323&display=swap',
   disney: 'https://fonts.googleapis.com/css2?family=Mouse+Memoirs&family=Nunito:ital,wght@0,400..900;1,400..700&display=swap',
+  '80s': 'https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron:wght@400..900&family=Rajdhani:wght@400;500;600;700&display=swap',
 };
 
 function ensureFonts(t: ThemeId) {

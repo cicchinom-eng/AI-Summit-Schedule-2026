@@ -35,6 +35,13 @@ const NINETIES_TICKER = [
 ];
 const DISNEY_LINES = ['The Most Magical Summit on Earth', 'Where dreams (and lesson plans) come true', 'A whole new world of AI literacy', 'Hakuna matata, your rooms won’t change (probably)'];
 
+const EIGHTIES_TICKER = [
+  '★ Welcome to the NJ AI Literacy Summit ★', 'TOTALLY TUBULAR', 'Like, gag me with a spoon!',
+  'Where’s the beef?', 'I’ll be back...', 'GNARLY', 'TO THE MAX!',
+  'Beam me up, Scotty', 'BODACIOUS', 'No whammies, no whammies!',
+  'Just say no... to boring PD', 'COWABUNGA!', 'RADICAL!', 'Gotta blast!',
+  'May the Force be with your lesson plans', 'Bueller? Bueller? Bueller?',
+];
 function HitCounter() {
   const [n, setN] = useState(473);
   useEffect(() => { const t = setInterval(() => setN((x) => x + 1), 7000); return () => clearInterval(t); }, []);
@@ -94,8 +101,15 @@ export default function ThemeDecor({ theme, onExit }: { theme: ThemeId; onExit: 
           <div className="sparkle-rise r1">✦</div><div className="sparkle-rise r2">✧</div><div className="sparkle-rise r3">✦</div><div className="sparkle-rise r4">★</div>
         </>
       )}
+      {theme === '80s' && (
+        <>
+          <div className="ticker eighty"><div className="ticker-track">{[...EIGHTIES_TICKER, ...EIGHTIES_TICKER].map((t, i) => <span key={i}>{t}</span>)}</div></div>
+          <div className="grid-floor" />
+          <SparkleTrail />
+        </>
+      )}
       <button className="theme-exit" onClick={onExit} style={{ pointerEvents: 'auto' }}>
-        {theme === 'nintendo' ? '⏏ Exit game' : theme === '90s' ? '✖ Back to the future' : '☾ Break the spell'}
+        {theme === 'nintendo' ? '⏏ Exit game' : theme === '90s' ? '✖ Back to the future' : theme === '80s' ? '🕶 Back to the present' : '☾ Break the spell'}
       </button>
     </div>
     </>

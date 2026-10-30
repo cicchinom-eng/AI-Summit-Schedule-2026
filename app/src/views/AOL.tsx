@@ -78,7 +78,6 @@ export default function AOL() {
   const [phase, setPhase] = useState<Phase>('login');
   const [name, setName] = useState('');
   const [connectStep, setConnectStep] = useState(0);
-  const [progress, setProgress] = useState(0);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState('');
   const [jamesOn, setJamesOn] = useState(false);
@@ -124,7 +123,7 @@ export default function AOL() {
   const signOn = useCallback(() => {
     if (!name.trim()) return;
     setPhase('connecting');
-    setConnectStep(0); setProgress(0);
+    setConnectStep(0);
     stopAll();
     play(SND.dialup);
 
@@ -132,7 +131,6 @@ export default function AOL() {
     let p = 0;
     const iv = setInterval(() => {
       p += 1.1;
-      setProgress(Math.min(p, 100));
       if (p < 33) setConnectStep(1);
       else if (p < 66) setConnectStep(2);
       else setConnectStep(3);
