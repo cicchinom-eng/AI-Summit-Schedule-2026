@@ -100,6 +100,7 @@
   image-rendering: pixelated; image-rendering: -moz-crisp-edges;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
   animation: dh-popup .5s cubic-bezier(.2,.8,.3,1) both; }
+.dh-james img[src*="both"] { width: clamp(160px, 35vw, 270px); }
 @keyframes dh-popup {
   from { transform: translateY(100%); }
   to   { transform: translateY(0); }
