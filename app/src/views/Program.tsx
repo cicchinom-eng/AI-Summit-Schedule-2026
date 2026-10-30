@@ -3,7 +3,7 @@ import { byTitle, currentBlocks, currentSlot, nextSlot, pathwayColor, roomForSlo
 import type { Block, Keynote, Session } from '../data/types';
 import { Arrow, Car, Entrance, IdCard, Info, Pin, Print, Search, Truck, Utensils } from '../components/icons';
 
-const PHOTO: Record<string, string> = { 'Kaiz Headshot.jpeg': '/images/kaiz.jpeg', 'James Santana Headshot.jpg': '/images/james-santana.jpg', 'Marc Cicchino Headshot.jpg': '/images/marc-cicchino.jpg', 'Winston Headshot.png': '/images/winston-roberts.png' };
+const PHOTO: Record<string, string> = { 'Kaiz Headshot.jpeg': '/images/kaiz.jpeg', 'James Santana Headshot.jpg': '/images/james-santana.jpg', 'Marc Cicchino Headshot.jpg': '/images/marc-cicchino.jpg', 'Winston Headshot.png': '/images/winston-roberts.png', 'WinstonHeadshotUpdated.png': '/images/winston-roberts.png' };
 const G = {
   arrival: 'linear-gradient(135deg, #e9eaf0 0%, #ffffff 100%)',
   welcome: 'linear-gradient(135deg, #5b4bff 0%, #9b5cff 55%, #ff7ab6 100%)',

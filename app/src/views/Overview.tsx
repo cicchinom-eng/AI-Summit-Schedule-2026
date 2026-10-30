@@ -4,7 +4,7 @@ import { currentBlocks, currentSlot, fmtMinutes, nextSlot, pathwayColor, scrollT
 import type { Block } from '../data/types';
 import { Chevron } from '../components/icons';
 
-const PHOTO: Record<string, string> = { 'Kaiz Headshot.jpeg': '/images/kaiz.jpeg', 'James Santana Headshot.jpg': '/images/james-santana.jpg', 'Marc Cicchino Headshot.jpg': '/images/marc-cicchino.jpg', 'Winston Headshot.png': '/images/winston-roberts.png' };
+const PHOTO: Record<string, string> = { 'Kaiz Headshot.jpeg': '/images/kaiz.jpeg', 'James Santana Headshot.jpg': '/images/james-santana.jpg', 'Marc Cicchino Headshot.jpg': '/images/marc-cicchino.jpg', 'Winston Headshot.png': '/images/winston-roberts.png', 'WinstonHeadshotUpdated.png': '/images/winston-roberts.png' };
 
 const shortLabel = (b: Block) =>
   b.type === 'concurrent' ? b.label.replace('Concurrent Sessions #', 'Sessions ') : b.type === 'keynote' ? 'Keynote' : b.type === 'arrival' ? 'Check-in' : b.type === 'plenary' ? 'Welcome' : b.type === 'lunch' ? 'Lunch & Meetups' : b.label;
