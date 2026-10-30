@@ -17,6 +17,7 @@ import MyDay from './views/MyDay';
 import Program from './views/Program';
 import SecretMenu from './views/SecretMenu';
 import PunchOut from './views/PunchOut';
+import DuckHunt from './views/DuckHunt';
 
 export type Route = { view: string; params: URLSearchParams };
 
@@ -64,7 +65,7 @@ const NAV = [
   { id: 'my-day', label: 'My Day', icon: Star },
 ];
 /** Pages that stay reachable by URL (and by typing their name into the Explore search) but are not in the menus. */
-export const HIDDEN_VIEWS = ['rooms', 'overview', 'secret-menu', 'punchout'];
+export const HIDDEN_VIEWS = ['rooms', 'overview', 'secret-menu', 'punchout', 'duckhunt'];
 
 export default function App() {
   const [data, setData] = useState<SummitData>(() => loadSnapshot());
@@ -120,7 +121,7 @@ export default function App() {
     theme, tryThemeCode,
   };
 
-  const View = { overview: Overview, sessions: Sessions, pathfinder: Pathfinder, rooms: Rooms, 'my-day': MyDay, program: Program, 'secret-menu': SecretMenu, punchout: PunchOut }[route.view] ?? Program;
+  const View = { overview: Overview, sessions: Sessions, pathfinder: Pathfinder, rooms: Rooms, 'my-day': MyDay, program: Program, 'secret-menu': SecretMenu, punchout: PunchOut, duckhunt: DuckHunt }[route.view] ?? Program;
   const openSession = openId ? data.sessions.find((s) => s.id === openId) ?? null : null;
 
   return (
