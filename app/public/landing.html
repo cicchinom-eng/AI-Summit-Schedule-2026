@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="The Fourth NJ AI Literacy Summit — December 7, 2026 at Northern Valley Old Tappan High School. A free, full-day professional learning event for educators exploring AI in education." />
+<title>NJ AI Literacy Summit 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23121A3F'/%3E%3Ccircle cx='22' cy='32' r='9' fill='%232F4BE8'/%3E%3Ccircle cx='42' cy='32' r='9' fill='%23F5A524'/%3E%3C/svg%3E" />
+<style>
+/* ══════════════════════════════════════════════════════════════════════════════
+   NJ AI Literacy Summit 2026 — Landing Page
+   Consistent with schedule app branding (Apple-inspired, Inter Tight/Inter)
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 17px; line-height: 1.47; color: #1d1d1f; background: #f5f5f7;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 { font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0.035em; line-height: 1.08; }
+a { color: #0a6cff; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ── Layout ── */
+.wrap { width: min(100% - 40px, 1120px); margin-inline: auto; }
+.section { padding: 100px 0; }
+@media (max-width: 760px) { .section { padding: 64px 0; } }
+
+/* ══════════════════════════════ NAV ═════════════════════════════════════════ */
+.nav-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 245, 247, 0.72); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.nav-inner { display: flex; align-items: center; height: 52px; gap: 8px; }
+.nav-brand { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 16px; color: #1d1d1f; letter-spacing: -0.02em; }
+.nav-brand span { font-weight: 500; color: #86868b; margin-left: 6px; font-size: 14px; }
+.nav-links { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+.nav-links a, .nav-drop-toggle { font-size: 14px; font-weight: 500; color: #424245; padding: 6px 14px; border-radius: 999px;
+  transition: background .2s, color .2s; cursor: pointer; background: none; border: none; font-family: inherit; }
+.nav-links a:hover, .nav-drop-toggle:hover { background: rgba(0,0,0,0.05); color: #1d1d1f; }
+.nav-links a.cta { background: #0a6cff; color: #fff; font-weight: 600; }
+.nav-links a.cta:hover { background: #0055cc; }
+
+/* Dropdown */
+.nav-drop { position: relative; }
+.nav-drop-menu { display: none; position: absolute; right: 0; top: 100%; padding-top: 8px;
+  min-width: 260px; z-index: 101; }
+.nav-drop-menu-inner { background: #fff; border-radius: 14px; padding: 8px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.06); max-height: 70vh; overflow-y: auto; }
+.nav-drop.open > .nav-drop-menu { display: block; }
+.nav-drop-menu-inner > a { display: block; padding: 8px 12px; border-radius: 8px; font-size: 13px; color: #424245; font-weight: 500; }
+.nav-drop-menu-inner > a:hover { background: rgba(0,0,0,0.04); color: #1d1d1f; }
+.nav-sep { height: 1px; background: rgba(0,0,0,0.06); margin: 6px 0; }
+.nav-drop-year { font-size: 12px; font-weight: 700; color: #1d1d1f; padding: 8px 12px; cursor: pointer; border-radius: 8px;
+  display: flex; align-items: center; justify-content: space-between; user-select: none; transition: background .15s; }
+.nav-drop-year:hover { background: rgba(0,0,0,0.04); }
+.nav-chev { font-size: 10px; color: #86868b; transition: transform .2s; }
+.nav-drop-year.open .nav-chev { transform: rotate(180deg); }
+.nav-drop-sub { display: none; padding-left: 8px; }
+.nav-drop-year.open + .nav-drop-sub { display: block; }
+.nav-drop-sub a { display: block; padding: 6px 12px; border-radius: 8px; font-size: 13px; color: #424245; font-weight: 500; }
+.nav-drop-sub a:hover { background: rgba(0,0,0,0.04); color: #1d1d1f; }
+
+/* Mobile nav */
+.nav-toggle { display: none; background: none; border: none; width: 36px; height: 36px; cursor: pointer; padding: 6px; }
+.nav-toggle svg { width: 24px; height: 24px; stroke: #1d1d1f; fill: none; stroke-width: 2; stroke-linecap: round; }
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; margin-left: auto; }
+  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 52px; left: 0; right: 0;
+    background: #fff; padding: 12px 20px 20px; border-bottom: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1); gap: 4px; }
+  .nav-drop-menu { position: static; box-shadow: none; border-radius: 0; padding: 0 0 0 4px; display: block; min-width: 0; }
+}
+
+/* ══════════════════════════════ HERO ════════════════════════════════════════ */
+.hero {
+  position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: #0b0b14; color: #fff; text-align: center;
+}
+.hero-particles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.hero-orbs { position: absolute; inset: 0; pointer-events: none; }
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.8; will-change: transform; }
+.hero-orb.a { width: 60vw; height: 60vw; max-width: 800px; max-height: 800px; left: -20%; top: -30%;
+  background: radial-gradient(circle at 30% 30%, #6a5cff 0%, #3b2fd1 40%, transparent 70%);
+  animation: h-drift-a 28s ease-in-out infinite alternate; }
+.hero-orb.b { width: 50vw; height: 50vw; max-width: 650px; max-height: 650px; right: -15%; top: -5%;
+  background: radial-gradient(circle at 50% 50%, #ff8a5c 0%, #ff3d7f 45%, transparent 72%);
+  opacity: 0.65; animation: h-drift-b 32s ease-in-out infinite alternate; }
+.hero-orb.c { width: 45vw; height: 45vw; max-width: 580px; max-height: 580px; left: 25%; bottom: -40%;
+  background: radial-gradient(circle at 50% 50%, #2cc8ff 0%, #0a6cff 45%, transparent 72%);
+  opacity: 0.6; animation: h-drift-a 36s ease-in-out infinite alternate-reverse; }
+.hero-orb.d { width: 30vw; height: 30vw; max-width: 400px; max-height: 400px; right: 10%; bottom: -20%;
+  background: radial-gradient(circle at 50% 50%, #34c759 0%, #00a550 50%, transparent 72%);
+  opacity: 0.35; animation: h-drift-b 40s ease-in-out infinite alternate-reverse; }
+@keyframes h-drift-a { from { transform: translate(0,0) scale(1); } to { transform: translate(5%,7%) scale(1.06); } }
+@keyframes h-drift-b { from { transform: translate(0,0) scale(1); } to { transform: translate(-6%,8%) scale(1.05); } }
+
+.hero-content { position: relative; z-index: 1; padding: 120px 24px 80px; max-width: 800px; }
+.hero-edition { font-family: 'Inter Tight', sans-serif; font-size: clamp(13px, 2vw, 16px); font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 20px; }
+.hero h1 { font-size: clamp(44px, 8vw, 88px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.98;
+  color: #fff; margin-bottom: 24px; }
+.hero h1 em { font-style: normal; background: linear-gradient(135deg, #6a5cff, #2cc8ff, #34c759); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-date { font-family: 'Inter Tight', sans-serif; font-size: clamp(18px, 3vw, 28px); font-weight: 600;
+  color: rgba(255,255,255,0.8); letter-spacing: -0.02em; margin-bottom: 8px; }
+.hero-venue { font-size: 15px; color: rgba(255,255,255,0.45); font-weight: 500; margin-bottom: 36px; }
+.hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 999px;
+  font-family: 'Inter Tight', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: -0.01em;
+  transition: transform .2s, box-shadow .2s, background .2s; cursor: pointer; border: none; text-decoration: none; }
+.btn-primary { background: #fff; color: #0b0b14; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,255,255,0.2); }
+.btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.3); }
+.btn-outline:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); }
+.hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 1;
+  color: rgba(255,255,255,0.3); font-size: 13px; font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.hero-scroll span { animation: scroll-hint 2s ease-in-out infinite; }
+@keyframes scroll-hint { 0%,100%{transform:translateY(0);opacity:.5} 50%{transform:translateY(6px);opacity:1} }
+
+/* ══════════════════════════════ ABOUT ═══════════════════════════════════════ */
+.about { background: #fff; }
+.about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; }
+@media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+.about-inner { }
+.about-tag { font-family: 'Inter Tight', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #0a6cff; margin-bottom: 16px; }
+.about h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -0.04em; color: #1d1d1f; margin-bottom: 24px; }
+.about p { font-size: 16px; color: #424245; line-height: 1.7; margin-bottom: 16px; }
+.about-cta-line { font-family: 'Inter Tight', sans-serif; font-size: 21px; font-weight: 700; color: #1d1d1f;
+  letter-spacing: -0.02em; margin-top: 8px; margin-bottom: 0; }
+
+/* Animated number ticker — right side of about */
+.about-ticker { display: flex; flex-direction: column; align-items: center; gap: 0;
+  background: #0b0b14; border-radius: 24px; padding: 36px 24px; overflow: hidden; position: relative; }
+.about-ticker::before { content: ''; position: absolute; inset: 0; border-radius: 24px;
+  background: radial-gradient(ellipse at 30% 20%, rgba(106,92,255,0.14) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(44,200,255,0.10) 0%, transparent 60%); }
+.ticker-item { text-align: center; position: relative; z-index: 1; padding: 16px 12px; }
+.ticker-num { font-family: 'Inter Tight', sans-serif; font-size: clamp(40px, 6vw, 64px); font-weight: 800;
+  letter-spacing: -0.04em; color: #fff; display: inline; line-height: 1; }
+.ticker-plus { font-family: 'Inter Tight', sans-serif; font-size: clamp(20px, 3vw, 30px); font-weight: 700;
+  color: rgba(255,255,255,0.45); display: inline; vertical-align: super; margin-left: 2px; }
+.ticker-label { font-size: clamp(12px, 1.4vw, 14px); color: rgba(255,255,255,0.5); font-weight: 500; margin-top: 6px; letter-spacing: 0.01em; }
+.ticker-divider { height: 1px; width: 60px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+
+/* ══════════════════════════════ REGISTRATION ════════════════════════════════ */
+.reg {
+  background: #0b0b14; color: #fff; position: relative; overflow: hidden;
+}
+.reg-orbs { position: absolute; inset: 0; pointer-events: none; }
+.reg-orb { position: absolute; border-radius: 50%; filter: blur(100px); }
+.reg-orb.a { width: 50vw; height: 50vw; max-width: 600px; left: -15%; top: -20%;
+  background: radial-gradient(circle, #5b4bff 0%, transparent 70%); opacity: 0.3; }
+.reg-orb.b { width: 40vw; height: 40vw; max-width: 500px; right: -10%; bottom: -20%;
+  background: radial-gradient(circle, #ff3d7f 0%, transparent 70%); opacity: 0.2; }
+.reg-content { position: relative; z-index: 1; text-align: center; max-width: 640px; margin: 0 auto; }
+.reg-tag { font-family: 'Inter Tight', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #ff9f0a; margin-bottom: 16px; }
+.reg h2 { font-size: clamp(30px, 5vw, 48px); font-weight: 700; letter-spacing: -0.035em; color: #fff; margin-bottom: 16px; }
+.reg p { font-size: 17px; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 28px; }
+.reg .btn-waitlist { background: linear-gradient(135deg, #ff9f0a, #ff6b2c); color: #fff; font-size: 17px; padding: 16px 36px; }
+.reg .btn-waitlist:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,159,10,0.3); }
+.reg .sold-out { display: inline-block; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 999px; padding: 8px 20px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5);
+  letter-spacing: 0.04em; margin-bottom: 24px; }
+
+/* ══════════════════════════════ FOOTER ══════════════════════════════════════ */
+.site-footer { background: #0b0b14; color: rgba(255,255,255,0.4); padding: 48px 0; text-align: center; font-size: 14px; line-height: 1.8; }
+.site-footer a { color: rgba(255,255,255,0.55); }
+.site-footer a:hover { color: #fff; }
+.footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+
+/* ══════════════════════════════ ANIMATIONS ══════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0.7,0.2,1), transform 0.7s cubic-bezier(0.2,0.7,0.2,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════════ -->
+<nav class="nav-bar">
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-brand">NJ AI Literacy Summit</a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#registration">Registration</a>
+      <a href="./" target="_blank">Schedule</a>
+      <div class="nav-drop">
+        <button class="nav-drop-toggle" onclick="event.stopPropagation(); this.parentElement.classList.toggle('open')">More &#9662;</button>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <div class="nav-drop-year" onclick="this.classList.toggle('open')">2025 <span class="nav-chev">&#9662;</span></div>
+          <div class="nav-drop-sub">
+            <a href="https://docs.google.com/document/d/e/2PACX-1vRGg7UE0A78FNwdJTIRtc4r6gg6MdMSbL2u4aJ4zQFkcdkf8If1SfpmSqFZDTLp2EJD7DoeFHVumLcf/pub" target="_blank">Schedule</a>
+            <a href="https://sites.google.com/nvnet.org/ailiteracysummit/more/2025/2025-photos" target="_blank">2025 Photos</a>
+            <a href="https://docs.google.com/document/d/1hY-V9Wm1HjyfZs5d6xwS2a6VKWo70YVYWNOoqxgTcQM/edit?usp=sharing" target="_blank">Dave Messer Keynote Resources</a>
+            <a href="https://hippasus.com/resources/NJAISummit25/Puentedura_NotesFromAFutureThatIsNow.pdf" target="_blank">Dr. Puentedura&rsquo;s Keynote Slides</a>
+            <a href="https://drive.google.com/drive/folders/1q47Tm1xD3slH7aFVwQ4quZ2RfVeg5qKu?usp=sharing" target="_blank">Peer Reviewed Research (AI)</a>
+            <a href="https://sites.google.com/nvnet.org/ailiteracysummit/more/2025/official-chatbot-2025" target="_blank">Official Chatbot (2025)</a>
+          </div>
+          <div class="nav-sep"></div>
+          <div class="nav-drop-year" onclick="this.classList.toggle('open')">2024 <span class="nav-chev">&#9662;</span></div>
+          <div class="nav-drop-sub">
+            <a href="https://docs.google.com/document/d/e/2PACX-1vRdEdKH9FdKevnhVc_xEX71htzGtJR2nlSk2dfehkM7P3pryuObnuDZ0zo7IjHER722G6Mmfv0g8bIf/pub" target="_blank">Schedule</a>
+            <a href="https://sites.google.com/nvnet.org/ailiteracysummit/more/2024/photos-2024" target="_blank">2024 Photos</a>
+            <a href="https://sites.google.com/nvnet.org/ailiteracysummit/more/2024/kickoff-toolkit" target="_blank">Kickoff Toolkit</a>
+            <a href="https://sites.google.com/nvnet.org/ailiteracysummit/more/2024/playlist" target="_blank">Playlist</a>
+          </div>
+          <div class="nav-sep"></div>
+          <div class="nav-drop-year" onclick="this.classList.toggle('open')">2023 <span class="nav-chev">&#9662;</span></div>
+          <div class="nav-drop-sub">
+            <a href="https://docs.google.com/document/d/e/2PACX-1vSpkcPaUgQstvPK0CHS9WgG6xspY4zVtIh0kJNn5Cow1gviyNX30nTzsIBcJj4wugHLAzKs6CM5jDPh/pub" target="_blank">Schedule</a>
+            <a href="https://drive.google.com/drive/folders/1N4_uW8_FHUsB8giHRv5W6mDUm6zu3t5FXMKSytZ_R3VB8TgUVi742C14VZX4cGSaHtAWxwsw?usp=sharing" target="_blank">Session Resources</a>
+            <a href="https://sites.google.com/nvnet.org/ailiteracysummit/more/2023/playlist-2023" target="_blank">Playlist</a>
+            <a href="https://sites.google.com/nvnet.org/ailiteracysummit/more/2023/chatbot-2023" target="_blank">ChatBot (2023)</a>
+            <a href="https://sites.google.com/nvnet.org/ailiteracysummit/more/2023/recap-2023" target="_blank">Recap</a>
+          </div>
+          <div class="nav-sep"></div>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSc6uPkiNuzvl_iCjezZGoIQW-CkrK3TKZfrd6QJnP7n7afjHg/viewform?usp=sf_link" target="_blank">Contact</a>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ══════════════════════════════════ -->
+<section class="hero" id="top">
+  <canvas class="hero-particles" id="heroParticles"></canvas>
+  <div class="hero-orbs">
+    <div class="hero-orb a"></div>
+    <div class="hero-orb b"></div>
+    <div class="hero-orb c"></div>
+    <div class="hero-orb d"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-edition">The Fourth Annual</p>
+    <h1>NJ <em>AI Literacy</em> Summit</h1>
+    <p class="hero-date">December 7, 2026</p>
+    <p class="hero-venue">Northern Valley Old Tappan High School &middot; Old Tappan, NJ</p>
+    <div class="hero-actions">
+      <a href="./" target="_blank" class="btn btn-primary">View the Schedule</a>
+      <a href="#registration" class="btn btn-outline">Join Waitlist</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>&#8595;</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ ABOUT ═════════════════════════════════ -->
+<section class="about section" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-inner reveal">
+        <h2>Where educators come together to explore what&rsquo;s next.</h2>
+        <p>The NJ AI Literacy Summit is a free, full-day professional learning event that brings educators together to share innovative ideas, exchange practices, and learn from each other in the age of AI.</p>
+        <p>The schedule of sessions is driven entirely by educator input. Every session is proposed and led by practitioners who are doing incredible work in their schools and classrooms every day.</p>
+        <p>Whether you&rsquo;re just beginning to explore AI or you&rsquo;ve been building with it for years, the NJ AI Literacy Summit is designed to meet you where you are and make sure you leave knowing more than when you walked in.</p>
+        <p class="about-cta-line">Come curious. Leave inspired.</p>
+      </div>
+
+      <div class="about-ticker reveal">
+        <div class="ticker-item">
+          <div class="ticker-num" data-target="4">0</div>
+          <div class="ticker-plus">th</div>
+          <div class="ticker-label">year running</div>
+        </div>
+        <div class="ticker-divider"></div>
+        <div class="ticker-item">
+          <div class="ticker-num" data-target="30">0</div>
+          <div class="ticker-plus">+</div>
+          <div class="ticker-label">concurrent sessions per time slot</div>
+        </div>
+        <div class="ticker-divider"></div>
+        <div class="ticker-item">
+          <div class="ticker-num" data-target="100">0</div>
+          <div class="ticker-plus">+</div>
+          <div class="ticker-label">school districts represented</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ REGISTRATION ═════════════════════════ -->
+<section class="reg section" id="registration">
+  <div class="reg-orbs"><div class="reg-orb a"></div><div class="reg-orb b"></div></div>
+  <div class="wrap reg-content">
+    <h2>Registration is sold out.</h2>
+    <p>All seats for the 2026 Summit have been claimed. If you&rsquo;d like to be notified if a spot opens up, join the waitlist below. We&rsquo;ll reach out if space becomes available.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfI2Th1D-J1r846-5OIR_xh6uc0-066lcq09j6lpDAoeI4Lag/viewform?usp=publish-editor" target="_blank" class="btn btn-waitlist">Join the Waitlist</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="./" target="_blank">Schedule</a>
+      <a href="#about">About</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc6uPkiNuzvl_iCjezZGoIQW-CkrK3TKZfrd6QJnP7n7afjHg/viewform?usp=sf_link" target="_blank">Contact</a>
+    </div>
+    <p>NJ AI Literacy Summit &middot; Hosted by Northern Valley Regional High School</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════ SCRIPTS ══════════════════════════════ -->
+<script>
+// Close More dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  document.querySelectorAll('.nav-drop.open').forEach(function(d) {
+    if (!d.contains(e.target)) d.classList.remove('open');
+  });
+});
+</script>
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Animated count-up for ticker numbers
+const countObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    countObs.unobserve(e.target);
+    const nums = e.target.querySelectorAll('.ticker-num[data-target]');
+    nums.forEach(el => {
+      const target = parseInt(el.dataset.target);
+      const duration = 1800;
+      const start = performance.now();
+      const tick = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  });
+}, { threshold: 0.3 });
+const ticker = document.querySelector('.about-ticker');
+if (ticker) countObs.observe(ticker);
+</script>
+
+<!-- ═══════════════════════════════ PARTICLE SYSTEM ═════════════════════ -->
+<script>
+(function() {
+  const canvas = document.getElementById('heroParticles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const COUNT = 90;
+  let W, H, dpr;
+  const particles = [];
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    W = canvas.clientWidth;
+    H = canvas.clientHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Particle: each has unique drift speed, size, glow, and a sinusoidal wobble
+  for (let i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: 0.8 + Math.random() * 2.2,           // radius: 0.8 - 3px
+      vx: (Math.random() - 0.5) * 0.25,        // very slow horizontal drift
+      vy: -0.08 - Math.random() * 0.22,         // gentle upward float
+      wobbleAmp: 15 + Math.random() * 30,       // horizontal wobble amplitude
+      wobbleSpeed: 0.003 + Math.random() * 0.006,// wobble frequency
+      wobbleOffset: Math.random() * Math.PI * 2, // phase offset
+      pulseSpeed: 0.01 + Math.random() * 0.02,   // glow pulse speed
+      pulseOffset: Math.random() * Math.PI * 2,
+      baseAlpha: 0.25 + Math.random() * 0.5,     // base opacity: 0.25 - 0.75
+    });
+  }
+
+  let t = 0;
+  function draw() {
+    t++;
+    ctx.clearRect(0, 0, W, H);
+
+    for (const p of particles) {
+      // Move
+      p.y += p.vy;
+      p.x += p.vx;
+
+      // Wobble (sinusoidal horizontal drift)
+      const wobbleX = Math.sin(t * p.wobbleSpeed + p.wobbleOffset) * p.wobbleAmp * 0.015;
+      const drawX = p.x + wobbleX;
+
+      // Wrap around
+      if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+      if (drawX < -20) p.x += W + 40;
+      if (drawX > W + 20) p.x -= W + 40;
+
+      // Pulsing glow
+      const pulse = Math.sin(t * p.pulseSpeed + p.pulseOffset) * 0.3 + 0.7; // 0.4 - 1.0
+      const alpha = p.baseAlpha * pulse;
+
+      // Outer glow (soft, larger)
+      const glowR = p.r * 4;
+      const grad = ctx.createRadialGradient(drawX, p.y, 0, drawX, p.y, glowR);
+      grad.addColorStop(0, 'rgba(255,255,255,' + (alpha * 0.6) + ')');
+      grad.addColorStop(0.3, 'rgba(200,210,255,' + (alpha * 0.2) + ')');
+      grad.addColorStop(1, 'rgba(200,210,255,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(drawX, p.y, glowR, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Core (bright white dot)
+      ctx.fillStyle = 'rgba(255,255,255,' + alpha + ')';
+      ctx.beginPath();
+      ctx.arc(drawX, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Reduce motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    ctx.clearRect(0, 0, W, H);
+    // Draw static particles without animation
+    for (const p of particles) {
+      ctx.fillStyle = 'rgba(255,255,255,' + (p.baseAlpha * 0.5) + ')';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
