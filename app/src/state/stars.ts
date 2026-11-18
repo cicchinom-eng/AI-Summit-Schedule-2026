@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
-const KEY = 'njais26.stars';
-const SEEN = 'njais26.starNoticeSeen';
+const KEY = 'techspo27.stars';
+const SEEN = 'techspo27.starNoticeSeen';
 
 function read(): Set<string> {
   try { const raw = localStorage.getItem(KEY); return new Set(raw ? (JSON.parse(raw) as string[]) : []); } catch { return new Set(); }
@@ -12,7 +12,7 @@ export function useStars() {
   const [notice, setNotice] = useState(false);
 
   useEffect(() => {
-    try { localStorage.setItem(KEY, JSON.stringify([...stars])); } catch { /* private mode: stars live in memory only */ }
+    try { localStorage.setItem(KEY, JSON.stringify([...stars])); } catch { /* private mode */ }
   }, [stars]);
 
   const toggle = useCallback((id: string) => {
