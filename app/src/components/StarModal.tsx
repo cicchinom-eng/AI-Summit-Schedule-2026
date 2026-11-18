@@ -4,7 +4,7 @@ import { Star } from './icons';
 
 export default function StarModal({ onClose }: { onClose: () => void }) {
   const { data } = useApp();
-  const text = data.info.star_modal_text || "Great choice! Your starred sessions are saved in this browser only. When you've built your schedule, export it as a PDF so you'll have it during the conference.";
+  const text = data.info.star_modal_text || "Nice pick! A quick heads-up: this site doesn't have accounts, so your starred sessions live only in this browser. When you've built your day, export it as a PDF so you'll have it with you.";
   return (
     <motion.div className="modal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
       <div className="scrim" style={{ position: 'absolute', zIndex: 0 }} onClick={onClose} />
@@ -14,7 +14,7 @@ export default function StarModal({ onClose }: { onClose: () => void }) {
         <p>{text}</p>
         <div className="actions">
           <button className="btn dark" onClick={onClose}>Keep exploring</button>
-          <button className="btn light" onClick={() => { onClose(); go('my-schedule'); }}>See my schedule</button>
+          <button className="btn light" onClick={() => { onClose(); go('my-day'); }}>See my day</button>
         </div>
       </motion.div>
     </motion.div>

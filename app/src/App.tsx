@@ -1,16 +1,26 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { AnimatePresence } from 'motion/react';
-import type { ConferenceData } from './data/types';
+import type { SummitData } from './data/types';
 import { loadLive, loadSnapshot } from './data/sheet';
-import { currentDayNumber, isEventDay, minutesOf } from './data/derive';
+import { isEventDay, minutesOf } from './data/derive';
 import { useStars } from './state/stars';
+import { useTheme, type ThemeId } from './state/theme';
+import ThemeDecor from './components/ThemeDecor';
 import { Book, Compass, Grid, Star } from './components/icons';
 import SessionDetail from './components/SessionDetail';
 import StarModal from './components/StarModal';
+import Overview from './views/Overview';
 import Sessions from './views/Sessions';
 import Pathfinder from './views/Pathfinder';
+import Rooms from './views/Rooms';
 import MyDay from './views/MyDay';
 import Program from './views/Program';
+import SecretMenu from './views/SecretMenu';
+import PunchOut from './views/PunchOut';
+import DuckHunt from './views/DuckHunt';
+import OregonTrail from './views/OregonTrail';
+import SpaceInvaders from './views/SpaceInvaders';
+import AOL from './views/AOL';
 
 export type Route = { view: string; params: URLSearchParams };
 
@@ -28,19 +38,20 @@ export function go(view: string, params?: Record<string, string | undefined>) {
 }
 
 type Ctx = {
-  data: ConferenceData;
+  data: SummitData;
   stars: Set<string>;
   toggleStar: (id: string) => void;
   addStars: (ids: string[]) => void;
   clearStars: () => void;
   open: (id: string) => void;
   route: Route;
-  now: Date;
+  now: Date; // real or previewed
   nowMin: number;
   eventDay: boolean;
-  currentDay: number | null;
-  preview: string | null;
+  preview: string | null; // "HH:MM" or null
   setPreview: (v: string | null) => void;
+  theme: ThemeId | null;
+  tryThemeCode: (raw: string) => 'set' | 'off' | null;
 };
 
 const AppCtx = createContext<Ctx | null>(null);
@@ -54,17 +65,30 @@ const NAV = [
   { id: 'program', label: 'Program', icon: Book },
   { id: 'sessions', label: 'Explore', icon: Grid },
   { id: 'pathfinder', label: 'Pathfinder', icon: Compass },
-  { id: 'my-schedule', label: 'My Schedule', icon: Star },
+  { id: 'my-day', label: 'My Day', icon: Star },
 ];
+/** Pages that stay reachable by URL (and by typing their name into the Explore search) but are not in the menus. */
+export const HIDDEN_VIEWS = ['rooms', 'overview', 'secret-menu', 'punchout', 'duckhunt', 'oregontrail', 'spaceinvaders', 'aol'];
 
 export default function App() {
-  const [data, setData] = useState<ConferenceData>(() => loadSnapshot());
+  const [data, setData] = useState<SummitData>(() => loadSnapshot());
   const [route, setRoute] = useState<Route>(() => parseHash());
   const [openId, setOpenId] = useState<string | null>(() => parseHash().params.get('s'));
   const [tick, setTick] = useState<Date>(() => new Date());
   const [preview, setPreview] = useState<string | null>(null);
   const { stars, toggle, addMany, clear, notice, dismiss } = useStars();
+  const { theme, setTheme, tryCode } = useTheme();
+  const [toast, setToast] = useState<string | null>(null);
+  const tryThemeCode = useCallback((raw: string) => {
+    const r = tryCode(raw);
+    const w = raw.trim().toLowerCase();
+    if (r === 'set') setToast(w.includes('disney') || w === 'mickey' || w === 'magic' ? '✨ Bibbidi-bobbidi-boo. The magic is on.' : w.startsWith('9') || w === 'nineties' ? '📼 Whoa. It\u2019s 1996 again.' : w.startsWith('8') || w === 'eighties' || w === 'radical' ? '🕶 Totally radical. It\u2019s 1985.' : '🍄 Player 1 has entered the game.');
+    else if (r === 'off') setToast('Back to normal.');
+    if (r) setTimeout(() => setToast(null), 2600);
+    return r;
+  }, [tryCode]);
 
+  // Live data: fetch on load, then refresh every 90 s while the tab is visible.
   useEffect(() => {
     let alive = true;
     const pull = () => loadLive().then((d) => { if (alive) setData(d); }).catch((e) => console.warn('Live sheet unavailable, using snapshot:', e));
@@ -80,6 +104,7 @@ export default function App() {
   }, []);
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }); }, [route.view]);
+
   useEffect(() => { const t = setInterval(() => setTick(new Date()), 30_000); return () => clearInterval(t); }, []);
 
   const now = useMemo(() => {
@@ -93,29 +118,27 @@ export default function App() {
 
   useEffect(() => { document.body.style.overflow = openId || notice ? 'hidden' : ''; }, [openId, notice]);
 
-  const eventDay = !!preview || isEventDay(data, now);
-  const currentDay = preview ? 1 : currentDayNumber(data, now);
-
   const ctx: Ctx = {
     data, stars, toggleStar: toggle, addStars: addMany, clearStars: clear, open, route,
-    now, nowMin: minutesOf(now), eventDay, currentDay, preview, setPreview,
+    now, nowMin: minutesOf(now), eventDay: !!preview || isEventDay(data, now), preview, setPreview,
+    theme, tryThemeCode,
   };
 
-  const View = { sessions: Sessions, pathfinder: Pathfinder, 'my-schedule': MyDay, program: Program }[route.view] ?? Program;
+  const View = { overview: Overview, sessions: Sessions, pathfinder: Pathfinder, rooms: Rooms, 'my-day': MyDay, program: Program, 'secret-menu': SecretMenu, punchout: PunchOut, duckhunt: DuckHunt, oregontrail: OregonTrail, spaceinvaders: SpaceInvaders, aol: AOL }[route.view] ?? Program;
   const openSession = openId ? data.sessions.find((s) => s.id === openId) ?? null : null;
 
   return (
     <AppCtx.Provider value={ctx}>
       <header className="topbar no-print">
         <div className="wrap topbar-in">
-          <a className="wordmark" href="#/program">
-            <img src="/techspo-logo.png" alt="Techspo '27" className="wordmark-logo" />
-          </a>
-{/* live indicator removed per design */}
+          <a className="wordmark" href="#/program"><b>NJ AI Literacy Summit</b><span>2026</span></a>
+          <span className={`live ${data.source}`} title={data.source === 'live' ? `Reading the live schedule sheet (checked ${data.fetchedAt.toLocaleTimeString()})` : 'Showing the built-in copy of the schedule'}>
+            <i />{data.source === 'live' ? 'Live schedule' : 'Offline copy'}
+          </span>
           <nav className="nav" aria-label="Main">
             {NAV.map((n) => (
               <a key={n.id} href={`#/${n.id}`} aria-current={route.view === n.id ? 'page' : undefined}>
-                {n.label}{n.id === 'my-schedule' && stars.size > 0 && <span className="count">{stars.size}</span>}
+                {n.label}{n.id === 'my-day' && stars.size > 0 && <span className="count">{stars.size}</span>}
               </a>
             ))}
           </nav>
@@ -126,8 +149,8 @@ export default function App() {
         <div className="wrap view-enter" key={route.view}>
           <View />
           <footer className="footer no-print">
-            <span>{data.info.event_edition ?? "Techspo '27"} · {data.info.event_dates}</span>
-            <span>Presented by {data.info.host}.</span>
+            <span>{data.info.event_edition ?? 'NJ AI Literacy Summit'} · {data.info.event_date}</span>
+            <span>Hosted by {data.info.host}.</span>
           </footer>
         </div>
       </main>
@@ -135,11 +158,13 @@ export default function App() {
       <nav className="tabbar no-print" aria-label="Main">
         {NAV.map((n) => (
           <a key={n.id} href={`#/${n.id}`} aria-current={route.view === n.id ? 'page' : undefined}>
-            <n.icon size={22} />{n.label}{n.id === 'my-schedule' && stars.size > 0 && <span className="count">{stars.size}</span>}
+            <n.icon size={22} />{n.label}{n.id === 'my-day' && stars.size > 0 && <span className="count">{stars.size}</span>}
           </a>
         ))}
       </nav>
 
+      {theme && <ThemeDecor theme={theme} onExit={() => { setTheme(null); setToast('Back to normal.'); setTimeout(() => setToast(null), 2000); }} />}
+      {toast && <div className="theme-toast no-print" role="status">{toast}</div>}
       <AnimatePresence>{openSession && <SessionDetail key={openSession.id} session={openSession} onClose={close} />}</AnimatePresence>
       <AnimatePresence>{notice && <StarModal key="notice" onClose={dismiss} />}</AnimatePresence>
     </AppCtx.Provider>

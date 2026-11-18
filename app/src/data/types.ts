@@ -2,36 +2,39 @@ export type Session = {
   id: string;
   title: string;
   short: string;
-  track: string;
-  track2: string;
+  pathway: string;
+  pathway2: string;
   format: string;
   level: string;
+  grade: string;
   audience: string[];
-  tags: string[];
+  strands: string[];
   tools: string[];
+  device: string; // "Yes" | "Helpful" | ""
+  runs: number;
   slots: number[];
   room: string;
-  presenters: string;
+  presenters: string; // display string
   leadName: string;
   leadTitle: string;
   leadOrg: string;
   coNames: string[];
   coDetails: string[];
   status: string;
+  needs: string;
   description: string;
   isTBA: boolean;
 };
 
 export type Block = {
   id: string;
-  day: number;
   label: string;
-  start: string;
+  start: string; // "8:00 AM"
   end: string;
-  startMin: number;
+  startMin: number; // minutes since midnight
   endMin: number;
   location: string;
-  type: string; // registration | plenary | keynote | breakout | lunch | break | event | closing
+  type: string; // arrival | plenary | keynote | concurrent | lunch | meetups | playground
   order: number;
   description: string;
 };
@@ -43,7 +46,6 @@ export type Keynote = {
   title: string;
   org: string;
   talk: string;
-  day: number;
   time: string;
   location: string;
   bio: string;
@@ -51,7 +53,7 @@ export type Keynote = {
   status: string;
 };
 
-export type Track = {
+export type Pathway = {
   id: string;
   name: string;
   color: string;
@@ -61,40 +63,20 @@ export type Track = {
   order: number;
 };
 
-export type SpecialEvent = {
-  id: string;
-  name: string;
-  day: number;
-  time: string;
-  location: string;
-  description: string;
-  order: number;
-};
+export type Meetup = { id: string; name: string; kind: string; room: string; description: string; host: string; order: number; status: string };
+export type LunchOption = { id: string; name: string; description: string; link: string; order: number };
+export type Exhibit = { id: string; name: string; description: string; location: string; order: number; status: string };
+export type Room = { room: string; wing: string; kind: string; notes: string };
 
-export type Exhibit = {
-  id: string;
-  name: string;
-  description: string;
-  location: string;
-  order: number;
-  status: string;
-};
-
-export type Room = {
-  room: string;
-  floor: string;
-  kind: string;
-  notes: string;
-};
-
-export type ConferenceData = {
+export type SummitData = {
   info: Record<string, string>;
   blocks: Block[];
   keynotes: Keynote[];
   sessions: Session[];
-  tracks: Track[];
-  events: SpecialEvent[];
-  exhibits: Exhibit[];
+  pathways: Pathway[];
+  meetups: Meetup[];
+  lunch: LunchOption[];
+  playground: Exhibit[];
   rooms: Room[];
   source: 'live' | 'snapshot';
   fetchedAt: Date;
