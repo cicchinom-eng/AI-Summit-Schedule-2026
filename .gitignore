@@ -2,3 +2,9 @@
 source-of-truth/
 
 .DS_Store
+
+# Hallway display assets (large images/HTML, not needed in deploy)
+hallway-display/
+
+# Event photos (large, not for web deploy)
+2025 AI Summit Photos/
