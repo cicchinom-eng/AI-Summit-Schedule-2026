@@ -122,8 +122,6 @@ export default function Jukebox() {
   /* ══════════ INTRO SEQUENCE ══════════ */
   useEffect(() => {
     if (introPhase !== 'showing') return;
-    const realLines = INTRO_LINES.filter(l => l !== null);
-    const totalLines = realLines.length;
     let lineIdx = 0;
     let globalIdx = 0;
     const timers: ReturnType<typeof setTimeout>[] = [];
