@@ -201,7 +201,7 @@ export default function OregonTrail() {
   ║                              ║
   ╚══════════════════════════════╝`}</pre>
           <p className="ot-copy">&copy; 2026 NJ AI Literacy Summit</p>
-          <p className="ot-blink ot-prompt">Press ENTER or click to start</p>
+          <p className="ot-blink ot-prompt">Press ENTER or tap to start</p>
         </div>
       )}
 
@@ -222,7 +222,7 @@ export default function OregonTrail() {
             ))}
           </div>
           <p className="ot-line">&nbsp;</p>
-          <p className="ot-line dim">Click a character or press 1-5</p>
+          <p className="ot-line dim">Tap a character or press 1-5</p>
         </div>
       )}
 
@@ -238,7 +238,7 @@ export default function OregonTrail() {
             </div>
           </div>
           <p className="ot-line">&nbsp;</p>
-          <p className="ot-blink ot-prompt">Press ENTER to embark</p>
+          <p className="ot-blink ot-prompt">Press ENTER or tap to embark</p>
         </div>
       )}
 
@@ -271,7 +271,7 @@ export default function OregonTrail() {
 
           {/* Continue prompt */}
           {((typeDone && !evt.choices) || respDone) && (
-            <><p className="ot-line">&nbsp;</p><p className="ot-blink ot-prompt">Press ENTER to continue</p></>
+            <><p className="ot-line">&nbsp;</p><p className="ot-blink ot-prompt">Press ENTER or tap to continue</p></>
           )}
         </div>
       )}
@@ -294,7 +294,7 @@ export default function OregonTrail() {
           <p className="ot-epitaph">"Gone, but not cleared from the cache."</p>
           <p className="ot-line dim">Final Score: 0</p>
           <p className="ot-line">&nbsp;</p>
-          <p className="ot-blink ot-prompt">Press ENTER to try again</p>
+          <p className="ot-blink ot-prompt">Press ENTER or tap to try again</p>
           <button className="ot-exit" onClick={e => { e.stopPropagation(); go('sessions'); }}>ESC : EXIT</button>
         </div>
       )}

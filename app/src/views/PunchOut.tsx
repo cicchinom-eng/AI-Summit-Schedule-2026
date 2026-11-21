@@ -225,7 +225,8 @@ export default function PunchOut() {
         <div className="po-title">
           <div className="po-title-bg" style={{ backgroundImage: `url(${COVER})` }} />
           <div className="po-title-bottom">
-            <div className="po-blink po-start-text">PRESS START</div>
+            <div className="po-blink po-start-text po-desktop-only">PRESS ENTER OR SPACE TO START</div>
+            <div className="po-blink po-start-text po-mobile-only" onClick={startFight}>TAP HERE TO START</div>
             <button className="po-back" onClick={() => go('sessions')}>ESC : BACK TO EXPLORE</button>
           </div>
         </div>
@@ -267,9 +268,10 @@ export default function PunchOut() {
 
           {koStep === 0 && !intro && (
             <>
-              <div className="po-ctrl"><span>Z / &#8592; &nbsp; LEFT PUNCH</span><span>X / &#8594; &nbsp; RIGHT PUNCH</span></div>
+              <div className="po-ctrl po-desktop-only"><span>Z / &#8592; / J &mdash; LEFT PUNCH</span><span>X / &#8594; / K &mdash; RIGHT PUNCH</span></div>
               <div className="po-touch">
                 <button onPointerDown={() => doPunch('l')}>&#x1F44A; LEFT</button>
+                <div className="po-touch-hint">TAP TO PUNCH!</div>
                 <button onPointerDown={() => doPunch('r')}>RIGHT &#x1F44A;</button>
               </div>
             </>
@@ -293,7 +295,8 @@ export default function PunchOut() {
           <div className="po-win-name">JAMES SANTANA</div>
           <div className="po-win-sub">UNDEFEATED CHAMPION</div>
           <div className="po-win-rec">RECORD: &infin; &ndash; 0</div>
-          <div className="po-blink" style={{ marginTop: 20, fontSize: 9 }}>PRESS START TO TRY AGAIN</div>
+          <div className="po-blink po-desktop-only" style={{ marginTop: 20, fontSize: 9 }}>PRESS ENTER TO TRY AGAIN</div>
+          <div className="po-blink po-mobile-only" style={{ marginTop: 20, fontSize: 9 }} onClick={reset}>TAP HERE TO TRY AGAIN</div>
           <button className="po-back" onClick={() => go('sessions')}>EXIT TO EXPLORE</button>
         </div>
       )}

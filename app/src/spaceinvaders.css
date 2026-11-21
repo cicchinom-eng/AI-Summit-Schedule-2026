@@ -82,6 +82,16 @@
 .si-over-score b { font-size: clamp(18px, 5vw, 34px); color: #0f0; text-shadow: 0 0 10px rgba(0,255,0,0.4); }
 .si-over-msg { font-size: clamp(7px, 1.6vw, 11px); color: #aaa; max-width: 340px; line-height: 1.7; }
 
+/* ── Mobile / Desktop visibility helpers ── */
+.si-mobile-only { display: none; }
+.si-desktop-only { display: block; }
+@media (pointer: coarse) {
+  .si-mobile-only { display: block; }
+  .si-desktop-only { display: none; }
+}
+.si-controls-info { font-size: 7px; color: #888; display: flex; flex-direction: column; gap: 4px; margin: 6px 0 12px; letter-spacing: .04em; }
+.si-controls-info.si-mobile-only { text-align: center; }
+
 /* ══════════════════════════════ RESPONSIVE ══════════════════════════════════ */
 @media print { .si { display: none !important; } }
 @media (prefers-reduced-motion: reduce) { .si, .si * { animation-duration: .01s !important; } }

@@ -258,7 +258,9 @@ export default function DuckHunt() {
         <div className="dh-title" onClick={startGame}>
           <div className="dh-title-bg" style={{ backgroundImage: `url(${COVER})` }} />
           <div className="dh-title-bottom">
-            <div className="dh-blink dh-start-text">PRESS START OR CLICK TO PLAY</div>
+            <div className="dh-blink dh-start-text dh-desktop-only">PRESS ENTER OR SPACE TO START</div>
+            <div className="dh-blink dh-start-text dh-mobile-only">TAP TO START</div>
+            <div className="dh-instructions dh-desktop-only">Click on the AI targets to shoot them!</div>
             <button className="dh-back" onClick={e => { e.stopPropagation(); go('sessions'); }}>ESC : BACK TO EXPLORE</button>
           </div>
         </div>
@@ -311,7 +313,8 @@ export default function DuckHunt() {
             <div className="dh-over-score"><span>FINAL SCORE</span><b>{String(score).padStart(4, '0')}</b></div>
             <div className="dh-over-msg">{overMsg}</div>
             <img src={score >= 500 ? J_BOTH : J_LAUGH} alt="James" className="dh-over-james" draggable={false} />
-            <div className="dh-blink" style={{ marginTop: 16, fontSize: 9 }}>PRESS START OR CLICK TO PLAY AGAIN</div>
+            <div className="dh-blink dh-desktop-only" style={{ marginTop: 16, fontSize: 9 }}>PRESS ENTER TO PLAY AGAIN</div>
+            <div className="dh-blink dh-mobile-only" style={{ marginTop: 16, fontSize: 9 }}>TAP TO PLAY AGAIN</div>
             <button className="dh-back" onClick={e => { e.stopPropagation(); go('sessions'); }}>EXIT TO EXPLORE</button>
           </div>
         </div>

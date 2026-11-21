@@ -246,6 +246,15 @@
 @keyframes po-cfall { 0%{transform:translateY(-10px) rotate(0);opacity:1} 100%{transform:translateY(110vh) rotate(720deg);opacity:.4} }
 
 
+/* ── Mobile / Desktop visibility helpers ── */
+.po-mobile-only { display: none; }
+.po-desktop-only { display: block; }
+@media (pointer: coarse) {
+  .po-mobile-only { display: block; }
+  .po-desktop-only { display: none; }
+}
+.po-touch-hint { font-size: 7px; color: #fbd000; text-align: center; align-self: center; letter-spacing: .08em; animation: po-blk 1.2s steps(2) infinite; }
+
 /* ══════════════════════════════ RESPONSIVE ══════════════════════════════════ */
 
 @media (max-height: 500px) {

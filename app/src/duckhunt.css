@@ -136,6 +136,15 @@
   filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4)); margin-bottom: 8px; }
 
 
+/* ── Mobile / Desktop visibility helpers ── */
+.dh-mobile-only { display: none; }
+.dh-desktop-only { display: block; }
+@media (pointer: coarse) {
+  .dh-mobile-only { display: block; }
+  .dh-desktop-only { display: none; }
+}
+.dh-instructions { font-size: 7px; color: #bbb; margin-top: 6px; letter-spacing: .04em; }
+
 /* ══════════════════════════════ RESPONSIVE ══════════════════════════════════ */
 
 @media (max-height: 500px) {

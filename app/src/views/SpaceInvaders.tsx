@@ -316,7 +316,13 @@ export default function SpaceInvaders() {
               </div>
             ))}
           </div>
-          <p className="si-blink">PRESS START OR CLICK TO PLAY</p>
+          <div className="si-controls-info si-desktop-only">
+            <span>&#8592; &#8594; or A/D &mdash; MOVE</span>
+            <span>SPACE or &#8593; &mdash; FIRE</span>
+          </div>
+          <div className="si-controls-info si-mobile-only">USE BUTTONS BELOW TO MOVE &amp; FIRE</div>
+          <p className="si-blink si-desktop-only">PRESS ENTER OR SPACE TO START</p>
+          <p className="si-blink si-mobile-only">TAP TO START</p>
           <button className="si-back" onClick={e => { e.stopPropagation(); go('sessions'); }}>ESC : BACK</button>
         </div>
       )}
@@ -327,7 +333,8 @@ export default function SpaceInvaders() {
           <div className="si-over-title">GAME OVER</div>
           <div className="si-over-score"><span>SCORE</span><b>{String(score).padStart(5, '0')}</b></div>
           <div className="si-over-msg">{overMsg}</div>
-          <p className="si-blink" style={{ marginTop: 20 }}>CLICK OR PRESS START TO PLAY AGAIN</p>
+          <p className="si-blink si-desktop-only" style={{ marginTop: 20 }}>PRESS ENTER TO PLAY AGAIN</p>
+          <p className="si-blink si-mobile-only" style={{ marginTop: 20 }}>TAP TO PLAY AGAIN</p>
           <button className="si-back" onClick={e => { e.stopPropagation(); go('sessions'); }}>ESC : EXIT</button>
         </div>
       )}
