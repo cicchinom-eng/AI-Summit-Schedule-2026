@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Chicken Fried",
+    "artist": "James Santana",
+    "src": "/audio/jb-chicken-fried.mp3",
+    "originalArtist": "Zac Brown Band",
+    "year": "2008",
+    "notes": "A feel-good anthem for the ride home."
+  },
+  {
+    "title": "Stand By Me",
+    "artist": "James Santana",
+    "src": "/audio/jb-stand-by-me.mp3",
+    "originalArtist": "Ben E. King",
+    "year": "1961",
+    "notes": "Because good people stood by you today."
+  },
+  {
+    "title": "Summer of '69",
+    "artist": "James Santana",
+    "src": "/audio/jb-summer-of-69.mp3",
+    "originalArtist": "Bryan Adams",
+    "year": "1985",
+    "notes": "Those were the best days."
+  },
+  {
+    "title": "Time To Say Goodbye",
+    "artist": "James Santana",
+    "src": "/audio/jb-time-to-say-goodbye.mp3",
+    "originalArtist": "Andrea Bocelli",
+    "year": "1996",
+    "notes": "Until next year."
+  },
+  {
+    "title": "Wagon Wheel",
+    "artist": "James Santana",
+    "src": "/audio/jb-wagon-wheel.mp3",
+    "originalArtist": "Old Crow Medicine Show",
+    "year": "2004",
+    "notes": "Rock me, mama, all the way home."
+  }
+]
