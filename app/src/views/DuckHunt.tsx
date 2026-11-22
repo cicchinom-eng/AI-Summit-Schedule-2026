@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { go } from '../App';
+import { goBack } from '../App';
 import '../duckhunt.css';
 
 /* ═══════════════════ Assets ═══════════════════ */
@@ -239,7 +239,7 @@ export default function DuckHunt() {
   /* ── Keys ── */
   useEffect(() => {
     const h = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { cancelAnimationFrame(frame.current); stopAll(); go('sessions'); return; }
+      if (e.key === 'Escape') { cancelAnimationFrame(frame.current); stopAll(); goBack(); return; }
       if ((phR.current === 'title' || phR.current === 'over') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); startGame(); }
     };
     window.addEventListener('keydown', h);
@@ -261,7 +261,7 @@ export default function DuckHunt() {
             <div className="dh-blink dh-start-text dh-desktop-only">PRESS ENTER OR SPACE TO START</div>
             <div className="dh-blink dh-start-text dh-mobile-only">TAP TO START</div>
             <div className="dh-instructions dh-desktop-only">Click on the AI targets to shoot them!</div>
-            <button className="dh-back" onClick={e => { e.stopPropagation(); go('sessions'); }}>ESC : BACK TO EXPLORE</button>
+            <button className="dh-back" onClick={e => { e.stopPropagation(); goBack(); }}>ESC : BACK TO EXPLORE</button>
           </div>
         </div>
       )}
@@ -315,7 +315,7 @@ export default function DuckHunt() {
             <img src={score >= 500 ? J_BOTH : J_LAUGH} alt="James" className="dh-over-james" draggable={false} />
             <div className="dh-blink dh-desktop-only" style={{ marginTop: 16, fontSize: 9 }}>PRESS ENTER TO PLAY AGAIN</div>
             <div className="dh-blink dh-mobile-only" style={{ marginTop: 16, fontSize: 9 }}>TAP TO PLAY AGAIN</div>
-            <button className="dh-back" onClick={e => { e.stopPropagation(); go('sessions'); }}>EXIT TO EXPLORE</button>
+            <button className="dh-back" onClick={e => { e.stopPropagation(); goBack(); }}>EXIT TO EXPLORE</button>
           </div>
         </div>
       )}

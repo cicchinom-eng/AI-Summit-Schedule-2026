@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { go } from '../App';
+import { goBack } from '../App';
 import '../oregontrail.css';
 
 /* ═══════════════════ Data ═══════════════════ */
@@ -166,7 +166,7 @@ export default function OregonTrail() {
   /* ── Keys ── */
   useEffect(() => {
     const h = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { clearInterval(timerRef.current); go('sessions'); return; }
+      if (e.key === 'Escape') { clearInterval(timerRef.current); goBack(); return; }
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); advance(); return; }
       // Number keys for choices / profession
       const n = parseInt(e.key);
@@ -295,7 +295,7 @@ export default function OregonTrail() {
           <p className="ot-line dim">Final Score: 0</p>
           <p className="ot-line">&nbsp;</p>
           <p className="ot-blink ot-prompt">Press ENTER or tap to try again</p>
-          <button className="ot-exit" onClick={e => { e.stopPropagation(); go('sessions'); }}>ESC : EXIT</button>
+          <button className="ot-exit" onClick={e => { e.stopPropagation(); goBack(); }}>ESC : EXIT</button>
         </div>
       )}
     </div>

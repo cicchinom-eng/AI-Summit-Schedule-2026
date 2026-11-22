@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { go } from '../App';
+import { goBack } from '../App';
 import '../spaceinvaders.css';
 
 /* ═══════════════════ Constants ═══════════════════ */
@@ -249,7 +249,7 @@ export default function SpaceInvaders() {
   /* ── Input ── */
   useEffect(() => {
     const dn = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { cancelAnimationFrame(frame.current); go('sessions'); return; }
+      if (e.key === 'Escape') { cancelAnimationFrame(frame.current); goBack(); return; }
       g.current.keys.add(e.key);
       if ((phRef.current === 'title' || phRef.current === 'over') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); startGame(); }
     };
@@ -323,7 +323,7 @@ export default function SpaceInvaders() {
           <div className="si-controls-info si-mobile-only">USE BUTTONS BELOW TO MOVE &amp; FIRE</div>
           <p className="si-blink si-desktop-only">PRESS ENTER OR SPACE TO START</p>
           <p className="si-blink si-mobile-only">TAP TO START</p>
-          <button className="si-back" onClick={e => { e.stopPropagation(); go('sessions'); }}>ESC : BACK</button>
+          <button className="si-back" onClick={e => { e.stopPropagation(); goBack(); }}>ESC : BACK</button>
         </div>
       )}
 
@@ -335,7 +335,7 @@ export default function SpaceInvaders() {
           <div className="si-over-msg">{overMsg}</div>
           <p className="si-blink si-desktop-only" style={{ marginTop: 20 }}>PRESS ENTER TO PLAY AGAIN</p>
           <p className="si-blink si-mobile-only" style={{ marginTop: 20 }}>TAP TO PLAY AGAIN</p>
-          <button className="si-back" onClick={e => { e.stopPropagation(); go('sessions'); }}>ESC : EXIT</button>
+          <button className="si-back" onClick={e => { e.stopPropagation(); goBack(); }}>ESC : EXIT</button>
         </div>
       )}
     </div>

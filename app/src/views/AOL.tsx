@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { go } from '../App';
+import { goBack } from '../App';
 import '../aol.css';
 
 /* ═══════════════════ Audio ═══════════════════ */
@@ -178,7 +178,7 @@ export default function AOL() {
 
   /* ── Exit ── */
   useEffect(() => {
-    const h = (e: KeyboardEvent) => { if (e.key === 'Escape') { stopAll(); play(SND.bye); setTimeout(() => go('sessions'), 800); } };
+    const h = (e: KeyboardEvent) => { if (e.key === 'Escape') { stopAll(); play(SND.bye); setTimeout(() => goBack(), 800); } };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
   }, []);
@@ -202,7 +202,7 @@ export default function AOL() {
             </div>
             <div className="aol-login-footer">Version 5.0 &middot; NJ AI Summit Edition</div>
           </div>
-          <button className="aol-esc" onClick={() => go('sessions')}>ESC: Exit</button>
+          <button className="aol-esc" onClick={() => goBack()}>ESC: Exit</button>
         </div>
       )}
 
@@ -272,7 +272,7 @@ export default function AOL() {
             </div>
           )}
 
-          <button className="aol-esc desktop" onClick={() => { stopAll(); play(SND.bye); setTimeout(() => go('sessions'), 800); }}>Sign Off (ESC)</button>
+          <button className="aol-esc desktop" onClick={() => { stopAll(); play(SND.bye); setTimeout(() => goBack(), 800); }}>Sign Off (ESC)</button>
         </div>
       )}
     </div>

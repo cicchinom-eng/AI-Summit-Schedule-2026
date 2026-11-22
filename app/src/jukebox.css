@@ -493,523 +493,85 @@
    SURPRISE TAB (?)
    ══════════════════════════════════════════════════════════════════════════════ */
 
-.jb-surprise-cards {
-  display: flex; flex-direction: column;
-  gap: 16px;
-}
-
-.jb-surprise-card {
-  display: flex; align-items: center;
-  gap: 16px;
-  padding: 20px;
-  background: var(--jb-surface);
-  border-radius: 14px;
-  cursor: pointer;
-  transition: transform 0.2s var(--jb-ease), background 0.2s;
-  border: 1px solid var(--jb-border);
-}
-.jb-surprise-card:active { transform: scale(0.98); background: rgba(255,255,255,0.08); }
-
-.jb-surprise-icon {
-  width: 56px; height: 56px;
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  font-size: 28px;
-}
-.jb-surprise-icon.ipod { background: linear-gradient(135deg, #e8e8e8, #c0c0c0); }
-.jb-surprise-icon.winamp { background: linear-gradient(135deg, #2a2a2a, #1a1a1a); border: 1px solid #3a3a3a; }
-
-.jb-surprise-text h3 {
-  font-size: 17px; font-weight: 600;
-  margin-bottom: 3px;
-}
-.jb-surprise-text p {
-  font-size: 13px;
-  color: var(--jb-text-secondary);
-}
-
-
 /* ══════════════════════════════════════════════════════════════════════════════
-   RETRO PAGE SHARED
+   ARCADE TAB — iOS-style App Launcher Grid
+   Premium, clean, Apple Home Screen feel. Real app icons in a centered grid.
    ══════════════════════════════════════════════════════════════════════════════ */
 
-.jb-retro-page {
-  padding: calc(16px + var(--jb-safe-t)) 20px 32px;
-}
-.jb-retro-back {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 15px; font-weight: 500;
-  color: var(--jb-accent);
-  margin-bottom: 20px;
-  padding: 6px 0;
-}
-.jb-retro-back svg { fill: var(--jb-accent); }
-
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   iPod CLASSIC  —  PREMIUM RECREATION
-   Faithful 2004 iPod Classic with brushed aluminum body, LCD screen with
-   album art, click wheel with realistic concentric grooves, and chrome bezel.
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-.jb-ipod {
-  display: flex; flex-direction: column; align-items: center; gap: 16px;
-  max-width: 340px; margin: 0 auto;
+.jb-arcade-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px 0;
+  padding: 8px 0 16px;
+  justify-items: center;
 }
 
-.jb-ipod-bezel {
-  width: 260px;
-  background:
-    linear-gradient(170deg, #f0f0f0 0%, #e4e4e4 20%, #d6d6d6 40%, #e0e0e0 60%, #d2d2d2 80%, #c8c8c8 100%);
-  border-radius: 24px;
-  padding: 18px 14px 22px;
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.6) inset,
-    0 -1px 0 rgba(0,0,0,0.08) inset,
-    0 12px 48px rgba(0,0,0,0.5),
-    0 2px 8px rgba(0,0,0,0.3);
-  border: 1px solid #aaa;
-  display: flex; flex-direction: column; align-items: center; gap: 14px;
+.jb-arcade-app {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px;
+  width: 80px;
+  transition: transform 0.15s var(--jb-ease);
+}
+.jb-arcade-app:active {
+  transform: scale(0.9);
 }
 
-/* ── iPod Screen ── */
-.jb-ipod-screen {
-  width: 100%;
-  background: linear-gradient(180deg, #cde4c8 0%, #b8d4b0 30%, #a8c8a0 100%);
-  border: 2px solid #6a6a6a;
-  border-radius: 4px;
-  padding: 0;
+.jb-arcade-icon-wrap {
+  width: 68px; height: 68px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: inset 0 1px 4px rgba(0,0,0,0.12);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.35),
+    0 0 0 0.5px rgba(255,255,255,0.08);
+  transition: box-shadow 0.2s var(--jb-ease);
 }
-.jb-ipod-status-bar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 4px 8px 3px;
-  font-size: 9px; font-weight: 700;
-  color: #1a3a1a;
-  border-bottom: 1px solid rgba(26,42,26,0.15);
-  background: rgba(255,255,255,0.15);
-}
-.jb-ipod-status-icon { font-size: 8px; }
-.jb-ipod-battery { display: flex; align-items: center; }
-
-.jb-ipod-screen-art {
-  display: flex; justify-content: center; padding: 8px 0 4px;
-}
-.jb-ipod-screen-art img {
-  width: 80px; height: 80px;
-  border-radius: 2px;
+.jb-arcade-icon {
+  width: 100%; height: 100%;
   object-fit: cover;
-  border: 1px solid rgba(26,42,26,0.2);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-.jb-ipod-screen-meta {
-  text-align: center; padding: 2px 10px 4px;
-}
-.jb-ipod-screen-track {
-  font-size: 12px; font-weight: 700;
-  color: #1a2a1a;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.jb-ipod-screen-artist {
-  font-size: 10px; color: rgba(26,42,26,0.6);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  display: block;
 }
 
-.jb-ipod-screen-progress { padding: 4px 10px 8px; }
-.jb-ipod-prog-bar {
-  width: 100%; height: 4px;
-  background: rgba(26,42,26,0.15);
-  border-radius: 2px;
-  position: relative;
-}
-.jb-ipod-prog-fill {
-  height: 100%;
-  background: #2a6a2a;
-  border-radius: 2px;
-  transition: width 0.3s linear;
-}
-.jb-ipod-prog-diamond {
-  position: absolute; top: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
-  width: 7px; height: 7px;
-  background: #1a4a1a;
-  border: 1px solid rgba(0,0,0,0.2);
-  transition: left 0.3s linear;
-}
-.jb-ipod-prog-times {
-  display: flex; justify-content: space-between;
-  font-size: 8px; color: rgba(26,42,26,0.5);
-  margin-top: 3px;
-  font-variant-numeric: tabular-nums;
+.jb-arcade-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--jb-text-secondary);
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
 }
 
-/* ── Click Wheel ── */
-.jb-ipod-wheel {
-  width: 190px; height: 190px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 50%, transparent 28%, rgba(0,0,0,0.02) 29%, rgba(0,0,0,0.02) 29.5%, transparent 30%),
-    linear-gradient(180deg, #e8e8e8 0%, #d4d4d4 50%, #c0c0c0 100%);
-  position: relative;
-  box-shadow:
-    0 2px 10px rgba(0,0,0,0.2),
-    0 0 0 1px rgba(0,0,0,0.08),
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    inset 0 -1px 0 rgba(0,0,0,0.05);
-  user-select: none;
-}
-.jb-ipod-wheel-groove {
-  position: absolute; border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.04);
-  pointer-events: none;
-}
-.jb-ipod-wg1 { inset: 15%; }
-.jb-ipod-wg2 { inset: 22%; }
-.jb-ipod-wg3 { inset: 8%; }
-
-.jb-ipod-center {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #f2f2f2 0%, #ddd 100%);
-  box-shadow:
-    0 1px 5px rgba(0,0,0,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.7),
-    0 0 0 1px rgba(0,0,0,0.06);
-  cursor: pointer;
-  transition: background 0.1s;
-  z-index: 2;
-}
-.jb-ipod-center:active {
-  background: linear-gradient(180deg, #e4e4e4 0%, #ccc 100%);
+.jb-arcade-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--jb-text-tertiary);
+  line-height: 1.65;
+  font-style: italic;
+  padding-bottom: 12px;
 }
 
-.jb-ipod-wbtn {
-  position: absolute;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 700;
-  color: #666; letter-spacing: 0.04em;
-  width: 48px; height: 48px;
-  cursor: pointer; z-index: 1;
-  transition: color 0.15s;
-}
-.jb-ipod-wbtn:active { color: #333; }
-.jb-ipod-wbtn-menu { top: 6px; left: 50%; transform: translateX(-50%); font-size: 9px; }
-.jb-ipod-wbtn-next  { right: 6px; top: 50%; transform: translateY(-50%); font-size: 10px; }
-.jb-ipod-wbtn-prev  { left: 6px; top: 50%; transform: translateY(-50%); font-size: 10px; }
-.jb-ipod-wbtn-play  { bottom: 6px; left: 50%; transform: translateX(-50%); font-size: 9px; letter-spacing: -1px; }
-
-/* ── iPod Playlist (below the device) ── */
-.jb-ipod-playlist {
-  width: 100%; max-width: 300px;
-  display: flex; flex-direction: column;
-  border-radius: 10px; overflow: hidden;
-  background: var(--jb-surface-dim);
-  border: 1px solid var(--jb-border);
-}
-.jb-ipod-pl-row {
-  display: flex; align-items: center; gap: 10px;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--jb-border);
-  text-align: left;
-  transition: background 0.15s;
-  color: var(--jb-text);
-}
-.jb-ipod-pl-row:last-child { border-bottom: none; }
-.jb-ipod-pl-row:active { background: rgba(255,255,255,0.05); }
-.jb-ipod-pl-row.active { background: rgba(252,60,68,0.08); }
-.jb-ipod-pl-art {
-  width: 36px; height: 36px;
-  border-radius: 4px; object-fit: cover; flex-shrink: 0;
-}
-.jb-ipod-pl-info { flex: 1; min-width: 0; }
-.jb-ipod-pl-title {
-  font-size: 13px; font-weight: 600;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.jb-ipod-pl-artist {
-  font-size: 11px; color: var(--jb-text-secondary);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+/* Desktop hover */
+@media (min-width: 768px) {
+  .jb-arcade-app:hover .jb-arcade-icon-wrap {
+    box-shadow:
+      0 4px 16px rgba(0,0,0,0.5),
+      0 0 0 0.5px rgba(255,255,255,0.12),
+      0 0 20px rgba(252,60,68,0.08);
+  }
+  .jb-arcade-app:hover {
+    transform: scale(1.05);
+  }
+  .jb-arcade-app:active {
+    transform: scale(0.95);
+  }
 }
 
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   WINAMP 2.91  —  PREMIUM RECREATION
-   Authentic charcoal metal skin with beveled edges, segmented spectrum analyzer,
-   proper LCD display, transport buttons, and playlist window.
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-.jb-winamp {
-  max-width: 380px; width: 100%;
-  margin: 0 auto;
-  display: flex; flex-direction: column; gap: 0;
-  filter: drop-shadow(0 8px 32px rgba(0,0,0,0.6));
-}
-
-/* ── Main Window ── */
-.jb-wa-main {
-  background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
-  border: 1px solid #555;
-  border-bottom: none;
-  border-radius: 2px 2px 0 0;
-  box-shadow:
-    inset 1px 1px 0 rgba(255,255,255,0.08),
-    inset -1px -1px 0 rgba(0,0,0,0.3);
-}
-
-.jb-wa-titlebar {
-  display: flex; align-items: center; justify-content: space-between;
-  background: linear-gradient(90deg, #2a3a1a 0%, #3a5a2a 30%, #2a4a1a 70%, #2a3a1a 100%);
-  padding: 3px 6px;
-  border-bottom: 1px solid rgba(0,0,0,0.3);
-}
-.jb-wa-tb-left, .jb-wa-tb-right { display: flex; gap: 3px; align-items: center; }
-.jb-wa-tb-bolt {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #888 0%, #555 100%);
-  border: 1px solid #444;
-}
-.jb-wa-tb-title { display: flex; align-items: baseline; gap: 6px; }
-.jb-wa-tb-text {
-  font-size: 11px; font-weight: 900;
-  color: #bde0a0;
-  letter-spacing: 0.12em;
-  text-shadow: 0 0 6px rgba(130,220,80,0.3);
-}
-.jb-wa-tb-ver { font-size: 8px; color: rgba(189,224,160,0.5); }
-.jb-wa-tb-wbtn {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 14px; height: 14px;
-  background: #3a4a2a;
-  border: 1px solid #5a7a3a;
-  font-size: 7px; color: #bde0a0;
-  line-height: 1; cursor: pointer;
-}
-
-.jb-wa-display {
-  display: flex; gap: 0;
-  margin: 4px 5px 2px;
-  background: #000;
-  border: 1px solid #111;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
-  overflow: hidden;
-}
-.jb-wa-display-left {
-  padding: 8px 10px;
-  display: flex; flex-direction: column; gap: 4px;
-  min-width: 110px;
-  border-right: 1px solid #111;
-}
-.jb-wa-time {
-  font-family: 'Courier New', monospace;
-  font-size: 28px; font-weight: 700;
-  color: #00ff00;
-  text-shadow: 0 0 8px rgba(0,255,0,0.4);
-  letter-spacing: 2px;
-  line-height: 1;
-}
-.jb-wa-meta-row {
-  display: flex; flex-wrap: wrap; gap: 4px; align-items: center;
-}
-.jb-wa-badge {
-  font-size: 7px; font-weight: 700;
-  color: #000; background: #00cc00;
-  padding: 1px 4px; border-radius: 1px;
-  letter-spacing: 0.06em;
-}
-.jb-wa-kbps, .jb-wa-khz, .jb-wa-stereo {
-  font-family: 'Courier New', monospace;
-  font-size: 8px; color: #00aa00;
-  letter-spacing: 0.03em;
-}
-.jb-wa-stereo {
-  font-weight: 700; color: #00cc00;
-  text-shadow: 0 0 4px rgba(0,255,0,0.3);
-}
-
-.jb-wa-display-right {
-  flex: 1; padding: 6px 6px; display: flex; align-items: flex-end;
-}
-.jb-wa-spectrum {
-  display: flex; gap: 1px; width: 100%; height: 100%;
-  align-items: flex-end;
-}
-.jb-wa-sbar-col {
-  flex: 1;
-  display: flex; flex-direction: column-reverse; gap: 1px;
-}
-.jb-wa-sbar-cell {
-  width: 100%; height: 3px;
-  border-radius: 0.5px;
-  opacity: 0;
-  animation: jb-wa-cell 0.5s ease-in-out infinite alternate;
-}
-.jb-wa-sbar-cell.green  { background: #00dd00; }
-.jb-wa-sbar-cell.yellow { background: #dddd00; }
-.jb-wa-sbar-cell.red    { background: #dd3300; }
-
-@keyframes jb-wa-cell {
-  0%   { opacity: 0.1; }
-  100% { opacity: 0.95; }
-}
-
-.jb-wa-marquee-wrap {
-  margin: 2px 5px;
-  padding: 3px 8px;
-  background: #000;
-  border: 1px solid #111;
-  overflow: hidden;
-}
-.jb-wa-marquee {
-  font-family: 'Courier New', monospace;
-  font-size: 10px; color: #00ee00;
-  white-space: nowrap;
-  display: inline-block;
-  animation: jb-wa-scroll 14s linear infinite;
-  text-shadow: 0 0 4px rgba(0,255,0,0.3);
-}
-.jb-wa-marquee.paused { animation-play-state: paused; }
-@keyframes jb-wa-scroll {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(-100%); }
-}
-
-.jb-wa-seek { padding: 4px 5px; }
-.jb-wa-seek-track {
-  height: 10px;
-  background: linear-gradient(180deg, #1a1a1a 0%, #111 100%);
-  border: 1px solid #333;
-  position: relative; cursor: pointer;
-}
-.jb-wa-seek-fill {
-  position: absolute; top: 1px; left: 1px; bottom: 1px;
-  background: linear-gradient(180deg, #00cc00 0%, #008800 100%);
-  transition: width 0.3s linear;
-}
-.jb-wa-seek-thumb {
-  position: absolute; top: 50%; transform: translate(-50%, -50%);
-  width: 12px; height: 14px;
-  background: linear-gradient(180deg, #bbb 0%, #888 100%);
-  border: 1px solid #666;
-  border-radius: 1px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
-  transition: left 0.3s linear;
-}
-
-.jb-wa-transport {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 4px 5px 6px; gap: 8px;
-}
-.jb-wa-buttons { display: flex; gap: 2px; }
-.jb-wa-btn {
-  width: 32px; height: 24px;
-  background: linear-gradient(180deg, #4a4a4a 0%, #3a3a3a 100%);
-  border: 1px solid #555;
-  border-radius: 1px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  transition: all 0.08s;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.1),
-    0 1px 2px rgba(0,0,0,0.3);
-}
-.jb-wa-btn span { font-size: 9px; color: #ccc; line-height: 1; }
-.jb-wa-btn:active {
-  background: linear-gradient(180deg, #2a2a2a 0%, #3a3a3a 100%);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-}
-.jb-wa-btn-play {
-  width: 38px;
-  background: linear-gradient(180deg, #4a5a3a 0%, #3a4a2a 100%);
-  border-color: #5a7a3a;
-}
-.jb-wa-btn-play span { color: #bde0a0; }
-
-.jb-wa-vol {
-  display: flex; align-items: center; gap: 5px;
-  flex: 1; max-width: 120px;
-}
-.jb-wa-vol-label {
-  font-size: 7px; font-weight: 700;
-  color: #888; letter-spacing: 0.08em;
-}
-.jb-wa-vol-track {
-  flex: 1; height: 8px;
-  background: linear-gradient(180deg, #1a1a1a 0%, #111 100%);
-  border: 1px solid #333;
-  position: relative; cursor: pointer;
-}
-.jb-wa-vol-fill {
-  position: absolute; top: 1px; left: 1px; bottom: 1px;
-  background: linear-gradient(180deg, #00aa00 0%, #006600 100%);
-  transition: width 0.15s;
-}
-
-/* ── Playlist Window ── */
-.jb-wa-playlist {
-  background: linear-gradient(180deg, #2a2a2a 0%, #222 100%);
-  border: 1px solid #555;
-  border-top: none;
-  border-radius: 0 0 2px 2px;
-  box-shadow: inset 1px 0 0 rgba(255,255,255,0.05), inset -1px 0 0 rgba(0,0,0,0.3);
-}
-.jb-wa-pl-titlebar {
-  display: flex; align-items: center; justify-content: space-between;
-  background: linear-gradient(90deg, #2a3a1a 0%, #3a5a2a 50%, #2a3a1a 100%);
-  padding: 3px 6px;
-  font-size: 9px; font-weight: 700;
-  color: #bde0a0;
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid rgba(0,0,0,0.3);
-}
-.jb-wa-pl-bolt {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #888 0%, #555 100%);
-  display: inline-block;
-}
-
-.jb-wa-pl-list {
-  background: #0a0a12;
-  margin: 3px 4px;
-  border: 1px solid #222;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
-  max-height: 160px;
-  overflow-y: auto;
-}
-.jb-wa-pl-item {
-  display: flex; align-items: center; gap: 0;
-  width: 100%; text-align: left;
-  padding: 4px 8px;
-  font-family: 'Courier New', monospace;
-  font-size: 11px;
-  color: #00cc00;
-  cursor: pointer;
-  transition: background 0.1s;
-  line-height: 1.5;
-}
-.jb-wa-pl-item:hover:not(.active) { background: rgba(0,100,0,0.15); }
-.jb-wa-pl-item.active {
-  background: #000088;
-  color: #fff;
-}
-.jb-wa-pl-num { width: 22px; color: inherit; opacity: 0.6; flex-shrink: 0; }
-.jb-wa-pl-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.jb-wa-pl-dur { flex-shrink: 0; margin-left: 8px; opacity: 0.5; }
-
-.jb-wa-pl-footer {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 4px 8px;
-  font-size: 8px; color: #555;
-  font-family: 'Courier New', monospace;
-  border-top: 1px solid #222;
-}
-.jb-wa-pl-llama {
-  font-style: italic;
-  color: #3a5a2a;
-}
+   (iPod and Winamp retro views removed)
 
 
 /* ══════════════════════════════════════════════════════════════════════════════

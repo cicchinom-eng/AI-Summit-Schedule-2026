@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { go } from '../App';
+import { goBack } from '../App';
 import '../punchout.css';
 
 /* ═══════════════════════ Types ═══════════════════════ */
@@ -198,16 +198,16 @@ export default function PunchOut() {
       const p = phRef.current;
       if (p === 'title') {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startFight(); }
-        if (e.key === 'Escape') go('sessions');
+        if (e.key === 'Escape') goBack();
       } else if (p === 'fight') {
         if (koRef.current > 0) return;
-        if (e.key === 'Escape') { go('sessions'); return; }
+        if (e.key === 'Escape') { goBack(); return; }
         const k = e.key.toLowerCase();
         if (k === 'z' || k === 'j' || k === 'arrowleft') { e.preventDefault(); doPunch('l'); }
         if (k === 'x' || k === 'k' || k === 'arrowright') { e.preventDefault(); doPunch('r'); }
       } else if (p === 'winner') {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); reset(); }
-        if (e.key === 'Escape') go('sessions');
+        if (e.key === 'Escape') goBack();
       }
     };
     window.addEventListener('keydown', h);
@@ -227,7 +227,7 @@ export default function PunchOut() {
           <div className="po-title-bottom">
             <div className="po-blink po-start-text po-desktop-only">PRESS ENTER OR SPACE TO START</div>
             <div className="po-blink po-start-text po-mobile-only" onClick={startFight}>TAP HERE TO START</div>
-            <button className="po-back" onClick={() => go('sessions')}>ESC : BACK TO EXPLORE</button>
+            <button className="po-back" onClick={() => goBack()}>ESC : BACK TO EXPLORE</button>
           </div>
         </div>
       )}
@@ -297,7 +297,7 @@ export default function PunchOut() {
           <div className="po-win-rec">RECORD: &infin; &ndash; 0</div>
           <div className="po-blink po-desktop-only" style={{ marginTop: 20, fontSize: 9 }}>PRESS ENTER TO TRY AGAIN</div>
           <div className="po-blink po-mobile-only" style={{ marginTop: 20, fontSize: 9 }} onClick={reset}>TAP HERE TO TRY AGAIN</div>
-          <button className="po-back" onClick={() => go('sessions')}>EXIT TO EXPLORE</button>
+          <button className="po-back" onClick={() => goBack()}>EXIT TO EXPLORE</button>
         </div>
       )}
     </div>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Large Language Monsters</title>
+<meta name="description" content="A tiny monster-collecting RPG that teaches AI literacy. Meet real AI models and learn to pick the right tool for the job.">
+<meta name="theme-color" content="#dbe8b6">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LL Monsters">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app">
+  <header id="top">
+    <span class="brand">LARGE LANGUAGE MONSTERS</span>
+    <span class="model">POCKET BINDER</span>
+  </header>
+
+  <div id="stage">
+    <div id="bezel">
+      <div class="lens-cap"><span class="led"></span><span>POWER</span><span class="cap-r">RIGHT TOOL &middot; RIGHT JOB</span></div>
+      <div id="glass"><canvas id="screen" width="160" height="144" aria-label="Game screen"></canvas><div id="lcd"></div></div>
+    </div>
+  </div>
+
+  <div id="dpad" role="group" aria-label="Direction pad">
+    <div class="cross"><i class="up"></i><i class="right"></i><i class="down"></i><i class="left"></i><b></b></div>
+  </div>
+
+  <div id="ab">
+    <button class="round b" type="button" data-key="b" aria-label="B button">B</button>
+    <button class="round a" type="button" data-key="a" aria-label="A button">A</button>
+  </div>
+
+  <div id="sys">
+    <button id="btnSound" class="pill" type="button" aria-pressed="false">SOUND OFF</button>
+    <button class="pill" type="button" data-key="menu">MENU</button>
+    <span class="speaker" aria-hidden="true"></span>
+  </div>
+
+  <p id="keys">Move: arrows or WASD &nbsp;·&nbsp; Confirm: Z or Enter &nbsp;·&nbsp; Back / switch helper: X &nbsp;·&nbsp; Menu: Esc &nbsp;·&nbsp; Sound: M</p>
+</main>
+
+<div id="nameDlg" class="overlay" hidden>
+  <form id="nameForm" class="sheet" autocomplete="off">
+    <p class="kicker">NEW GAME</p>
+    <label for="nameInput">What's your name, teacher?</label>
+    <input id="nameInput" type="text" maxlength="12" placeholder="Teacher" autocapitalize="words" spellcheck="false" enterkeyhint="go">
+    <p class="small">It goes on your certificate at the end. It stays on this device.</p>
+    <button type="submit">Start</button>
+  </form>
+</div>
+
+<div id="cert" class="overlay" hidden>
+  <div class="cert-card">
+    <p class="kicker">LARGE LANGUAGE MONSTERS</p>
+    <h1>AI Literacy Trainer</h1>
+    <p>This certifies that</p>
+    <p id="certName" class="cert-name">Teacher</p>
+    <p>explored Prompt Town, earned three mentor stamps, climbed the Benchmark Tower and flattened THE HYPE CYCLE by picking the right tool for the job.</p>
+    <img id="certSeal" alt="" width="120" height="120">
+    <p class="cert-row"><span id="certCount"></span> &nbsp;·&nbsp; <span id="certDate"></span></p>
+    <p id="certFacts" class="small"></p>
+  </div>
+  <div class="cert-actions">
+    <button id="certPrint" type="button">Print or save as PDF</button>
+    <button id="certClose" type="button">Continue</button>
+  </div>
+</div>
+
+<noscript><p style="color:#e4f2b4;padding:20px">This game needs JavaScript turned on.</p></noscript>
+<script src="js/engine.js"></script>
+<script src="js/models.js"></script>
+<script src="js/content.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
