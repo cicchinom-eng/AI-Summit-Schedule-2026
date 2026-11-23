@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NJ AI Literacy Summit Radio — Podcast Scripts</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Lora', Georgia, serif; background: #faf9f7; color: #1a1a1a; line-height: 1.75; }
+  .container { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+  .series-header { text-align: center; border-bottom: 3px solid #1a1a1a; padding-bottom: 32px; margin-bottom: 48px; }
+  .series-header h1 { font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .series-header .subtitle { font-size: 16px; color: #666; font-style: italic; }
+  .series-header .meta { font-family: 'Inter', sans-serif; font-size: 12px; color: #999; margin-top: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+  .episode { margin-bottom: 64px; page-break-inside: avoid; }
+  .episode-header { border-left: 4px solid #c0392b; padding-left: 16px; margin-bottom: 24px; }
+  .episode-num { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; color: #c0392b; letter-spacing: 0.1em; text-transform: uppercase; }
+  .episode-title { font-size: 28px; font-weight: 700; line-height: 1.2; margin-top: 4px; }
+  .episode-runtime { font-family: 'Inter', sans-serif; font-size: 12px; color: #888; margin-top: 4px; }
+
+  .script { font-size: 17px; }
+  .script p { margin-bottom: 16px; text-align: left; }
+  .script .pause { text-align: center; color: #aaa; font-style: italic; font-size: 13px; margin: 24px 0; letter-spacing: 0.08em; }
+  .script .direction { color: #888; font-style: italic; font-size: 14px; margin: 20px 0; }
+
+  .divider { border: none; border-top: 1px solid #ddd; margin: 56px 0; }
+
+  /* Toggle bar */
+  .toggle-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 249, 247, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .toggle-control {
+    display: inline-flex;
+    position: relative;
+    background: #e8e6e3;
+    border-radius: 10px;
+    padding: 3px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    gap: 0;
+  }
+  .toggle-control .toggle-pill {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    height: calc(100% - 6px);
+    width: calc(50% - 3px);
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+  .toggle-control.elevenlabs-active .toggle-pill {
+    transform: translateX(100%);
+  }
+  .toggle-control button {
+    position: relative;
+    z-index: 1;
+    border: none;
+    background: none;
+    padding: 7px 20px;
+    cursor: pointer;
+    color: #888;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    transition: color 0.2s;
+    white-space: nowrap;
+    border-radius: 8px;
+  }
+  .toggle-control button.active {
+    color: #1a1a1a;
+  }
+  .toggle-control button:hover:not(.active) {
+    color: #555;
+  }
+
+  /* ElevenLabs tag styling */
+  .el-tag {
+    display: inline;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  /* Show/hide versions */
+  .elevenlabs { display: none; }
+  .clean { display: block; }
+
+  @media print {
+    body { font-size: 15px; }
+    .container { max-width: 100%; padding: 20px; }
+    .episode { page-break-before: always; }
+    .episode:first-of-type { page-break-before: avoid; }
+    .toggle-bar { display: none; }
+  }
+  @media (max-width: 600px) {
+    .container { padding: 20px 16px 60px; }
+    .episode-title { font-size: 22px; }
+    .script { font-size: 16px; }
+    .toggle-control button { padding: 7px 14px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toggle-bar">
+  <div class="toggle-control" id="toggleControl">
+    <div class="toggle-pill"></div>
+    <button class="active" id="btnClean" onclick="switchMode('clean')">Clean Script</button>
+    <button id="btnElevenlabs" onclick="switchMode('elevenlabs')">ElevenLabs</button>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="series-header">
+  <h1>NJ AI Literacy Summit Radio</h1>
+  <div class="subtitle">Five episodes for the ride home.</div>
+  <div class="meta">Scripts &bull; December 2026 &bull; Not for publication</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<div class="episode">
+<div class="episode-header">
+  <div class="episode-num">Episode One</div>
+  <div class="episode-title">Your Newest Superpower</div>
+  <div class="episode-runtime">~8 minutes &bull; 1,650 words</div>
+</div>
+
+<!-- CLEAN VERSION -->
+<div class="script clean">
+
+<p>I want to tell you about a physics teacher.</p>
+
+<p>She teaches in a mid-sized district in New Jersey. Good school. Decent budget. And every year, she runs into the same problem. She needs a simulation. Something her students can play with &mdash; adjust the angle of a ramp, change the mass of a ball, watch what happens to the velocity. The kind of thing that makes Newton's second law go from words on a whiteboard to something a sixteen-year-old can actually <em>feel</em>.</p>
+
+<p>She's looked for this tool. She's Googled it. She's browsed those sprawling educational software catalogs that look like they were designed in 2008 &mdash; because they were. And the tools she finds are either too expensive, too clunky, or too locked down. They don't do quite what she needs. Close, but not right.</p>
+
+<p>So every year, she puts in a request. She emails the tech department. She fills out the form. And then she waits. And waits. And sometime around April, someone tells her they'll look into it over the summer.</p>
+
+<p class="pause">[beat]</p>
+
+<p>This year, she built it herself.</p>
+
+<p>In an afternoon.</p>
+
+<p>She sat down with Claude &mdash; that's an AI from a company called Anthropic &mdash; and she described what she wanted. Not in code. In <em>English</em>. She said, "I need an interactive physics simulation where students can adjust the mass of an object and the angle of an inclined plane, and watch how the acceleration changes in real time. It should show force vectors. It should have a graph that updates as they drag the sliders."</p>
+
+<p>And Claude wrote the code. All of it. HTML, CSS, JavaScript. She previewed it right there in her browser. She tweaked a few things &mdash; "make the sliders bigger, add a reset button, change the colors so it matches my class website" &mdash; and ten minutes later, she had a working, interactive physics simulation that did exactly what she needed.</p>
+
+<p>She published it on Google Sites. Free. Her students used it the next day.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Now. I need you to understand what just happened, because it's easy to hear that story and think, <em>Oh, neat, a teacher used AI to save some time.</em> That's not what happened. What happened is that the person closest to the problem &mdash; the person who actually understands what a sixteen-year-old needs to learn Newton's second law &mdash; that person, for the first time in the history of educational technology, was also the person who could build the solution.</p>
+
+<p>No ticket. No vendor. No committee. No budget line item.</p>
+
+<p>They call this "vibe coding." I know &mdash; it's a ridiculous name. But the name doesn't matter. What matters is the idea: you describe what you want in plain language, and AI writes the code. You don't need to know what JavaScript is. You don't need to understand what a function does. You just need to know what your students need.</p>
+
+<p>And it turns out teachers are <em>really good</em> at knowing what their students need.</p>
+
+<p class="pause">[pause]</p>
+
+<p>Here's what I find fascinating about this. For decades, we've had this awkward dance in schools between the people who understand teaching and the people who understand technology. The teacher knows the problem. The developer knows the tools. And somewhere in the middle &mdash; in the email chain, in the feature request, in the committee meeting &mdash; the original insight gets lost. The tool that ships is never quite right. It solves a <em>version</em> of the problem. A committee's interpretation of the problem. Not the actual problem.</p>
+
+<p>What vibe coding does is collapse that distance to zero.</p>
+
+<p>And it's not just simulations. At the summit today, people were building vocabulary flashcard apps, random student pickers, lab timers, self-checking quizzes, curriculum alignment tools, scheduling conflict checkers, approval workflows, data dashboards. Things that would have required a developer six months ago. Things that are now a conversation.</p>
+
+<p>One administrator built a tool that checks for PII &mdash; personally identifiable information &mdash; in documents before they get shared. It runs entirely offline, on the user's own device. No data ever leaves the building. She built it because she needed it, and nobody was going to build it for her.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Now, I want to be careful here, because I don't want to oversell this. Vibe coding is not magic. The code AI writes isn't always perfect. Sometimes it breaks. Sometimes you have to go back and forth five or six times before the tool does what you actually want. And if you're building something truly complex &mdash; a full application with user accounts and a database &mdash; you're going to need more sophisticated tools.</p>
+
+<p>That's where the deeper end of the pool comes in. Some educators at the summit are using VS Code &mdash; that's a professional code editor &mdash; paired with something called Claude Code, which is basically an AI that sits inside the editor and writes alongside you. They're deploying to Vercel, which puts your app live on the internet with a single click. They're building things that look and feel like the polished apps you download from the App Store.</p>
+
+<p>But here's the thing: you don't have to go that far. The teacher who built the physics simulation? She used the simplest possible approach. She talked to an AI. She copied the code. She pasted it into Google Sites using an HTML embed. Done. That's the floor. And the floor is already extraordinary.</p>
+
+<p class="pause">[pause]</p>
+
+<p>I keep thinking about something a presenter said today. She said, "Stop asking for the tool you need. Start building it." And I think that's the shift. For the first time, the gap between <em>I wish this existed</em> and <em>I made this</em> is not a gap anymore. It's a conversation.</p>
+
+<p>The question isn't whether teachers can code. That question is already obsolete. The question is: what will they build when nothing is stopping them?</p>
+
+<p class="direction">[End of Episode 1]</p>
+
+</div>
+
+<!-- ELEVENLABS VERSION -->
+<div class="script elevenlabs">
+
+<p><span class="el-tag">[warmly]</span> I want to tell you about a physics teacher.</p>
+
+<p>She teaches in a mid-sized district in New Jersey. Good school. Decent budget. And every year, she runs into the same problem. She needs a simulation. Something her students can play with &mdash; adjust the angle of a ramp, change the mass of a ball, watch what happens to the velocity. The kind of thing that makes Newton's second law go from words on a whiteboard to something a sixteen-year-old can actually <em>feel</em>.</p>
+
+<p>She's looked for this tool. She's Googled it. She's browsed those sprawling educational software catalogs that look like they were designed in 2008 &mdash; because they were. And the tools she finds are either too expensive, too clunky, or too locked down. They don't do quite what she needs. Close, but not right.</p>
+
+<p>So every year, she puts in a request. She emails the tech department. She fills out the form. And then she waits. And waits. And sometime around April, someone tells her they'll look into it over the summer.</p>
+
+<p class="pause">[beat]</p>
+
+<p><span class="el-tag">[slowly, deliberately]</span> This year, she built it herself.</p>
+
+<p>In an afternoon.</p>
+
+<p>She sat down with Claude &mdash; that's an AI from a company called Anthropic &mdash; and she described what she wanted. Not in code. In <em>English</em>. She said, "I need an interactive physics simulation where students can adjust the mass of an object and the angle of an inclined plane, and watch how the acceleration changes in real time. It should show force vectors. It should have a graph that updates as they drag the sliders."</p>
+
+<p>And Claude wrote the code. All of it. HTML, CSS, JavaScript. She previewed it right there in her browser. <span class="el-tag">[quickening pace]</span> She tweaked a few things &mdash; "make the sliders bigger, add a reset button, change the colors so it matches my class website" &mdash; and ten minutes later, she had a working, interactive physics simulation that did exactly what she needed.</p>
+
+<p>She published it on Google Sites. Free. Her students used it the next day.</p>
+
+<p class="pause">[beat]</p>
+
+<p><span class="el-tag">[with conviction]</span> Now. I need you to understand what just happened, because it's easy to hear that story and think, <em>Oh, neat, a teacher used AI to save some time.</em> That's not what happened. What happened is that the person closest to the problem &mdash; the person who actually understands what a sixteen-year-old needs to learn Newton's second law &mdash; that person, for the first time in the history of educational technology, was also the person who could build the solution.</p>
+
+<p>No ticket. No vendor. No committee. No budget line item.</p>
+
+<p><span class="el-tag">[wry, amused]</span> They call this "vibe coding." I know &mdash; it's a ridiculous name. But the name doesn't matter. What matters is the idea: you describe what you want in plain language, and AI writes the code. You don't need to know what JavaScript is. You don't need to understand what a function does. You just need to know what your students need.</p>
+
+<p>And it turns out teachers are <em>really good</em> at knowing what their students need.</p>
+
+<p class="pause">[pause]</p>
+
+<p><span class="el-tag">[thoughtful]</span> Here's what I find fascinating about this. For decades, we've had this awkward dance in schools between the people who understand teaching and the people who understand technology. The teacher knows the problem. The developer knows the tools. And somewhere in the middle &mdash; in the email chain, in the feature request, in the committee meeting &mdash; the original insight gets lost. The tool that ships is never quite right. It solves a <em>version</em> of the problem. A committee's interpretation of the problem. Not the actual problem.</p>
+
+<p>What vibe coding does is collapse that distance to zero.</p>
+
+<p><span class="el-tag">[building energy]</span> And it's not just simulations. At the summit today, people were building vocabulary flashcard apps, random student pickers, lab timers, self-checking quizzes, curriculum alignment tools, scheduling conflict checkers, approval workflows, data dashboards. Things that would have required a developer six months ago. Things that are now a conversation.</p>
+
+<p>One administrator built a tool that checks for PII &mdash; personally identifiable information &mdash; in documents before they get shared. It runs entirely offline, on the user's own device. No data ever leaves the building. She built it because she needed it, and nobody was going to build it for her.</p>
+
+<p class="pause">[beat]</p>
+
+<p><span class="el-tag">[matter-of-factly]</span> Now, I want to be careful here, because I don't want to oversell this. Vibe coding is not magic. The code AI writes isn't always perfect. Sometimes it breaks. Sometimes you have to go back and forth five or six times before the tool does what you actually want. And if you're building something truly complex &mdash; a full application with user accounts and a database &mdash; you're going to need more sophisticated tools.</p>
+
+<p>That's where the deeper end of the pool comes in. Some educators at the summit are using VS Code &mdash; that's a professional code editor &mdash; paired with something called Claude Code, which is basically an AI that sits inside the editor and writes alongside you. They're deploying to Vercel, which puts your app live on the internet with a single click. They're building things that look and feel like the polished apps you download from the App Store.</p>
+
+<p>But here's the thing: you don't have to go that far. The teacher who built the physics simulation? She used the simplest possible approach. She talked to an AI. She copied the code. She pasted it into Google Sites using an HTML embed. Done. That's the floor. And the floor is already extraordinary.</p>
+
+<p class="pause">[pause]</p>
+
+<p><span class="el-tag">[earnest]</span> I keep thinking about something a presenter said today. She said, "Stop asking for the tool you need. Start building it." And I think that's the shift. For the first time, the gap between <em>I wish this existed</em> and <em>I made this</em> is not a gap anymore. It's a conversation.</p>
+
+<p><span class="el-tag">[curious, leaning in]</span> The question isn't whether teachers can code. That question is already obsolete. The question is: what will they build when nothing is stopping them?</p>
+
+<p class="direction">[End of Episode 1]</p>
+
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<div class="episode">
+<div class="episode-header">
+  <div class="episode-num">Episode Two</div>
+  <div class="episode-title">The Thinking Problem</div>
+  <div class="episode-runtime">~8 minutes &bull; 1,700 words</div>
+</div>
+
+<!-- CLEAN VERSION -->
+<div class="script clean">
+
+<p>Let me ask you a question. When was the last time you watched a student struggle?</p>
+
+<p>I mean really struggle. Not frustrated. Not shut down. But that particular kind of stuck where you can almost see the gears turning &mdash; where they're reaching for an idea they don't have yet, and the reaching itself is the learning.</p>
+
+<p>Cognitive scientists have a name for it. They call it "productive struggle." And it turns out it's one of the most important things that happens in a classroom. Not the right answer. Not the finished product. The <em>struggle</em>. The gap between <em>I don't get it</em> and <em>oh, wait</em>. That's where the neural pathways form. That's where learning actually lives.</p>
+
+<p>And we just handed every student in America a tool that can skip it entirely.</p>
+
+<p class="pause">[beat]</p>
+
+<p>ChatGPT launched in November of 2022. Within three months, it had a hundred million users. Within a year, it was in every school whether schools wanted it there or not. And the first question everyone asked was the wrong one. They asked: <em>How do we stop students from using it?</em></p>
+
+<p>That was always the wrong question. You cannot stop a hundred million people from using a free tool that's available on every phone. It's like asking how to stop students from using Google in 2005. The ship has sailed. It's not coming back to port.</p>
+
+<p>The right question &mdash; the harder question &mdash; is this: <em>How do we make sure they keep thinking?</em></p>
+
+<p class="pause">[pause]</p>
+
+<p>Here's what I mean. A ninth grader has an essay due on <em>The Great Gatsby</em>. She opens ChatGPT. She types, "Write me a five-paragraph essay about the American Dream in The Great Gatsby." And in eight seconds, she has an essay. It's grammatically correct. It's structured. It makes reasonable points. And she learned absolutely nothing. The productive struggle &mdash; the part where she had to decide what she actually thinks about Gatsby, the part where she had to organize her thoughts, the part where she had to wrestle with an argument that didn't quite work and figure out why &mdash; all of that just vanished.</p>
+
+<p>That's the thinking problem.</p>
+
+<p>But here's where it gets interesting. Because the same tool that can skip the thinking can also <em>intensify</em> it. And the difference has nothing to do with blocking or restricting. It has to do with <em>design</em>.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Think about productive struggle for a second. Where does it actually live? We tend to think it lives in the big, obvious places &mdash; solving the equation, writing the essay, building the project. But it's hiding everywhere. It's in the brainstorm. It's in the outline. It's in the moment a student stares at a blank page and has to decide, out of everything in the world, what <em>they</em> want to say.</p>
+
+<p>That moment &mdash; the blank page moment &mdash; is cognitively enormous. It's identity work. It's taste. It's agency. And when a student types "give me five project ideas about climate change" into a chatbot, all of that vanishes. They didn't choose. They <em>selected</em>. There's a difference.</p>
+
+<p>Or take outlining. Outlining sounds mechanical &mdash; Roman numerals, sub-points, indent, done. But outlining is actually where a student learns to <em>structure thought</em>. It's where they discover that their third point is actually their first point, and that two of their examples are saying the same thing, and that their conclusion doesn't follow from their argument. That mess &mdash; that confusion, that rearranging &mdash; that's the learning. That's where they internalize what an argument <em>is</em>.</p>
+
+<p>So the first question a teacher should ask isn't "Can my students use AI on this assignment?" It's: <em>Where is the productive struggle hiding in this task? Which of these twenty small cognitive acts is the actual learning?</em></p>
+
+<p>That's the harder question. And the more important one.</p>
+
+<p class="pause">[pause]</p>
+
+<p>But here's where it flips. Because once you've identified where the struggle is, AI becomes a tool for <em>creating more of it</em> &mdash; not less.</p>
+
+<p>Imagine a student writes a first draft of an argument. It's rough. It has holes. That's fine &mdash; that's the point. Now, instead of turning it in and waiting three days for teacher feedback, she pastes it into an AI and says, "Challenge this argument. Where are the weak points? What's the strongest counterargument?" And the AI pushes back. It finds the gap in her reasoning. It asks the question she didn't think of.</p>
+
+<p>She hasn't outsourced the thinking. She's been <em>forced into more of it</em>. The AI didn't write her argument. It stress-tested it. And now she has to go back and make it better &mdash; which is the hardest, most valuable kind of cognitive work there is.</p>
+
+<p>Or think about a math student who's solved a problem but isn't sure if her approach is right. She asks the AI, "Don't tell me the answer. Tell me if my method makes sense." That's a fundamentally different interaction than "solve this for me." She's using the tool to stay inside the struggle, not to escape it.</p>
+
+<p class="pause">[beat]</p>
+
+<p>This is the shift that the best educators are making right now. They're not asking "how do we keep AI out?" They're asking "how do we use AI to make the thinking <em>harder</em>?"</p>
+
+<p>Ask a chatbot to generate five counterarguments to a student's thesis &mdash; and then make the student defeat them, one by one. Use AI to generate a flawed essay on the same topic &mdash; and have students find the errors, the weak evidence, the logical fallacies. Have the AI roleplay as a skeptical audience that keeps asking "But why?" until the student's reasoning is bulletproof.</p>
+
+<p>In each of these cases, AI isn't replacing the struggle. It's engineering it. It's creating the resistance that makes the thinking muscle grow. The teacher used to be the only source of that resistance. Now she has a tireless sparring partner she can deploy to every student at the same time.</p>
+
+<p class="pause">[pause]</p>
+
+<p>But there's a deeper issue here that I think is worth raising. Because all of this works for <em>assignments</em>. For products &mdash; essays, projects, problem sets. But what about the thinking that happens <em>between</em> assignments? What about the student who, instead of wondering about something and sitting with the wonder for a while, just asks ChatGPT? What about the slow erosion of curiosity that happens when every question has an instant answer?</p>
+
+<p>That's harder to design for. You can't engineer productive struggle around curiosity.</p>
+
+<p>But you can model something. You can model what it looks like to <em>not</em> know. To be comfortable with uncertainty. To say, in front of your students, "I don't know the answer to that. Let's think about it for a minute before we look it up." That's a pedagogical move. And it might be the most important one we have left.</p>
+
+<p>Because the technology isn't going to slow down. The models are going to get better. The answers are going to get faster. The only thing that keeps human thinking alive in the classroom is a human who insists on it.</p>
+
+<p class="pause">[pause]</p>
+
+<p>There's a phrase I heard today that I haven't been able to shake. Someone said it almost in passing, but it stuck with me: "Brain first, bot second."</p>
+
+<p>Four words. And I think they might be the whole philosophy.</p>
+
+<p>Use your brain first. Then use the bot. Not because the bot is bad. Because the brain needs to go first, or it won't go at all. And when the bot shows up second &mdash; as the challenger, the stress-tester, the sparring partner &mdash; the brain gets <em>stronger</em>.</p>
+
+<p>That's not a restriction. That's a superpower.</p>
+
+<p class="direction">[End of Episode 2]</p>
+
+</div>
+
+<!-- ELEVENLABS VERSION -->
+<div class="script elevenlabs">
+
+<p><span class="el-tag">[curious, leaning in]</span> Let me ask you a question. When was the last time you watched a student struggle?</p>
+
+<p>I mean really struggle. Not frustrated. Not shut down. But that particular kind of stuck where you can almost see the gears turning &mdash; where they're reaching for an idea they don't have yet, and the reaching itself is the learning.</p>
+
+<p>Cognitive scientists have a name for it. They call it "productive struggle." And it turns out it's one of the most important things that happens in a classroom. Not the right answer. Not the finished product. The <em>struggle</em>. The gap between <em>I don't get it</em> and <em>oh, wait</em>. That's where the neural pathways form. That's where learning actually lives.</p>
+
+<p><span class="el-tag">[slowly, deliberately]</span> And we just handed every student in America a tool that can skip it entirely.</p>
+
+<p class="pause">[beat]</p>
+
+<p>ChatGPT launched in November of 2022. Within three months, it had a hundred million users. Within a year, it was in every school whether schools wanted it there or not. And the first question everyone asked was the wrong one. They asked: <em>How do we stop students from using it?</em></p>
+
+<p><span class="el-tag">[matter-of-factly]</span> That was always the wrong question. You cannot stop a hundred million people from using a free tool that's available on every phone. It's like asking how to stop students from using Google in 2005. The ship has sailed. It's not coming back to port.</p>
+
+<p><span class="el-tag">[with conviction]</span> The right question &mdash; the harder question &mdash; is this: <em>How do we make sure they keep thinking?</em></p>
+
+<p class="pause">[pause]</p>
+
+<p>Here's what I mean. A ninth grader has an essay due on <em>The Great Gatsby</em>. She opens ChatGPT. She types, "Write me a five-paragraph essay about the American Dream in The Great Gatsby." And in eight seconds, she has an essay. It's grammatically correct. It's structured. It makes reasonable points. And she learned absolutely nothing. The productive struggle &mdash; the part where she had to decide what she actually thinks about Gatsby, the part where she had to organize her thoughts, the part where she had to wrestle with an argument that didn't quite work and figure out why &mdash; all of that just vanished.</p>
+
+<p><span class="el-tag">[pause]</span> That's the thinking problem.</p>
+
+<p>But here's where it gets interesting. Because the same tool that can skip the thinking can also <em>intensify</em> it. And the difference has nothing to do with blocking or restricting. It has to do with <em>design</em>.</p>
+
+<p class="pause">[beat]</p>
+
+<p><span class="el-tag">[thoughtful]</span> Think about productive struggle for a second. Where does it actually live? We tend to think it lives in the big, obvious places &mdash; solving the equation, writing the essay, building the project. But it's hiding everywhere. It's in the brainstorm. It's in the outline. It's in the moment a student stares at a blank page and has to decide, out of everything in the world, what <em>they</em> want to say.</p>
+
+<p>That moment &mdash; the blank page moment &mdash; is cognitively enormous. It's identity work. It's taste. It's agency. And when a student types "give me five project ideas about climate change" into a chatbot, all of that vanishes. They didn't choose. They <em>selected</em>. There's a difference.</p>
+
+<p>Or take outlining. Outlining sounds mechanical &mdash; Roman numerals, sub-points, indent, done. But outlining is actually where a student learns to <em>structure thought</em>. It's where they discover that their third point is actually their first point, and that two of their examples are saying the same thing, and that their conclusion doesn't follow from their argument. That mess &mdash; that confusion, that rearranging &mdash; that's the learning. That's where they internalize what an argument <em>is</em>.</p>
+
+<p><span class="el-tag">[with conviction]</span> So the first question a teacher should ask isn't "Can my students use AI on this assignment?" It's: <em>Where is the productive struggle hiding in this task? Which of these twenty small cognitive acts is the actual learning?</em></p>
+
+<p>That's the harder question. And the more important one.</p>
+
+<p class="pause">[pause]</p>
+
+<p><span class="el-tag">[building energy]</span> But here's where it flips. Because once you've identified where the struggle is, AI becomes a tool for <em>creating more of it</em> &mdash; not less.</p>
+
+<p>Imagine a student writes a first draft of an argument. It's rough. It has holes. That's fine &mdash; that's the point. Now, instead of turning it in and waiting three days for teacher feedback, she pastes it into an AI and says, "Challenge this argument. Where are the weak points? What's the strongest counterargument?" And the AI pushes back. It finds the gap in her reasoning. It asks the question she didn't think of.</p>
+
+<p>She hasn't outsourced the thinking. She's been <em>forced into more of it</em>. The AI didn't write her argument. It stress-tested it. And now she has to go back and make it better &mdash; which is the hardest, most valuable kind of cognitive work there is.</p>
+
+<p>Or think about a math student who's solved a problem but isn't sure if her approach is right. She asks the AI, "Don't tell me the answer. Tell me if my method makes sense." That's a fundamentally different interaction than "solve this for me." She's using the tool to stay inside the struggle, not to escape it.</p>
+
+<p class="pause">[beat]</p>
+
+<p><span class="el-tag">[quickening pace]</span> This is the shift that the best educators are making right now. They're not asking "how do we keep AI out?" They're asking "how do we use AI to make the thinking <em>harder</em>?"</p>
+
+<p>Ask a chatbot to generate five counterarguments to a student's thesis &mdash; and then make the student defeat them, one by one. Use AI to generate a flawed essay on the same topic &mdash; and have students find the errors, the weak evidence, the logical fallacies. Have the AI roleplay as a skeptical audience that keeps asking "But why?" until the student's reasoning is bulletproof.</p>
+
+<p>In each of these cases, AI isn't replacing the struggle. It's engineering it. It's creating the resistance that makes the thinking muscle grow. The teacher used to be the only source of that resistance. Now she has a tireless sparring partner she can deploy to every student at the same time.</p>
+
+<p class="pause">[pause]</p>
+
+<p><span class="el-tag">[softer, more intimate]</span> But there's a deeper issue here that I think is worth raising. Because all of this works for <em>assignments</em>. For products &mdash; essays, projects, problem sets. But what about the thinking that happens <em>between</em> assignments? What about the student who, instead of wondering about something and sitting with the wonder for a while, just asks ChatGPT? What about the slow erosion of curiosity that happens when every question has an instant answer?</p>
+
+<p>That's harder to design for. You can't engineer productive struggle around curiosity.</p>
+
+<p>But you can model something. You can model what it looks like to <em>not</em> know. To be comfortable with uncertainty. To say, in front of your students, "I don't know the answer to that. Let's think about it for a minute before we look it up." That's a pedagogical move. And it might be the most important one we have left.</p>
+
+<p>Because the technology isn't going to slow down. The models are going to get better. The answers are going to get faster. The only thing that keeps human thinking alive in the classroom is a human who insists on it.</p>
+
+<p class="pause">[pause]</p>
+
+<p>There's a phrase I heard today that I haven't been able to shake. Someone said it almost in passing, but it stuck with me: "Brain first, bot second."</p>
+
+<p><span class="el-tag">[slowly, deliberately]</span> Four words. And I think they might be the whole philosophy.</p>
+
+<p>Use your brain first. Then use the bot. Not because the bot is bad. Because the brain needs to go first, or it won't go at all. And when the bot shows up second &mdash; as the challenger, the stress-tester, the sparring partner &mdash; the brain gets <em>stronger</em>.</p>
+
+<p><span class="el-tag">[earnest]</span> That's not a restriction. That's a superpower.</p>
+
+<p class="direction">[End of Episode 2]</p>
+
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<div class="episode">
+<div class="episode-header">
+  <div class="episode-num">Episode Three</div>
+  <div class="episode-title">Six Assistants and a Cup of Coffee</div>
+  <div class="episode-runtime">~8 minutes &bull; 1,650 words</div>
+</div>
+
+<!-- CLEAN VERSION -->
+<div class="script clean">
+
+<p>Picture this. It's 6:47 in the morning. You haven't had coffee yet. You open your laptop, and there's an email waiting for you. It's from your Chief of Staff.</p>
+
+<p>Your Chief of Staff is not a person.</p>
+
+<p>Your Chief of Staff is an AI agent that ran at 5:30 AM, while you were sleeping. It checked your calendar for the day. It flagged two scheduling conflicts. It pulled the agenda for your 9 o'clock meeting and drafted three bullet points you'll want to raise. It noticed that a parent email from last Thursday is still unanswered and suggested a response. It cross-referenced your to-do list with your calendar and determined that you have a 45-minute window at 2:15 to work on the budget proposal that's due Friday.</p>
+
+<p>All of this happened before you woke up.</p>
+
+<p class="pause">[beat]</p>
+
+<p>This is not science fiction. This is what an educational leader demonstrated today at the summit. He calls it his "agent cabinet." It's a team of AI agents &mdash; six of them &mdash; each with a name, a role, and a set of instructions. There's a Chief of Staff. A research analyst. A communications director. A project manager. Each one is essentially a custom AI assistant with a specific job description.</p>
+
+<p>And here's the part that changes everything: they run on a schedule. Not when you remember to open a chatbot. Not when you think to ask. They run <em>automatically</em>, every weekday morning, and the results land in your inbox like a briefing from a team you hired but never have to manage.</p>
+
+<p class="pause">[pause]</p>
+
+<p>Now, let's slow down, because I realize this might sound a little... much. Six AI agents? Running on a schedule? For a school administrator? Isn't that overkill?</p>
+
+<p>Let me ask you this. How many emails did you send this week that were basically the same email you sent last month, with slightly different dates? How many times did you stare at a spreadsheet trying to remember what the data was supposed to tell you? How many meetings did you walk into without having had time to prepare?</p>
+
+<p>That's what agents fix. Not the important work. The <em>everything else</em>. The substrate. The logistics. The stuff that fills your day but doesn't actually require <em>you</em>.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Google is moving in this direction too. If you've been using Gemini, you might have heard of Gems &mdash; custom AI assistants you could build inside Gemini. Those are being replaced by something called Skills. And Skills are more interesting than Gems were, because Skills can be <em>scheduled</em>. They can run at a specific time. They can be embedded into Flows &mdash; which means they can live inside Gmail, responding to triggers, processing information, drafting responses. Not as a separate app you have to remember to open. As part of the work you're already doing.</p>
+
+<p>Think about what that means for a building principal.</p>
+
+<p>A Skill that runs every Monday morning, pulls the week's attendance data, and flags students whose absences have increased over the past three weeks. Not a dashboard you have to log into. An email that arrives with three names and a one-sentence explanation for each.</p>
+
+<p>A Skill that monitors incoming parent emails and drafts suggested responses for the ones that follow predictable patterns &mdash; "My child will be absent," "Can you send home the homework," "I'd like to schedule a conference." The principal reviews, edits if needed, and sends. What used to take twenty minutes now takes two.</p>
+
+<p>A Skill that takes the notes from last week's department meeting, compares them to the notes from the previous three meetings, and generates a summary of which action items are still open. Not because the principal can't do that. Because the principal doesn't have <em>time</em> to do that.</p>
+
+<p class="pause">[pause]</p>
+
+<p>But here's where I want to get serious for a moment. Because agents aren't just about saving time. They're about something more fundamental. They're about what happens to a leader's attention when the logistical noise goes quiet.</p>
+
+<p>I talked to a curriculum director today who told me she used to spend the first two hours of every morning on email and scheduling. Two hours. That's the freshest, sharpest part of her day &mdash; the part where she has the most cognitive bandwidth &mdash; and she was spending it on logistics. Now she has an agent that handles the first pass. She still reviews everything. She still makes the decisions. But the drafting, the organizing, the cross-referencing &mdash; that's done before she arrives.</p>
+
+<p>And so she spends those two hours in classrooms. Watching teaching. Having conversations. Doing the work that actually requires a human being.</p>
+
+<p>That's not a time-saving story. That's a <em>role transformation</em> story.</p>
+
+<p class="pause">[beat]</p>
+
+<p>One more thing. And this is important.</p>
+
+<p>There's a version of this that goes wrong. The version where you hand everything to the agents and stop checking. The version where the email goes out with your name on it but you never actually read it. The version where the data summary says everything's fine, and you believe it because you didn't look at the underlying numbers.</p>
+
+<p>The people doing this well &mdash; the ones I saw today &mdash; have a phrase for it. They say the agent <em>proposes</em>. The human <em>decides</em>. The agent drafts. The human sends. The agent flags. The human acts.</p>
+
+<p>That's the move.</p>
+
+<p>Because the point of having six assistants isn't to stop paying attention. It's to finally have <em>time</em> to pay attention to the things that matter.</p>
+
+<p class="direction">[End of Episode 3]</p>
+
+</div>
+
+<!-- ELEVENLABS VERSION -->
+<div class="script elevenlabs">
+
+<p><span class="el-tag">[warmly]</span> Picture this. It's 6:47 in the morning. You haven't had coffee yet. You open your laptop, and there's an email waiting for you. It's from your Chief of Staff.</p>
+
+<p><span class="el-tag">[pause]</span> Your Chief of Staff is not a person.</p>
+
+<p><span class="el-tag">[building energy]</span> Your Chief of Staff is an AI agent that ran at 5:30 AM, while you were sleeping. It checked your calendar for the day. It flagged two scheduling conflicts. It pulled the agenda for your 9 o'clock meeting and drafted three bullet points you'll want to raise. It noticed that a parent email from last Thursday is still unanswered and suggested a response. It cross-referenced your to-do list with your calendar and determined that you have a 45-minute window at 2:15 to work on the budget proposal that's due Friday.</p>
+
+<p>All of this happened before you woke up.</p>
+
+<p class="pause">[beat]</p>
+
+<p>This is not science fiction. This is what an educational leader demonstrated today at the summit. He calls it his "agent cabinet." It's a team of AI agents &mdash; six of them &mdash; each with a name, a role, and a set of instructions. There's a Chief of Staff. A research analyst. A communications director. A project manager. Each one is essentially a custom AI assistant with a specific job description.</p>
+
+<p><span class="el-tag">[slowly, deliberately]</span> And here's the part that changes everything: they run on a schedule. Not when you remember to open a chatbot. Not when you think to ask. They run <em>automatically</em>, every weekday morning, and the results land in your inbox like a briefing from a team you hired but never have to manage.</p>
+
+<p class="pause">[pause]</p>
+
+<p><span class="el-tag">[wry, amused]</span> Now, let's slow down, because I realize this might sound a little... much. Six AI agents? Running on a schedule? For a school administrator? Isn't that overkill?</p>
+
+<p><span class="el-tag">[curious, leaning in]</span> Let me ask you this. How many emails did you send this week that were basically the same email you sent last month, with slightly different dates? How many times did you stare at a spreadsheet trying to remember what the data was supposed to tell you? How many meetings did you walk into without having had time to prepare?</p>
+
+<p>That's what agents fix. Not the important work. The <em>everything else</em>. The substrate. The logistics. The stuff that fills your day but doesn't actually require <em>you</em>.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Google is moving in this direction too. If you've been using Gemini, you might have heard of Gems &mdash; custom AI assistants you could build inside Gemini. Those are being replaced by something called Skills. And Skills are more interesting than Gems were, because Skills can be <em>scheduled</em>. They can run at a specific time. They can be embedded into Flows &mdash; which means they can live inside Gmail, responding to triggers, processing information, drafting responses. Not as a separate app you have to remember to open. As part of the work you're already doing.</p>
+
+<p>Think about what that means for a building principal.</p>
+
+<p>A Skill that runs every Monday morning, pulls the week's attendance data, and flags students whose absences have increased over the past three weeks. Not a dashboard you have to log into. An email that arrives with three names and a one-sentence explanation for each.</p>
+
+<p><span class="el-tag">[quickening pace]</span> A Skill that monitors incoming parent emails and drafts suggested responses for the ones that follow predictable patterns &mdash; "My child will be absent," "Can you send home the homework," "I'd like to schedule a conference." The principal reviews, edits if needed, and sends. What used to take twenty minutes now takes two.</p>
+
+<p>A Skill that takes the notes from last week's department meeting, compares them to the notes from the previous three meetings, and generates a summary of which action items are still open. Not because the principal can't do that. Because the principal doesn't have <em>time</em> to do that.</p>
+
+<p class="pause">[pause]</p>
+
+<p><span class="el-tag">[thoughtful]</span> But here's where I want to get serious for a moment. Because agents aren't just about saving time. They're about something more fundamental. They're about what happens to a leader's attention when the logistical noise goes quiet.</p>
+
+<p>I talked to a curriculum director today who told me she used to spend the first two hours of every morning on email and scheduling. Two hours. That's the freshest, sharpest part of her day &mdash; the part where she has the most cognitive bandwidth &mdash; and she was spending it on logistics. Now she has an agent that handles the first pass. She still reviews everything. She still makes the decisions. But the drafting, the organizing, the cross-referencing &mdash; that's done before she arrives.</p>
+
+<p>And so she spends those two hours in classrooms. Watching teaching. Having conversations. Doing the work that actually requires a human being.</p>
+
+<p><span class="el-tag">[with conviction]</span> That's not a time-saving story. That's a <em>role transformation</em> story.</p>
+
+<p class="pause">[beat]</p>
+
+<p><span class="el-tag">[sighs]</span> One more thing. And this is important.</p>
+
+<p>There's a version of this that goes wrong. The version where you hand everything to the agents and stop checking. The version where the email goes out with your name on it but you never actually read it. The version where the data summary says everything's fine, and you believe it because you didn't look at the underlying numbers.</p>
+
+<p>The people doing this well &mdash; the ones I saw today &mdash; have a phrase for it. They say the agent <em>proposes</em>. The human <em>decides</em>. The agent drafts. The human sends. The agent flags. The human acts.</p>
+
+<p>That's the move.</p>
+
+<p><span class="el-tag">[softer, more intimate]</span> Because the point of having six assistants isn't to stop paying attention. It's to finally have <em>time</em> to pay attention to the things that matter.</p>
+
+<p class="direction">[End of Episode 3]</p>
+
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<div class="episode">
+<div class="episode-header">
+  <div class="episode-num">Episode Four</div>
+  <div class="episode-title">Carpe Datum</div>
+  <div class="episode-runtime">~8 minutes &bull; 1,700 words</div>
+</div>
+
+<!-- CLEAN VERSION -->
+<div class="script clean">
+
+<p>I'm going to say something that might make a few tech directors uncomfortable.</p>
+
+<p>The most important AI decision your district will make this year has nothing to do with which chatbot to license. It's not about whether you pick ChatGPT or Gemini or Claude. It's not about prompt engineering workshops or AI policy documents or any of the things that fill conference agendas.</p>
+
+<p>It's about where the data lives.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Let me explain. Every school district in America is sitting on an enormous amount of data. Test scores. Report cards. Attendance records. Disciplinary referrals. IEP documentation. Survey results. Progress monitoring data. Grade distributions by teacher, by subject, by quarter, going back years. It's all there. And almost nobody is using it.</p>
+
+<p>Not because they don't want to. Because the tools haven't been there. Because analyzing that data used to require a statistician, or at minimum someone comfortable with pivot tables and regression formulas. And most districts don't have that person. Or they have one person, and that person has forty-seven other responsibilities.</p>
+
+<p>So the data sits. In spreadsheets nobody opens. In reports nobody reads past page two. In dashboards that were exciting for a week and then became wallpaper.</p>
+
+<p class="pause">[pause]</p>
+
+<p>Here's what's changing.</p>
+
+<p>There's a tool from Google that some districts are starting to use for exactly this. It used to be called NotebookLM &mdash; Google has since renamed it Gemini Notebook. And it does something genuinely new. You upload your documents &mdash; your data, your reports, your spreadsheets &mdash; and it reads them. All of them. And then you just... ask questions. In plain English.</p>
+
+<p>"Which students showed declining attendance in the last quarter?" "What are the common characteristics of students who improved in math this year?" "Compare our reading scores to last year and tell me where the biggest drops are." "What story does this data tell?"</p>
+
+<p>And it answers. With citations. Pointing back to the specific documents and cells where it found the information.</p>
+
+<p>Now, to be clear: when you use Gemini Notebook, your data is going to Google's servers. Some districts are comfortable with that &mdash; especially Google Workspace schools that already have data processing agreements in place. Others aren't. And that's a legitimate conversation to have, because school data isn't just data. It's <em>student</em> data. It's protected by FERPA. It includes personally identifiable information &mdash; names, grades, behavior records, disability classifications. You cannot &mdash; legally, ethically &mdash; paste that into just any chatbot. And yet the temptation is enormous, because the AI is <em>right there</em>, and the data is <em>right there</em>, and the question you need answered is burning a hole in your afternoon.</p>
+
+<p>So the question becomes: how do you get the power of AI analysis while managing the risk of data exposure?</p>
+
+<p>And there are, right now, three approaches worth knowing about.</p>
+
+<p class="pause">[pause]</p>
+
+<p>The first is managed cloud tools &mdash; Gemini Notebook, Gemini in Google Sheets &mdash; where the analysis happens inside a platform your district already has a relationship with. Some districts are comfortable with this. They've reviewed the terms, they've signed the agreements, and they've decided the tradeoff works. This is the easiest path. You upload the spreadsheet. You ask the question. You get the answer. But you need to know what you've agreed to.</p>
+
+<p>The second is what I'd call the vibe-coded dashboard approach. And this one is clever. Instead of uploading your data <em>to</em> an AI, you use AI to build a tool that runs entirely in your own browser. You describe the dashboard you want &mdash; "I need a tool where I can upload a CSV of student test scores and see a histogram of score distributions, with the ability to filter by teacher and by quarter." AI writes the code. You host it on your own server, or even just open it as a local file. The data never touches the internet. It goes from your spreadsheet, into your browser, onto your screen. That's it. The AI was involved in building the tool, not in seeing the data.</p>
+
+<p>That distinction is worth pausing on. The AI builds the instrument. The AI never sees the patient.</p>
+
+<p>The third approach is local AI. And this one is for the districts that want to go all in. Some schools are now running large language models on their own hardware &mdash; Apple Silicon servers, GPU clusters, machines that sit in a closet in the server room. The AI runs entirely on campus. No internet connection required. No third-party servers. No data leaves the building, ever. It's expensive to set up. It requires technical expertise. But for districts that handle sensitive data at scale &mdash; special education records, disciplinary files, personnel evaluations &mdash; it's the gold standard for privacy.</p>
+
+<p class="pause">[beat]</p>
+
+<p>I realize this episode might sound like it's for tech directors. And partly, it is. But here's why it matters for everyone.</p>
+
+<p>If you're a teacher, the data question affects you because <em>you</em> are the one who needs the insights. You're the one staring at a stack of formative assessment results wondering which three students need a different approach tomorrow. The right data tool, with the right privacy architecture, turns that from a two-hour task into a two-minute conversation.</p>
+
+<p>If you're a principal, the data question affects you because every hard decision you make &mdash; about scheduling, about staffing, about intervention &mdash; is better when it's grounded in evidence instead of intuition. And right now, the evidence is locked inside a spreadsheet you don't have time to analyze.</p>
+
+<p>And if you're a superintendent, the data question affects you because the board is going to ask. The parents are going to ask. The community is going to ask: <em>Is our students' data safe?</em> And your answer needs to be more specific than "yes." It needs to be: <em>Here's the architecture. Here's where the data lives. Here's who can see it. Here's who can't.</em></p>
+
+<p class="pause">[pause]</p>
+
+<p>Privacy isn't the enemy of insight. That's the thing people get wrong. They think there's a tradeoff &mdash; that you can have powerful AI analysis <em>or</em> you can have strong data protection, but not both. That's a false choice. The tools exist right now, today, to do both. The question is whether your district knows about them.</p>
+
+<p>Seize the data. But know where it sleeps.</p>
+
+<p class="direction">[End of Episode 4]</p>
+
+</div>
+
+<!-- ELEVENLABS VERSION -->
+<div class="script elevenlabs">
+
+<p><span class="el-tag">[wry, amused]</span> I'm going to say something that might make a few tech directors uncomfortable.</p>
+
+<p>The most important AI decision your district will make this year has nothing to do with which chatbot to license. It's not about whether you pick ChatGPT or Gemini or Claude. It's not about prompt engineering workshops or AI policy documents or any of the things that fill conference agendas.</p>
+
+<p><span class="el-tag">[slowly, deliberately]</span> It's about where the data lives.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Let me explain. Every school district in America is sitting on an enormous amount of data. <span class="el-tag">[building energy]</span> Test scores. Report cards. Attendance records. Disciplinary referrals. IEP documentation. Survey results. Progress monitoring data. Grade distributions by teacher, by subject, by quarter, going back years. It's all there. And almost nobody is using it.</p>
+
+<p>Not because they don't want to. Because the tools haven't been there. Because analyzing that data used to require a statistician, or at minimum someone comfortable with pivot tables and regression formulas. And most districts don't have that person. Or they have one person, and that person has forty-seven other responsibilities.</p>
+
+<p><span class="el-tag">[matter-of-factly]</span> So the data sits. In spreadsheets nobody opens. In reports nobody reads past page two. In dashboards that were exciting for a week and then became wallpaper.</p>
+
+<p class="pause">[pause]</p>
+
+<p>Here's what's changing.</p>
+
+<p>There's a tool from Google that some districts are starting to use for exactly this. It used to be called NotebookLM &mdash; Google has since renamed it Gemini Notebook. And it does something genuinely new. You upload your documents &mdash; your data, your reports, your spreadsheets &mdash; and it reads them. All of them. And then you just... ask questions. In plain English.</p>
+
+<p><span class="el-tag">[quickening pace]</span> "Which students showed declining attendance in the last quarter?" "What are the common characteristics of students who improved in math this year?" "Compare our reading scores to last year and tell me where the biggest drops are." "What story does this data tell?"</p>
+
+<p>And it answers. With citations. Pointing back to the specific documents and cells where it found the information.</p>
+
+<p>Now, to be clear: when you use Gemini Notebook, your data is going to Google's servers. Some districts are comfortable with that &mdash; especially Google Workspace schools that already have data processing agreements in place. Others aren't. <span class="el-tag">[with conviction]</span> And that's a legitimate conversation to have, because school data isn't just data. It's <em>student</em> data. It's protected by FERPA. It includes personally identifiable information &mdash; names, grades, behavior records, disability classifications. You cannot &mdash; legally, ethically &mdash; paste that into just any chatbot. And yet the temptation is enormous, because the AI is <em>right there</em>, and the data is <em>right there</em>, and the question you need answered is burning a hole in your afternoon.</p>
+
+<p><span class="el-tag">[curious, leaning in]</span> So the question becomes: how do you get the power of AI analysis while managing the risk of data exposure?</p>
+
+<p>And there are, right now, three approaches worth knowing about.</p>
+
+<p class="pause">[pause]</p>
+
+<p>The first is managed cloud tools &mdash; Gemini Notebook, Gemini in Google Sheets &mdash; where the analysis happens inside a platform your district already has a relationship with. Some districts are comfortable with this. They've reviewed the terms, they've signed the agreements, and they've decided the tradeoff works. This is the easiest path. You upload the spreadsheet. You ask the question. You get the answer. But you need to know what you've agreed to.</p>
+
+<p><span class="el-tag">[thoughtful]</span> The second is what I'd call the vibe-coded dashboard approach. And this one is clever. Instead of uploading your data <em>to</em> an AI, you use AI to build a tool that runs entirely in your own browser. You describe the dashboard you want &mdash; "I need a tool where I can upload a CSV of student test scores and see a histogram of score distributions, with the ability to filter by teacher and by quarter." AI writes the code. You host it on your own server, or even just open it as a local file. The data never touches the internet. It goes from your spreadsheet, into your browser, onto your screen. That's it. The AI was involved in building the tool, not in seeing the data.</p>
+
+<p><span class="el-tag">[pause]</span> That distinction is worth pausing on. The AI builds the instrument. The AI never sees the patient.</p>
+
+<p>The third approach is local AI. And this one is for the districts that want to go all in. Some schools are now running large language models on their own hardware &mdash; Apple Silicon servers, GPU clusters, machines that sit in a closet in the server room. The AI runs entirely on campus. No internet connection required. No third-party servers. No data leaves the building, ever. It's expensive to set up. It requires technical expertise. But for districts that handle sensitive data at scale &mdash; special education records, disciplinary files, personnel evaluations &mdash; it's the gold standard for privacy.</p>
+
+<p class="pause">[beat]</p>
+
+<p><span class="el-tag">[sighs]</span> I realize this episode might sound like it's for tech directors. And partly, it is. But here's why it matters for everyone.</p>
+
+<p>If you're a teacher, the data question affects you because <em>you</em> are the one who needs the insights. You're the one staring at a stack of formative assessment results wondering which three students need a different approach tomorrow. The right data tool, with the right privacy architecture, turns that from a two-hour task into a two-minute conversation.</p>
+
+<p>If you're a principal, the data question affects you because every hard decision you make &mdash; about scheduling, about staffing, about intervention &mdash; is better when it's grounded in evidence instead of intuition. And right now, the evidence is locked inside a spreadsheet you don't have time to analyze.</p>
+
+<p>And if you're a superintendent, the data question affects you because the board is going to ask. The parents are going to ask. The community is going to ask: <em>Is our students' data safe?</em> And your answer needs to be more specific than "yes." It needs to be: <em>Here's the architecture. Here's where the data lives. Here's who can see it. Here's who can't.</em></p>
+
+<p class="pause">[pause]</p>
+
+<p><span class="el-tag">[earnest]</span> Privacy isn't the enemy of insight. That's the thing people get wrong. They think there's a tradeoff &mdash; that you can have powerful AI analysis <em>or</em> you can have strong data protection, but not both. That's a false choice. The tools exist right now, today, to do both. The question is whether your district knows about them.</p>
+
+<p><span class="el-tag">[with conviction]</span> Seize the data. But know where it sleeps.</p>
+
+<p class="direction">[End of Episode 4]</p>
+
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<div class="episode">
+<div class="episode-header">
+  <div class="episode-num">Episode Five</div>
+  <div class="episode-title">Creativity in the Age of AI</div>
+  <div class="episode-runtime">~9 minutes &bull; 1,850 words</div>
+</div>
+
+<!-- CLEAN VERSION -->
+<div class="script clean">
+
+<p>Here's something I've been turning over in my head all day.</p>
+
+<p>There's a question that keeps coming up whenever AI enters a conversation about creativity. And the question is this: if a machine can paint, compose, write, and edit video &mdash; what's left for the human? If AI can generate a song in fifteen seconds, why would a student spend fifteen weeks learning to play the guitar?</p>
+
+<p>It's a reasonable question. And I think the answer is hiding in a place nobody's looking.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Think about what a teacher actually does when she creates a lesson. She doesn't sit down and produce content from nothing. She makes <em>decisions</em>. What's the right example for this group of kids? What order should the ideas go in? Where do I slow down? Where do I speed up? What's the hook that gets a bored fourteen-year-old to lean forward instead of checking out?</p>
+
+<p>Those are creative decisions. Every one of them. And none of them require the ability to draw, compose, or code. They require taste. Judgment. An understanding of your audience. The ability to look at something and say, <em>That's not quite right,</em> and know how to fix it.</p>
+
+<p>What AI does is strip away the production layer &mdash; the formatting, the rendering, the grunt work &mdash; and leave those decisions exposed. Front and center. The teacher who used to spend three hours making a worksheet look presentable can now spend those three hours thinking about whether the worksheet is even the right approach.</p>
+
+<p>That's not less creativity. That's <em>more</em>.</p>
+
+<p class="pause">[pause]</p>
+
+<p>Let me give you a few examples of what this looks like in practice.</p>
+
+<p>There's a tool called Suno. It's an AI music generator. You type in a description &mdash; "upbeat country song about the water cycle, appropriate for fourth graders, with a catchy chorus" &mdash; and it generates a full song. Vocals, instruments, production. It sounds like something you'd hear on the radio. And it takes about fifteen seconds.</p>
+
+<p>Now, you could look at that and say: <em>Well, that's the end of music in schools.</em></p>
+
+<p>Or you could do what some teachers are doing. Use Suno to generate five different songs about the <em>same</em> topic &mdash; in five different genres. A country version. A hip-hop version. A Broadway number. A punk rock anthem. A lullaby. And then play all five for your students and ask: <em>Which one works? Which one makes you remember the content? Why? What does the genre do to the message?</em></p>
+
+<p>That's not a lesson about AI. That's a lesson about rhetoric, about audience, about the relationship between form and content. It's a music lesson and a media literacy lesson all at once. And it was only possible because the AI removed the bottleneck. The bottleneck used to be: <em>I can't compose five songs in five different genres.</em> Nobody can. It would take weeks. So you'd never try. The question would never get asked.</p>
+
+<p>AI didn't replace the creativity. It removed the obstacle that was <em>preventing</em> it.</p>
+
+<p class="pause">[pause]</p>
+
+<p>This pattern keeps showing up.</p>
+
+<p>Google Vids lets you take a Google Doc or a set of slides and turn it into a narrated, visually polished instructional video in a few minutes. Not a screen recording where you can hear the HVAC system in the background. A real video, with transitions, with pacing, with text overlays that actually look professional.</p>
+
+<p>A cynical reading: <em>AI made the video, so it's not creative.</em> But that misses the point entirely. The teacher still decided what to teach. She still chose the structure, the examples, the pacing of the ideas. What she <em>didn't</em> have to do was spend three hours fighting with video editing software. The creative decisions were hers. The production labor was the machine's.</p>
+
+<p>That's the trade. That's the deal AI offers. I'll handle the formatting. You handle the thinking.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Adobe Express is opening up similar possibilities in visual arts. There's a feature called Animate Character &mdash; a student draws something, or uploads an image, and the AI animates it. It moves. It talks. A kid can draw a wobbly stick figure with a purple hat, and suddenly that stick figure is narrating a book report. Is the animation sophisticated? No. But it doesn't need to be. What it needs to be is <em>theirs</em>. Their character. Their story. Their creative vision &mdash; amplified by a tool that handles the parts they can't do yet.</p>
+
+<p>And that's the word I keep coming back to. <em>Yet.</em></p>
+
+<p>A third grader can't animate a character by hand. Yet. A seventh grader can't compose a song in five genres. Yet. A high school student can't produce a documentary-quality video. Yet. But with AI handling the production layer, they can experience what it <em>feels</em> like to create at that level. They can make the creative decisions &mdash; the real ones &mdash; and see them come to life. And that experience, that feeling of <em>I made this and it's real</em>, is the thing that makes someone want to learn the deeper skills.</p>
+
+<p>AI doesn't replace the ladder. It lets you see the view from the top, so you're motivated to climb.</p>
+
+<p class="pause">[pause]</p>
+
+<p>Here's what I think we're really talking about when we talk about creativity in the age of AI.</p>
+
+<p>For a long time, creative work in schools was gated by technical skill. You needed to draw to make art. You needed to play an instrument to make music. You needed to code to make interactive media. And those gates kept a lot of people out &mdash; students <em>and</em> teachers. Plenty of educators have extraordinary taste, beautiful ideas, a deep sense of what would resonate with their students. But they couldn't execute. They didn't have the production skills. So the ideas stayed in their heads.</p>
+
+<p>AI is removing the gates. Not the creativity. The <em>gates</em>.</p>
+
+<p>And what's flowing through? Teachers who would never call themselves creative are making comics, songs, interactive timelines, animated characters. They're not creative because they can draw. They're creative because they can <em>see</em> &mdash; they can envision what a student needs to experience, and now, for the first time, they can actually make it real.</p>
+
+<p>Vision. Taste. Judgment. The willingness to look at the first draft and say, "No, not that &mdash; more like <em>this</em>."</p>
+
+<p>Those are the creative skills that matter now. And they always were. We just couldn't see them, because the production skills were in the way.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Creativity in the age of AI isn't smaller. It's wider. It belongs to more people. And it might be the most exciting shift happening in schools right now.</p>
+
+<p class="direction">[End of Episode 5]</p>
+
+</div>
+
+<!-- ELEVENLABS VERSION -->
+<div class="script elevenlabs">
+
+<p><span class="el-tag">[thoughtful]</span> Here's something I've been turning over in my head all day.</p>
+
+<p><span class="el-tag">[curious, leaning in]</span> There's a question that keeps coming up whenever AI enters a conversation about creativity. And the question is this: if a machine can paint, compose, write, and edit video &mdash; what's left for the human? If AI can generate a song in fifteen seconds, why would a student spend fifteen weeks learning to play the guitar?</p>
+
+<p>It's a reasonable question. And I think the answer is hiding in a place nobody's looking.</p>
+
+<p class="pause">[beat]</p>
+
+<p>Think about what a teacher actually does when she creates a lesson. She doesn't sit down and produce content from nothing. She makes <em>decisions</em>. What's the right example for this group of kids? What order should the ideas go in? Where do I slow down? Where do I speed up? What's the hook that gets a bored fourteen-year-old to lean forward instead of checking out?</p>
+
+<p>Those are creative decisions. Every one of them. And none of them require the ability to draw, compose, or code. They require taste. Judgment. An understanding of your audience. The ability to look at something and say, <em>That's not quite right,</em> and know how to fix it.</p>
+
+<p><span class="el-tag">[slowly, deliberately]</span> What AI does is strip away the production layer &mdash; the formatting, the rendering, the grunt work &mdash; and leave those decisions exposed. Front and center. The teacher who used to spend three hours making a worksheet look presentable can now spend those three hours thinking about whether the worksheet is even the right approach.</p>
+
+<p><span class="el-tag">[with conviction]</span> That's not less creativity. That's <em>more</em>.</p>
+
+<p class="pause">[pause]</p>
+
+<p>Let me give you a few examples of what this looks like in practice.</p>
+
+<p>There's a tool called Suno. It's an AI music generator. You type in a description &mdash; "upbeat country song about the water cycle, appropriate for fourth graders, with a catchy chorus" &mdash; and it generates a full song. Vocals, instruments, production. It sounds like something you'd hear on the radio. And it takes about fifteen seconds.</p>
+
+<p>Now, you could look at that and say: <em>Well, that's the end of music in schools.</em></p>
+
+<p><span class="el-tag">[building energy]</span> Or you could do what some teachers are doing. Use Suno to generate five different songs about the <em>same</em> topic &mdash; in five different genres. A country version. A hip-hop version. A Broadway number. A punk rock anthem. A lullaby. And then play all five for your students and ask: <em>Which one works? Which one makes you remember the content? Why? What does the genre do to the message?</em></p>
+
+<p>That's not a lesson about AI. That's a lesson about rhetoric, about audience, about the relationship between form and content. It's a music lesson and a media literacy lesson all at once. And it was only possible because the AI removed the bottleneck. The bottleneck used to be: <em>I can't compose five songs in five different genres.</em> Nobody can. It would take weeks. So you'd never try. The question would never get asked.</p>
+
+<p><span class="el-tag">[pause]</span> AI didn't replace the creativity. It removed the obstacle that was <em>preventing</em> it.</p>
+
+<p class="pause">[pause]</p>
+
+<p>This pattern keeps showing up.</p>
+
+<p>Google Vids lets you take a Google Doc or a set of slides and turn it into a narrated, visually polished instructional video in a few minutes. Not a screen recording where you can hear the HVAC system in the background. A real video, with transitions, with pacing, with text overlays that actually look professional.</p>
+
+<p><span class="el-tag">[matter-of-factly]</span> A cynical reading: <em>AI made the video, so it's not creative.</em> But that misses the point entirely. The teacher still decided what to teach. She still chose the structure, the examples, the pacing of the ideas. What she <em>didn't</em> have to do was spend three hours fighting with video editing software. The creative decisions were hers. The production labor was the machine's.</p>
+
+<p>That's the trade. That's the deal AI offers. I'll handle the formatting. You handle the thinking.</p>
+
+<p class="pause">[beat]</p>
+
+<p><span class="el-tag">[warmly]</span> Adobe Express is opening up similar possibilities in visual arts. There's a feature called Animate Character &mdash; a student draws something, or uploads an image, and the AI animates it. It moves. It talks. A kid can draw a wobbly stick figure with a purple hat, and suddenly that stick figure is narrating a book report. <span class="el-tag">[light laugh]</span> Is the animation sophisticated? No. But it doesn't need to be. What it needs to be is <em>theirs</em>. Their character. Their story. Their creative vision &mdash; amplified by a tool that handles the parts they can't do yet.</p>
+
+<p>And that's the word I keep coming back to. <em>Yet.</em></p>
+
+<p>A third grader can't animate a character by hand. Yet. A seventh grader can't compose a song in five genres. Yet. A high school student can't produce a documentary-quality video. Yet. But with AI handling the production layer, they can experience what it <em>feels</em> like to create at that level. They can make the creative decisions &mdash; the real ones &mdash; and see them come to life. And that experience, that feeling of <em>I made this and it's real</em>, is the thing that makes someone want to learn the deeper skills.</p>
+
+<p>AI doesn't replace the ladder. It lets you see the view from the top, so you're motivated to climb.</p>
+
+<p class="pause">[pause]</p>
+
+<p><span class="el-tag">[softer, more intimate]</span> Here's what I think we're really talking about when we talk about creativity in the age of AI.</p>
+
+<p>For a long time, creative work in schools was gated by technical skill. You needed to draw to make art. You needed to play an instrument to make music. You needed to code to make interactive media. And those gates kept a lot of people out &mdash; students <em>and</em> teachers. Plenty of educators have extraordinary taste, beautiful ideas, a deep sense of what would resonate with their students. But they couldn't execute. They didn't have the production skills. So the ideas stayed in their heads.</p>
+
+<p><span class="el-tag">[earnest]</span> AI is removing the gates. Not the creativity. The <em>gates</em>.</p>
+
+<p>And what's flowing through? Teachers who would never call themselves creative are making comics, songs, interactive timelines, animated characters. They're not creative because they can draw. They're creative because they can <em>see</em> &mdash; they can envision what a student needs to experience, and now, for the first time, they can actually make it real.</p>
+
+<p>Vision. Taste. Judgment. The willingness to look at the first draft and say, "No, not that &mdash; more like <em>this</em>."</p>
+
+<p>Those are the creative skills that matter now. And they always were. We just couldn't see them, because the production skills were in the way.</p>
+
+<p class="pause">[beat]</p>
+
+<p><span class="el-tag">[with conviction]</span> Creativity in the age of AI isn't smaller. It's wider. It belongs to more people. And it might be the most exciting shift happening in schools right now.</p>
+
+<p class="direction">[End of Episode 5]</p>
+
+</div>
+</div>
+
+<hr class="divider">
+
+<div style="text-align: center; padding: 24px 0; color: #aaa; font-family: 'Inter', sans-serif; font-size: 12px;">
+  <p><strong>NJ AI Literacy Summit Radio</strong></p>
+  <p>Five episodes &bull; ~40 minutes total runtime</p>
+  <p>Scripts prepared December 2026</p>
+  <p style="margin-top: 8px; font-style: italic;">Drive safe. See you next year.</p>
+</div>
+
+</div>
+
+<script>
+function switchMode(mode) {
+  const cleanDivs = document.querySelectorAll('.script.clean');
+  const elDivs = document.querySelectorAll('.script.elevenlabs');
+  const btnClean = document.getElementById('btnClean');
+  const btnElevenlabs = document.getElementById('btnElevenlabs');
+  const toggleControl = document.getElementById('toggleControl');
+
+  if (mode === 'clean') {
+    cleanDivs.forEach(d => d.style.display = 'block');
+    elDivs.forEach(d => d.style.display = 'none');
+    btnClean.classList.add('active');
+    btnElevenlabs.classList.remove('active');
+    toggleControl.classList.remove('elevenlabs-active');
+  } else {
+    cleanDivs.forEach(d => d.style.display = 'none');
+    elDivs.forEach(d => d.style.display = 'block');
+    btnClean.classList.remove('active');
+    btnElevenlabs.classList.add('active');
+    toggleControl.classList.add('elevenlabs-active');
+  }
+}
+</script>
+
+</body>
+</html>

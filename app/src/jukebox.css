@@ -207,7 +207,10 @@
   overflow-y: auto; overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   transition: opacity 0.25s var(--jb-ease);
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
+.jb-page::-webkit-scrollbar { display: none; }
 .jb-page.has-mini {
   bottom: calc(var(--jb-tab-h) + var(--jb-mini-h) + var(--jb-safe-b));
 }
@@ -329,6 +332,43 @@
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
+/* Podcast Hero on Home Page */
+.jb-podcast-hero {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1;
+  max-height: 200px;
+  width: 100%;
+}
+.jb-podcast-hero img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.jb-podcast-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}
+.jb-podcast-hero-badge {
+  font-size: 10px; font-weight: 700;
+  color: var(--jb-accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+.jb-podcast-hero-title {
+  font-size: 18px; font-weight: 700;
+  line-height: 1.2;
+}
+.jb-podcast-hero-sub {
+  font-size: 12px;
+  color: var(--jb-text-secondary);
+  margin-top: 2px;
+}
+
 /* Track List */
 .jb-tracklist { margin-top: 28px; }
 .jb-track {
@@ -383,24 +423,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Playing bars indicator */
-.jb-bars {
-  display: flex; align-items: flex-end;
-  gap: 2px; height: 14px; width: 16px;
-}
-.jb-bar {
-  width: 3px;
-  background: var(--jb-accent);
-  border-radius: 1px;
-  animation: jb-bar-bounce 0.8s ease-in-out infinite alternate;
-}
-.jb-bar:nth-child(1) { height: 40%; animation-delay: 0s; }
-.jb-bar:nth-child(2) { height: 70%; animation-delay: 0.15s; }
-.jb-bar:nth-child(3) { height: 50%; animation-delay: 0.3s; }
-@keyframes jb-bar-bounce {
-  0% { transform: scaleY(0.4); } 100% { transform: scaleY(1); }
-}
-.jb-bars.paused .jb-bar { animation-play-state: paused; }
+/* Playing bars indicator — JS-driven, no CSS animation needed */
 
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -487,6 +510,277 @@
 .jb-radio-icon svg { width: 30px; height: 30px; opacity: 0.5; }
 .jb-radio-title { font-size: 20px; font-weight: 600; }
 .jb-radio-sub { font-size: 14px; color: var(--jb-text-secondary); line-height: 1.5; }
+
+/* Radio tab podcast player */
+.jb-radio-art {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto 20px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.jb-radio-art img {
+  width: 100%; height: auto;
+  display: block;
+}
+.jb-radio-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.jb-radio-header h2 {
+  font-size: 20px; font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.jb-radio-header p {
+  font-size: 13px;
+  color: var(--jb-text-secondary);
+  margin-top: 2px;
+}
+
+.jb-ep-list {
+  display: flex; flex-direction: column;
+  gap: 2px;
+}
+
+.jb-ep {
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--jb-surface);
+  border: 1px solid var(--jb-border);
+  transition: background 0.15s;
+}
+.jb-ep-main {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+}
+.jb-ep-main:active { background: rgba(255,255,255,0.03); }
+
+.jb-ep-num {
+  font-size: 14px; font-weight: 700;
+  color: var(--jb-text-tertiary);
+  min-width: 20px;
+  text-align: center;
+}
+.jb-ep-info { flex: 1; min-width: 0; }
+.jb-ep-title {
+  font-size: 15px; font-weight: 600;
+  line-height: 1.3;
+}
+.jb-ep-meta {
+  font-size: 12px;
+  color: var(--jb-text-secondary);
+  margin-top: 2px;
+  display: flex; gap: 8px;
+}
+.jb-ep-desc {
+  font-size: 12px;
+  color: var(--jb-text-tertiary);
+  margin-top: 3px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.jb .jb-ep-play {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.15s, background 0.15s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+.jb .jb-ep-play:active { transform: scale(0.9); }
+.jb .jb-ep-play svg { width: 13px; height: 13px; fill: #000; margin-left: 1px; }
+.jb .jb-ep-play.playing {
+  background: rgba(255,255,255,0.12);
+  box-shadow: none;
+}
+.jb .jb-ep-play.playing svg { fill: #fff; }
+
+/* Episode expanded details */
+.jb-ep-details {
+  padding: 0 14px 14px;
+  border-top: 1px solid var(--jb-border);
+}
+.jb-ep-details-desc {
+  font-size: 13px;
+  color: var(--jb-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.jb-ep-tools-title {
+  font-size: 11px; font-weight: 600;
+  color: var(--jb-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.jb-ep-tools {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 8px;
+}
+.jb-ep-tool {
+  font-size: 12px;
+  color: var(--jb-accent);
+  background: rgba(252,60,68,0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.jb-ep-tool:hover { background: rgba(252,60,68,0.15); }
+.jb-ep-transcript-note {
+  font-size: 11px;
+  color: var(--jb-text-tertiary);
+  font-style: italic;
+}
+
+.jb-ep.active-ep {
+  border-color: var(--jb-accent);
+  background: rgba(252,60,68,0.04);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   TV TAB — Cinematic Apple TV+ inspired
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* No page header — the hero IS the page */
+.jb-tv-page .jb-page-header { display: none; }
+.jb-tv-page .jb-page-pad { padding: 0; }
+
+/* Hero — full-bleed cinematic poster */
+.jb-tv-hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.jb-tv-poster {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  /* Slight cinematic color grade */
+  filter: brightness(0.85) saturate(1.1);
+}
+
+/* Gradient overlays — top and bottom fade */
+.jb-tv-gradient {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(0deg,
+      rgba(0,0,0,0.95) 0%,
+      rgba(0,0,0,0.4) 35%,
+      rgba(0,0,0,0.05) 55%,
+      transparent 70%),
+    linear-gradient(180deg,
+      rgba(0,0,0,0.5) 0%,
+      transparent 20%);
+  pointer-events: none;
+}
+
+/* Play button — frosted glass circle */
+.jb .jb-tv-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 3;
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(255,255,255,0.1);
+  transition: transform 0.2s var(--jb-ease), box-shadow 0.2s;
+  cursor: pointer;
+}
+.jb .jb-tv-play svg {
+  margin-left: 3px; /* optical centering for play triangle */
+}
+.jb .jb-tv-play:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow:
+    0 6px 30px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(255,255,255,0.15),
+    0 0 40px rgba(255,255,255,0.1);
+}
+.jb .jb-tv-play:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* Title overlay at bottom of hero */
+.jb-tv-title-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px 20px 20px;
+  z-index: 2;
+  pointer-events: none;
+}
+.jb-tv-badge {
+  font-size: 10px; font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.14em;
+  margin-bottom: 6px;
+}
+.jb-tv-title {
+  font-size: clamp(22px, 5vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+.jb-tv-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* iframe container (shown after play) */
+.jb-tv-iframe-wrap {
+  width: 100%; height: 100%;
+  background: #000;
+}
+.jb-tv-iframe-wrap iframe {
+  width: 100%; height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Meta info below the hero */
+.jb-tv-meta {
+  padding: 20px 20px 32px;
+}
+.jb-tv-meta-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px;
+  color: var(--jb-text-secondary);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.jb-tv-meta-dot {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+}
+.jb-tv-meta-year {
+  color: rgba(255,255,255,0.7);
+  font-weight: 600;
+}
+.jb-tv-desc {
+  font-size: 14px;
+  color: var(--jb-text-secondary);
+  line-height: 1.65;
+}
 
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -739,7 +1033,7 @@
 .jb-np-ctrl.medium svg { width: 28px; height: 28px; }
 .jb-np-ctrl.active { color: var(--jb-accent); }
 
-.jb-np-play-btn {
+.jb .jb-np-play-btn {
   width: 64px; height: 64px;
   border-radius: 50%;
   background: #fff;
@@ -747,8 +1041,8 @@
   transition: transform 0.15s;
   flex-shrink: 0;
 }
-.jb-np-play-btn:active { transform: scale(0.92); }
-.jb-np-play-btn svg { width: 28px; height: 28px; fill: #000; }
+.jb .jb-np-play-btn:active { transform: scale(0.92); }
+.jb .jb-np-play-btn svg { width: 28px; height: 28px; fill: #000; }
 
 /* Volume (optional, below controls) */
 .jb-np-volume {
@@ -850,6 +1144,38 @@
 
 /* Print */
 @media print { .jb { display: none !important; } }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   EPISODE TRANSCRIPT
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.jb-ep-transcript-toggle {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--jb-accent);
+  padding: 8px 0 4px;
+  transition: opacity 0.2s;
+}
+.jb-ep-transcript-toggle:hover { opacity: 0.8; }
+
+.jb-ep-transcript {
+  margin-top: 12px;
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  border: 1px solid var(--jb-border);
+  max-height: 300px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.jb-ep-transcript p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--jb-text-secondary);
+  margin-bottom: 12px;
+}
+.jb-ep-transcript p:last-child { margin-bottom: 0; }
+
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
