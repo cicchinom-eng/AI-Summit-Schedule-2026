@@ -82,7 +82,7 @@ const INTRO_LINES = [
   'Please enjoy this little parting gift',
   'as we go our separate ways:',
   null, // pause
-  'a few songs to listen to',
+  'a few tracks to listen to',
   'on your ride home.',
   null, // longer pause
   'Drive safe, and see you next year.',
